@@ -4,11 +4,27 @@
 	"keywords": ["aimeos", "extension", "symfony", "friendsofsymfony", "user", "bundle"],
 	"type": "aimeos-extension",
 	"license": "LGPL-3.0",
+	"support": {
+		"source": "https://github.com/aimeos/ai-fosuser",
+		"issues": "https://github.com/aimeos/ai-fosuser/issues",
+		"forum": "https://aimeos.org/help",
+		"wiki": "https://aimeos.org/docs"
+	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/aimeos/php-coveralls.git"
+		}
+	],
 	"prefer-stable": true,
 	"minimum-stability": "dev",
 	"require": {
 		"php": ">=5.3.3",
 		"composer/installers": "^1.0"
+	},
+	"require-dev": {
+		"satooshi/php-coveralls": "dev-master",
+		"phing/phing": "~2.0"
 	},
 	"autoload": {
 		"psr-4": {
