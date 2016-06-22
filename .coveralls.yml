@@ -1,0 +1,3 @@
+src_dir: ext/ai-fosuser
+json_path: ext/ai-fosuser/coveralls.json
+coverage_clover: ext/ai-fosuser/lib/custom/tests/coverage.xml
