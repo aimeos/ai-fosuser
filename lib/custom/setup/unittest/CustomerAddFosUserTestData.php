@@ -10,7 +10,7 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Adds Laravel customer test data.
+ * Adds FOS user customer test data.
  */
 class CustomerAddFosUserTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 {
@@ -21,7 +21,7 @@ class CustomerAddFosUserTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'TablesAddFosUserTestData' );
+		return array( 'TablesCreateFosUser' );
 	}
 
 
