@@ -47,6 +47,21 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetSearchAttributes()
+	{
+		foreach( $this->object->getSearchAttributes() as $attribute ) {
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attribute );
+		}
+	}
+
+
+	public function testGetSubManager()
+	{
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->object->getSubManager( 'unknown' );
+	}
+
+
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
