@@ -2,6 +2,7 @@
 	"name": "aimeos/ai-fosuser",
 	"description": "Aimeos ai-fosuser extension",
 	"keywords": ["aimeos", "extension", "symfony", "friendsofsymfony", "user", "bundle"],
+	"homepage": "https://aimeos.org/",
 	"type": "aimeos-extension",
 	"license": "LGPL-3.0",
 	"support": {
