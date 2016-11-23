@@ -35,12 +35,12 @@ return array(
 			$table->addColumn( 'title', 'string', array( 'length' => 64, 'default' => '' ) );
 			$table->addColumn( 'firstname', 'string', array( 'length' => 64, 'default' => '' ) );
 			$table->addColumn( 'lastname', 'string', array( 'length' => 64, 'default' => '' ) );
-			$table->addColumn( 'address1', 'string', array( 'length' => 255, 'default' => '' ) );
-			$table->addColumn( 'address2', 'string', array( 'length' => 255, 'default' => '' ) );
-			$table->addColumn( 'address3', 'string', array( 'length' => 255, 'default' => '' ) );
+			$table->addColumn( 'address1', 'string', array( 'length' => 200, 'default' => '' ) );
+			$table->addColumn( 'address2', 'string', array( 'length' => 200, 'default' => '' ) );
+			$table->addColumn( 'address3', 'string', array( 'length' => 200, 'default' => '' ) );
 			$table->addColumn( 'postal', 'string', array( 'length' => 16, 'default' => '' ) );
-			$table->addColumn( 'city', 'string', array( 'length' => 255, 'default' => '' ) );
-			$table->addColumn( 'state', 'string', array( 'length' => 255, 'default' => '' ) );
+			$table->addColumn( 'city', 'string', array( 'length' => 200, 'default' => '' ) );
+			$table->addColumn( 'state', 'string', array( 'length' => 200, 'default' => '' ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false, 'fixed' => true ) );
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32, 'default' => '' ) );
@@ -56,12 +56,11 @@ return array(
 			$table->addUniqueIndex( array( 'username_canonical' ), 'unq_fosus_username' );
 			$table->addUniqueIndex( array( 'email_canonical' ), 'unq_fosus_email' );
 			$table->addIndex( array( 'langid' ), 'idx_fosus_langid' );
-			$table->addIndex( array( 'enabled', 'lastname', 'firstname' ), 'idx_fosus_enabled_ln_fn' );
-			$table->addIndex( array( 'enabled', 'address1', 'address2' ), 'idx_fosus_enabled_ad1_ad2' );
-			$table->addIndex( array( 'enabled', 'postal', 'city' ), 'idx_fosus_enabled_postal_city' );
+			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_fosus_last_first' );
+			$table->addIndex( array( 'postal', 'address1' ), 'idx_fosus_post_addr1' );
+			$table->addIndex( array( 'postal', 'city' ), 'idx_fosus_post_city' );
 			$table->addIndex( array( 'lastname' ), 'idx_fosus_lastname' );
 			$table->addIndex( array( 'address1' ), 'idx_fosus_address1' );
-			$table->addIndex( array( 'postal' ), 'idx_fosus_postal' );
 			$table->addIndex( array( 'city' ), 'idx_fosus_city' );
 
 			return $schema;
@@ -80,12 +79,12 @@ return array(
 			$table->addColumn( 'title', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'firstname', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'lastname', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'address1', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'address2', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'address3', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'address1', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'address2', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'address3', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'postal', 'string', array( 'length' => 16 ) );
-			$table->addColumn( 'city', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'state', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'city', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'state', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false, 'fixed' => true ) );
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
@@ -99,11 +98,13 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_fosad_id' );
-			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_fosad_ln_fn' );
-			$table->addIndex( array( 'address1', 'address2' ), 'idx_fosad_ad1_ad2' );
-			$table->addIndex( array( 'postal', 'city' ), 'idx_fosad_post_ci' );
 			$table->addIndex( array( 'parentid' ), 'idx_fosad_pid' );
+			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_fosad_last_first' );
+			$table->addIndex( array( 'postal', 'address1' ), 'idx_fosad_post_addr1' );
+			$table->addIndex( array( 'postal', 'city' ), 'idx_fosad_post_city' );
+			$table->addIndex( array( 'address1' ), 'idx_fosad_address1' );
 			$table->addIndex( array( 'city' ), 'idx_fosad_city' );
+			$table->addIndex( array( 'email' ), 'idx_fosad_email' );
 
 			$table->addForeignKeyConstraint( 'fos_user', array( 'parentid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_fosad_pid' );
