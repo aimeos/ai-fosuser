@@ -169,6 +169,20 @@ class FosUser
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'customer.longitude' => array(
+			'label' => 'Customer longitude',
+			'code' => 'customer.longitude',
+			'internalcode' => 'fos."longitude"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'customer.latitude' => array(
+			'label' => 'Customer latitude',
+			'code' => 'customer.latitude',
+			'internalcode' => 'fos."latitude"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'customer.birthday' => array(
 			'label' => 'Customer birthday',
 			'code' => 'customer.birthday',
@@ -387,19 +401,21 @@ class FosUser
 			$stmt->bind( 19, $billingAddress->getEmail() );
 			$stmt->bind( 20, $billingAddress->getTelefax() );
 			$stmt->bind( 21, $billingAddress->getWebsite() );
-			$stmt->bind( 22, $item->getBirthday() );
-			$stmt->bind( 23, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 24, $item->getDateVerified() );
-			$stmt->bind( 25, $item->getPassword() );
-			$stmt->bind( 26, $date ); // Modification time
-			$stmt->bind( 27, $context->getEditor() );
-			$stmt->bind( 28, serialize( $item->getRoles() ) );
+			$stmt->bind( 22, $billingAddress->getLongitude() );
+			$stmt->bind( 23, $billingAddress->getLatitude() );
+			$stmt->bind( 24, $item->getBirthday() );
+			$stmt->bind( 25, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 26, $item->getDateVerified() );
+			$stmt->bind( 27, $item->getPassword() );
+			$stmt->bind( 28, $date ); // Modification time
+			$stmt->bind( 29, $context->getEditor() );
+			$stmt->bind( 30, serialize( $item->getRoles() ) );
 
 			if( $id !== null ) {
-				$stmt->bind( 29, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 31, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 29, $date ); // Creation time
+				$stmt->bind( 31, $date ); // Creation time
 			}
 
 			$stmt->execute()->finish();

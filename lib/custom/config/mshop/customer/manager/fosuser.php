@@ -18,11 +18,11 @@ return array(
 				"username_canonical", "username", "company", "vatid", "salutation", "title",
 				"firstname", "lastname", "address1", "address2", "address3",
 				"postal", "city", "state", "countryid", "langid", "telephone",
-				"email_canonical", "email", "telefax", "website", "birthday", "enabled",
-				"vdate", "password", "mtime", "editor", "roles", "ctime",
-				"salt", "locked", "expired", "credentials_expired"
+				"email_canonical", "email", "telefax", "website", "longitude", "latitude",
+				"birthday", "enabled", "vdate", "password", "mtime", "editor", "roles",
+				"ctime", "salt", "locked", "expired", "credentials_expired"
 			) VALUES (
-				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, \'\', 0, 0, 0
+				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, \'\', 0, 0, 0
 			)
 		',
 	),
@@ -34,14 +34,14 @@ return array(
 				"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 				"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
 				"telephone" = ?, "email_canonical" = ?, "email" = ?, "telefax" = ?,
-				"website" = ?, "birthday" = ?, "enabled" = ?, "vdate" = ?, "password" = ?,
-				"mtime" = ?, "editor" = ?, "roles" = ?
+				"website" = ?, "longitude" = ?, "latitude" = ?, "birthday" = ?, "enabled" = ?,
+				"vdate" = ?, "password" = ?, "mtime" = ?, "editor" = ?, "roles" = ?
 			WHERE "id" = ?
 		',
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT fos."id" AS "customer.id",
+			SELECT fos."id" AS "customer.id",
 				fos."username_canonical" as "customer.code", fos."username" as "customer.label",
 				fos."company" AS "customer.company", fos."vatid" AS "customer.vatid",
 				fos."salutation" AS "customer.salutation", fos."title" AS "customer.title",
@@ -52,13 +52,22 @@ return array(
 				fos."countryid" AS "customer.countryid", fos."langid" AS "customer.languageid",
 				fos."telephone" AS "customer.telephone", fos."email_canonical" AS "customer.email",
 				fos."telefax" AS "customer.telefax", fos."website" AS "customer.website",
-				fos."birthday" AS "customer.birthday", fos."enabled" as "customer.status",
+				fos."longitude" AS "customer.longitude", fos."latitude" AS "customer.latitude",
+				fos."birthday" AS "customer.birthday", fos."enabled" AS "customer.status",
 				fos."vdate" AS "customer.vdate", fos."password" AS "customer.password",
 				fos."ctime" AS "customer.ctime", fos."mtime" AS "customer.mtime",
 				fos."editor" AS "customer.editor", fos."roles"
 			FROM "fos_user" AS fos
 			:joins
 			WHERE :cond
+			GROUP BY fos."id", fos."username_canonical", fos."username",
+				fos."company", fos."vatid", fos."salutation", fos."title",
+				fos."firstname", fos."lastname", fos."address1", fos."address2",
+				fos."address3", fos."postal", fos."city", fos."state",
+				fos."countryid", fos."langid", fos."telephone", fos."email_canonical",
+				fos."telefax", fos."website", fos."longitude", fos."latitude",
+				fos."birthday", fos."enabled", fos."vdate", fos."password",
+				fos."ctime", fos."mtime", fos."editor", fos."roles"
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',
