@@ -65,7 +65,7 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 			'roles' => array( 'ROLE_ADMIN' ),
 		);
 
-		$this->object = new \Aimeos\MShop\Customer\Item\FosUser( $address, $values, array(), array(), 'mshop', null );
+		$this->object = new \Aimeos\MShop\Customer\Item\FosUser( $address, $values );
 	}
 
 	/**
