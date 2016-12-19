@@ -1,12 +1,14 @@
 <?php
 
-namespace Aimeos\MShop\Customer\Manager;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2016
  */
+
+
+namespace Aimeos\MShop\Customer\Manager;
+
+
 class FosUserTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
@@ -15,9 +17,6 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 	private $editor = '';
 
 
-	/**
-	 * Sets up the fixture. This method is called before a test is executed.
-	 */
 	protected function setUp()
 	{
 		$context = \TestHelper::getContext();
@@ -33,9 +32,6 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture. This method is called after a test is executed.
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object, $this->fixture, $this->address );
@@ -112,6 +108,7 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getBirthday(), $itemSaved->getBirthday() );
 		$this->assertEquals( $item->getPassword(), $itemSaved->getPassword() );
 		$this->assertEquals( $item->getRoles(), $itemSaved->getRoles() );
+		$this->assertEquals( $item->getSalt(), $itemSaved->getSalt() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -126,6 +123,7 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getBirthday(), $itemUpd->getBirthday() );
 		$this->assertEquals( $itemExp->getPassword(), $itemUpd->getPassword() );
 		$this->assertEquals( $itemExp->getRoles(), $itemUpd->getRoles() );
+		$this->assertEquals( $itemExp->getSalt(), $itemUpd->getSalt() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );

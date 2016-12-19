@@ -20,7 +20,64 @@ namespace Aimeos\MShop\Customer\Item;
 class FosUser
 	extends \Aimeos\MShop\Customer\Item\Standard
 {
-	private $roles;
+	private $values;
+	private $helper;
+
+
+	/**
+	 * Initializes the customer item object
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Payment address item object
+	 * @param array $values List of attributes that belong to the customer item
+	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
+	 * @param \Aimeos\MShop\Common\Item\Helper\Password\Iface|null $helper Password encryption helper object
+	 */
+	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = array(),
+		array $listItems = array(), array $refItems = array(), \Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null )
+	{
+		parent::__construct( $address, $values, $listItems, $refItems, $helper );
+
+		$this->values = $values;
+		$this->helper = $helper;
+	}
+
+
+
+	/**
+	 * Returns the password of the customer item.
+	 *
+	 * @return string Password string
+	 */
+	public function getPassword()
+	{
+		if( isset( $this->values['customer.password'] ) ) {
+			return (string) $this->values['customer.password'];
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Sets the password of the customer item.
+	 *
+	 * @param string $value Password of the customer item
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 */
+	public function setPassword( $value )
+	{
+		if( $value == $this->getPassword() ) { return $this; }
+
+		if( $this->helper !== null ) {
+			$value = $this->helper->encode( $value, $this->getSalt() );
+		}
+
+		$this->values['customer.password'] = (string) $value;
+		$this->setModified();
+
+		return $this;
+	}
 
 
 	/**
@@ -30,12 +87,11 @@ class FosUser
 	 */
 	public function getRoles()
 	{
-		if( isset( $this->roles ) ) {
-			return $this->roles;
+		if( isset( $this->values['roles'] ) ) {
+			return (array) $this->values['roles'];
 		}
 
-		$values = $this->getRawValues();
-		return ( isset( $values['roles'] ) ? (array) $values['roles'] : array() );
+		return array();
 	}
 
 
@@ -46,7 +102,38 @@ class FosUser
 	 */
 	public function setRoles( array $roles )
 	{
-		$this->roles = $roles;
+		$this->values['roles'] = $roles;
 		$this->setModified();
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns the password salt
+	 *
+	 * @return string Password salt
+	 */
+	public function getSalt()
+	{
+		if( !isset( $this->values['salt'] ) ) {
+			$this->values['salt'] = sha1( microtime( true ) . getmypid() );
+		}
+
+		return $this->values['salt'];
+	}
+
+
+	/**
+	 * Sets the password salt
+	 *
+	 * @param string $value Password salt
+	 */
+	public function setSalt( $value )
+	{
+		$this->values['salt'] = (string) $value;
+		$this->setModified();
+
+		return $this;
 	}
 }

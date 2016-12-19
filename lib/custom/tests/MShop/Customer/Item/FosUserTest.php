@@ -9,20 +9,12 @@
 namespace Aimeos\MShop\Customer\Item;
 
 
-/**
- * Test class for \Aimeos\MShop\Customer\Item\FosUser.
- */
 class FosUserTest extends \PHPUnit_Framework_TestCase
 {
+	private $address;
 	private $object;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$addressValues = array(
@@ -30,7 +22,7 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 			'customer.address.position' => 1,
 		);
 
-		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.', $addressValues );
+		$this->address = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.', $addressValues );
 
 		$values = array(
 			'customer.id' => 541,
@@ -39,7 +31,7 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 			'customer.code' => '12345ABCDEF',
 			'customer.birthday' => '2010-01-01',
 			'customer.status' => 1,
-			'customer.password' => '',
+			'customer.password' => 'testpwd',
 			'customer.vdate' => null,
 			'customer.company' => 'unitCompany',
 			'customer.vatid' => 'DE999999999',
@@ -63,20 +55,36 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 			'customer.ctime'=> '2010-01-01 00:00:00',
 			'customer.editor' => 'unitTestUser',
 			'roles' => array( 'ROLE_ADMIN' ),
+			'salt' => 'test',
 		);
 
-		$this->object = new \Aimeos\MShop\Customer\Item\FosUser( $address, $values );
+		$this->object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, $values );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
+	}
+
+	public function testGetPassword()
+	{
+		$this->assertEquals( 'testpwd', $this->object->getPassword() );
+	}
+
+	public function testSetPassword()
+	{
+		$this->object->setPassword( 'new' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'new', $this->object->getPassword() );
+	}
+
+	public function testSetPasswordGenerated()
+	{
+		$helper = new \Aimeos\MShop\Common\Item\Helper\Password\Standard( array( 'format' => '%1$s{%2$s}' ) );
+		$object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, array(), array(), array(), $helper );
+
+		$object->setPassword( 'newpwd' );
+		$this->assertEquals( sha1( 'newpwd{' . $object->getSalt() . '}' ), $object->getPassword() );
 	}
 
 	public function testGetRoles()
@@ -89,6 +97,24 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 		$this->object->setRoles( array( 'ROLE_USER' ) );
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertEquals( array( 'ROLE_USER' ), $this->object->getRoles() );
+	}
+
+	public function testGetSalt()
+	{
+		$this->assertEquals( 'test', $this->object->getSalt() );
+	}
+
+	public function testGetSaltGenerated()
+	{
+		$object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, array() );
+		$this->assertInternalType( 'string', $object->getSalt() );
+	}
+
+	public function testSetSalt()
+	{
+		$this->object->setSalt( 'new' );
+		$this->assertTrue( $this->object->isModified() );
+		$this->assertEquals( 'new', $this->object->getSalt() );
 	}
 
 	public function testIsModified()

@@ -19,10 +19,10 @@ return array(
 				"firstname", "lastname", "address1", "address2", "address3",
 				"postal", "city", "state", "countryid", "langid", "telephone",
 				"email_canonical", "email", "telefax", "website", "longitude", "latitude",
-				"birthday", "enabled", "vdate", "password", "mtime", "editor", "roles",
-				"ctime", "salt", "locked", "expired", "credentials_expired"
+				"birthday", "enabled", "vdate", "password", "mtime", "editor", "roles", "salt",
+				"ctime", "locked", "expired", "credentials_expired"
 			) VALUES (
-				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, \'\', 0, 0, 0
+				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, 0, 0, 0
 			)
 		',
 	),
@@ -35,7 +35,7 @@ return array(
 				"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
 				"telephone" = ?, "email_canonical" = ?, "email" = ?, "telefax" = ?,
 				"website" = ?, "longitude" = ?, "latitude" = ?, "birthday" = ?, "enabled" = ?,
-				"vdate" = ?, "password" = ?, "mtime" = ?, "editor" = ?, "roles" = ?
+				"vdate" = ?, "password" = ?, "mtime" = ?, "editor" = ?, "roles" = ?, "salt" = ?
 			WHERE "id" = ?
 		',
 	),
@@ -56,7 +56,7 @@ return array(
 				fos."birthday" AS "customer.birthday", fos."enabled" AS "customer.status",
 				fos."vdate" AS "customer.vdate", fos."password" AS "customer.password",
 				fos."ctime" AS "customer.ctime", fos."mtime" AS "customer.mtime",
-				fos."editor" AS "customer.editor", fos."roles"
+				fos."editor" AS "customer.editor", fos."roles", fos."salt"
 			FROM "fos_user" AS fos
 			:joins
 			WHERE :cond
@@ -67,7 +67,7 @@ return array(
 				fos."countryid", fos."langid", fos."telephone", fos."email_canonical",
 				fos."telefax", fos."website", fos."longitude", fos."latitude",
 				fos."birthday", fos."enabled", fos."vdate", fos."password",
-				fos."ctime", fos."mtime", fos."editor", fos."roles"
+				fos."ctime", fos."mtime", fos."editor", fos."roles", fos."salt"
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',

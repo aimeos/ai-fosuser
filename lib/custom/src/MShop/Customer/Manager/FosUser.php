@@ -410,12 +410,13 @@ class FosUser
 			$stmt->bind( 28, $date ); // Modification time
 			$stmt->bind( 29, $context->getEditor() );
 			$stmt->bind( 30, serialize( $item->getRoles() ) );
+			$stmt->bind( 31, $item->getSalt() );
 
 			if( $id !== null ) {
-				$stmt->bind( 31, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 32, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 31, $date ); // Creation time
+				$stmt->bind( 32, $date ); // Creation time
 			}
 
 			$stmt->execute()->finish();
