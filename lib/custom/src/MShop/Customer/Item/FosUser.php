@@ -117,7 +117,7 @@ class FosUser
 	public function getSalt()
 	{
 		if( !isset( $this->values['salt'] ) ) {
-			$this->values['salt'] = sha1( microtime( true ) . getmypid() );
+			$this->values['salt'] = sha1( microtime( true ) . getmypid() . mt_rand() );
 		}
 
 		return $this->values['salt'];
