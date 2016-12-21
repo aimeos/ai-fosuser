@@ -540,6 +540,6 @@ class FosUser
 		$helper = $this->getPasswordHelper();
 		$address = $this->addressManager->createItem();
 
-		return new \Aimeos\MShop\Customer\Item\FosUser( $address, $values, $listItems, $refItems, $helper );
+		return new \Aimeos\MShop\Customer\Item\FosUser( $address, $values, $listItems, $refItems, null, $helper );
 	}
 }
