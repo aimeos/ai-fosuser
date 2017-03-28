@@ -212,7 +212,7 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testSearchItemsNoCriteria()
+	public function testSearchItemsTotal()
 	{
 		$total = 0;
 
@@ -230,7 +230,7 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testSearchItemsBaseCriteria()
+	public function testSearchItemsCriteria()
 	{
 		$search = $this->object->createSearch( true );
 		$conditions = array(
@@ -239,6 +239,22 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$this->assertEquals( 2, count( $this->object->searchItems( $search, array(), $total ) ) );
+	}
+
+
+	public function testSearchItemsRef()
+	{
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
+
+		$results = $this->object->searchItems( $search, ['address', 'text'] );
+
+		if( ( $item = reset( $results ) ) === false ) {
+			throw new \Exception( 'No customer item for "UTC001" available' );
+		}
+
+		$this->assertEquals( 1, count( $item->getRefItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $item->getAddressItems() ) );
 	}
 
 

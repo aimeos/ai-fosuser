@@ -475,12 +475,12 @@ class FosUser
 	 * @return array List of items implementing \Aimeos\MShop\Customer\Item\Iface
 	 * @throws \Aimeos\MShop\Customer\Exception If creating items failed
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
-		$map = array();
+		$map = [];
 
 		try
 		{
@@ -502,7 +502,12 @@ class FosUser
 			throw $e;
 		}
 
-		return $this->buildItems( $map, $ref, 'customer' );
+		$addrItems = [];
+		if( in_array( 'address', $ref, true ) ) {
+			$addrItems = $this->getAddressItems( array_keys( $map ) );
+		}
+
+		return $this->buildItems( $map, $ref, 'customer', $addrItems );
 	}
 
 
@@ -527,7 +532,7 @@ class FosUser
 	 * @param array $refItems Items referenced by the customer item via the list items
 	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item
 	 */
-	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
+	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [], array $addresses = [] )
 	{
 		if( !isset( $this->addressManager ) ) {
 			$this->addressManager = $this->getSubManager( 'address' );
@@ -540,6 +545,6 @@ class FosUser
 		$helper = $this->getPasswordHelper();
 		$address = $this->addressManager->createItem();
 
-		return new \Aimeos\MShop\Customer\Item\FosUser( $address, $values, $listItems, $refItems, null, $helper );
+		return new \Aimeos\MShop\Customer\Item\FosUser( $address, $values, $listItems, $refItems, null, $helper, $addresses );
 	}
 }

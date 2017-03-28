@@ -33,10 +33,10 @@ class FosUser
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 * @param \Aimeos\MShop\Common\Item\Helper\Password\Iface|null $helper Password encryption helper object
 	 */
-	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = array(),
-		array $listItems = array(), array $refItems = array(), \Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null )
+	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = [], array $listItems = [],
+		array $refItems = [], $salt = '', \Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null, array $addresses = [] )
 	{
-		parent::__construct( $address, $values, $listItems, $refItems, $helper );
+		parent::__construct( $address, $values, $listItems, $refItems, $salt, $helper, $addresses );
 
 		$this->values = $values;
 		$this->helper = $helper;
@@ -91,7 +91,7 @@ class FosUser
 			return (array) $this->values['roles'];
 		}
 
-		return array();
+		return [];
 	}
 
 
