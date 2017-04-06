@@ -29,7 +29,7 @@ class CustomerChangeAddressRefidParentidFosUser extends \Aimeos\MW\Setup\Task\Ba
 	 */
 	public function getPreDependencies()
 	{
-		return array();
+		return [];
 	}
 
 

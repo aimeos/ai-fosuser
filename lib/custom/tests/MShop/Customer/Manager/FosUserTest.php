@@ -145,7 +145,7 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 		$total = 0;
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'customer.id', null );
 		$expr[] = $search->compare( '==', 'customer.label', 'UTC002' );
 		$expr[] = $search->compare( '==', 'customer.code', 'UTC002' );
@@ -207,7 +207,7 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $result ) );
 	}
 
@@ -220,7 +220,7 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 		$search->setConditions( $search->compare( '==', 'customer.address.editor', $this->editor ) );
 		$search->setSlice( 0, 2 );
 
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
 
@@ -238,7 +238,7 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$this->assertEquals( 2, count( $this->object->searchItems( $search, array(), $total ) ) );
+		$this->assertEquals( 2, count( $this->object->searchItems( $search, [], $total ) ) );
 	}
 
 

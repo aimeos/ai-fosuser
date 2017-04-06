@@ -81,7 +81,7 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 	public function testSetPasswordGenerated()
 	{
 		$helper = new \Aimeos\MShop\Common\Item\Helper\Password\Standard( array( 'format' => '%1$s{%2$s}' ) );
-		$object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, array(), array(), array(), null, $helper );
+		$object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, [], [], [], null, $helper );
 
 		$object->setPassword( 'newpwd' );
 		$this->assertEquals( sha1( 'newpwd{' . $object->getSalt() . '}' ), $object->getPassword() );
@@ -106,7 +106,7 @@ class FosUserTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetSaltGenerated()
 	{
-		$object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, array() );
+		$object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, [] );
 		$this->assertEquals( 'mshop', $object->getSalt() );
 	}
 

@@ -37,7 +37,7 @@ class CustomerAddFosUserTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 
 		$this->msg( 'Adding Fos user bundle customer test data', 0 );
 
-		$parentIds = array();
+		$parentIds = [];
 		$ds = DIRECTORY_SEPARATOR;
 		$this->additional->setEditor( 'ai-fosuser:unittest' );
 		$path = __DIR__ . $ds . 'data' . $ds . 'customer.php';
