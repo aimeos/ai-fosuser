@@ -246,7 +246,7 @@ class FosUser
 	{
 		$path = 'mshop/customer/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'address', 'lists' ) ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 	}
 
@@ -535,7 +535,7 @@ class FosUser
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [], array $addresses = [] )
 	{
 		if( !isset( $this->addressManager ) ) {
-			$this->addressManager = $this->getSubManager( 'address' );
+			$this->addressManager = $this->getObject()->getSubManager( 'address' );
 		}
 
 		if( isset( $values['roles'] ) ) {
