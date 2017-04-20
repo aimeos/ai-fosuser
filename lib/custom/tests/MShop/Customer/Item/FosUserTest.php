@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Customer\Item;
 
 
-class FosUserTest extends \PHPUnit_Framework_TestCase
+class FosUserTest extends \PHPUnit\Framework\TestCase
 {
 	private $address;
 	private $object;
