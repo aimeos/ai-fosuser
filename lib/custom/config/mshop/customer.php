@@ -268,21 +268,21 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "fos_user" (
-						"username_canonical", "username", "company", "vatid", "salutation", "title",
+						"siteid", "username_canonical", "username", "company", "vatid", "salutation", "title",
 						"firstname", "lastname", "address1", "address2", "address3",
 						"postal", "city", "state", "countryid", "langid", "telephone",
 						"email_canonical", "email", "telefax", "website", "longitude", "latitude",
 						"birthday", "enabled", "vdate", "password", "mtime", "editor", "roles", "salt",
 						"ctime", "locked", "expired", "credentials_expired"
 					) VALUES (
-						?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, 0, 0, 0
+						?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, 0, 0, 0
 					)
 				',
 			),
 			'update' => array(
 				'ansi' => '
 					UPDATE "fos_user"
-					SET "username_canonical" = ?, "username" = ?, "company" = ?, "vatid" = ?,
+					SET "siteid" = ?, "username_canonical" = ?, "username" = ?, "company" = ?, "vatid" = ?,
 						"salutation" = ?, "title" = ?, "firstname" = ?, "lastname" = ?,
 						"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 						"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
@@ -294,7 +294,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT fos."id" AS "customer.id",
+					SELECT fos."id" AS "customer.id", fos."siteid" AS "customer.siteid",
 						fos."username_canonical" as "customer.code", fos."username" as "customer.label",
 						fos."company" AS "customer.company", fos."vatid" AS "customer.vatid",
 						fos."salutation" AS "customer.salutation", fos."title" AS "customer.title",
@@ -313,7 +313,7 @@ return array(
 					FROM "fos_user" AS fos
 					:joins
 					WHERE :cond
-					GROUP BY fos."id", fos."username_canonical", fos."username",
+					GROUP BY fos."id", fos."siteid", fos."username_canonical", fos."username",
 						fos."company", fos."vatid", fos."salutation", fos."title",
 						fos."firstname", fos."lastname", fos."address1", fos."address2",
 						fos."address3", fos."postal", fos."city", fos."state",
