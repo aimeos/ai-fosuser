@@ -19,25 +19,25 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "fos_user_address" (
-							"siteid", "parentid", "company", "vatid", "salutation", "title",
+							"parentid", "company", "vatid", "salutation", "title",
 							"firstname", "lastname", "address1", "address2", "address3",
 							"postal", "city", "state", "countryid", "langid", "telephone",
-							"email", "telefax", "website", "longitude", "latitude", "flag", "pos", "mtime",
-							"editor", "ctime"
+							"email", "telefax", "website", "longitude", "latitude", "flag",
+							"pos", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "fos_user_address"
-						SET "siteid" = ?, "parentid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
+						SET "parentid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
 							"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?,
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-							"flag" = ?, "pos" = ?, "mtime" = ?, "editor" = ?
+							"flag" = ?, "pos" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
 						WHERE "id" = ?
 					',
 				),
@@ -99,16 +99,20 @@ return array(
 				'fosuser' => array(
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "fos_user_list_type"( "siteid", "code", "domain", "label", "status",
-								"mtime", "editor", "ctime" )
-							VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+							INSERT INTO "fos_user_list_type"(
+								"code", "domain", "label", "status",
+								"mtime", "editor", "siteid", "ctime"
+							) VALUES (
+								?, ?, ?, ?, ?, ?, ?, ?
+							)
 						',
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "fos_user_list_type"
-							SET "siteid"=?, "code" = ?, "domain" = ?, "label" = ?, "status" = ?, "mtime" = ?, "editor" = ?
-							WHERE "id" = ?
+							SET "code" = ?, "domain" = ?, "label" = ?,
+								"status" = ?, "mtime" = ?, "editor" = ?
+							WHERE "siteid" = ? AND "id" = ?
 						',
 					),
 					'delete' => array(
@@ -182,24 +186,27 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "fos_user_list"( "parentid", "siteid", "typeid", "domain", "refid", "start", "end",
-						"config", "pos", "status", "mtime", "editor", "ctime" )
-						VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+						INSERT INTO "fos_user_list"(
+							"parentid", "typeid", "domain", "refid", "start", "end",
+							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
+						) VALUES (
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+						)
 					',
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "fos_user_list"
-						SET "parentid"=?, "siteid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+						SET "parentid"=?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
-						WHERE "id" = ?
+						WHERE "siteid" = ? AND "id" = ?
 					',
 				),
 				'updatepos' => array(
 					'ansi' => '
 						UPDATE "fos_user_list"
 							SET "pos" = ?, "mtime" = ?, "editor" = ?
-						WHERE "id" = ?
+						WHERE "siteid" = ? AND "id" = ?
 					',
 				),
 				'delete' => array(
