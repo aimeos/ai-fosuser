@@ -56,7 +56,7 @@ return array(
 							fosad."longitude" AS "customer.address.longitude", fosad."latitude" AS "customer.address.latitude",
 							fosad."flag" AS "customer.address.flag", fosad."pos" AS "customer.address.position",
 							fosad."mtime" AS "customer.address.mtime", fosad."editor" AS "customer.address.editor",
-							fosad."ctime" AS "customer.address.ctime"
+							fosad."ctime" AS "customer.address.ctime", fosad."siteid" AS "customer.address.siteid"
 						FROM "fos_user_address" AS fosad
 						:joins
 						WHERE :cond
