@@ -15,14 +15,7 @@ namespace Aimeos\MW\Setup\Task;
 class FosuserAddIndexes extends \Aimeos\MW\Setup\Task\Base
 {
 	private $list = array(
-		'idx_fosus_langid' => 'CREATE INDEX "idx_fosus_langid" ON "fos_user" ("langid")',
-		'idx_fosus_enabled_ln_fn' => 'CREATE INDEX "idx_fosus_enabled_ln_fn" ON "fos_user" ("enabled", "lastname", "firstname")',
-		'idx_fosus_enabled_ad1_ad2' => 'CREATE INDEX "idx_fosus_enabled_ad1_ad2" ON "fos_user" ("enabled", "address1", "address2")',
-		'idx_fosus_enabled_postal_city' => 'CREATE INDEX "idx_fosus_enabled_postal_city" ON "fos_user" ("enabled", "postal", "city")',
-		'idx_fosus_lastname' => 'CREATE INDEX "idx_fosus_lastname" ON "fos_user" ("lastname")',
-		'idx_fosus_address1' => 'CREATE INDEX "idx_fosus_address1" ON "fos_user" ("address1")',
-		'idx_fosus_postal' => 'CREATE INDEX "idx_fosus_postal" ON "fos_user" ("postal")',
-		'idx_fosus_city' => 'CREATE INDEX "idx_fosus_city" ON "fos_user" ("city")',
+		// done by Doctrine schema update
 	);
 
 
