@@ -18,11 +18,11 @@ return array(
 			$table->addColumn( 'username_canonical', 'string', array( 'length' => 180 ) );
 			$table->addColumn( 'email', 'string', array( 'length' => 180 ) );
 			$table->addColumn( 'email_canonical', 'string', array( 'length' => 180 ) );
-			$table->addColumn( 'enabled', 'smallint', [] );
+			$table->addColumn( 'enabled', 'boolean', [] );
 			$table->addColumn( 'salt', 'string', array( 'length' => 255, 'notnull' => false ) );
 			$table->addColumn( 'password', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'last_login', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'confirmation_token', 'string', array( 'length' => 255, 'notnull' => false ) );
+			$table->addColumn( 'confirmation_token', 'string', array( 'length' => 180, 'notnull' => false ) );
 			$table->addColumn( 'password_requested_at', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'roles', 'text', array( 'length' => 0x7fffffff, 'comment' => '(DC2Type:array)' ) );
 			$table->addColumn( 'salutation', 'string', array( 'length' => 8, 'default' => '' ) );
