@@ -18,7 +18,7 @@ return array(
 			$table->addColumn( 'username_canonical', 'string', array( 'length' => 180 ) );
 			$table->addColumn( 'email', 'string', array( 'length' => 180 ) );
 			$table->addColumn( 'email_canonical', 'string', array( 'length' => 180 ) );
-			$table->addColumn( 'enabled', 'tinyint', [] );
+			$table->addColumn( 'enabled', 'smallint', [] );
 			$table->addColumn( 'salt', 'string', array( 'length' => 255, 'notnull' => false ) );
 			$table->addColumn( 'password', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'last_login', 'datetime', array( 'notnull' => false ) );
