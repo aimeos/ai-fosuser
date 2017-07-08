@@ -14,22 +14,17 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
-			$table->addColumn( 'username', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'username_canonical', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'email_canonical', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'enabled', 'smallint', [] );
-			$table->addColumn( 'salt', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'username', 'string', array( 'length' => 180 ) );
+			$table->addColumn( 'username_canonical', 'string', array( 'length' => 180 ) );
+			$table->addColumn( 'email', 'string', array( 'length' => 180 ) );
+			$table->addColumn( 'email_canonical', 'string', array( 'length' => 180 ) );
+			$table->addColumn( 'enabled', 'tinyint', [] );
+			$table->addColumn( 'salt', 'string', array( 'length' => 255, 'notnull' => false ) );
 			$table->addColumn( 'password', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'last_login', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'locked', 'smallint', [] );
-			$table->addColumn( 'expired', 'smallint', [] );
-			$table->addColumn( 'expires_at', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'confirmation_token', 'string', array( 'length' => 255, 'notnull' => false ) );
 			$table->addColumn( 'password_requested_at', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'roles', 'text', array( 'length' => 0x7fffffff, 'comment' => '(DC2Type:array)' ) );
-			$table->addColumn( 'credentials_expired', 'smallint', [] );
-			$table->addColumn( 'credentials_expire_at', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'salutation', 'string', array( 'length' => 8, 'default' => '' ) );
 			$table->addColumn( 'company', 'string', array( 'length' => 100, 'default' => '' ) );
 			$table->addColumn( 'vatid', 'string', array( 'length' => 32, 'default' => '' ) );
@@ -56,6 +51,7 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255, 'default' => '' ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_fosus_id' );
+			$table->addUniqueIndex( array( 'confirmation_token' ), 'unq_fosus_confirmtoken' );
 			$table->addUniqueIndex( array( 'username_canonical' ), 'unq_fosus_username' );
 			$table->addUniqueIndex( array( 'email_canonical' ), 'unq_fosus_email' );
 			$table->addIndex( array( 'langid' ), 'idx_fosus_langid' );
