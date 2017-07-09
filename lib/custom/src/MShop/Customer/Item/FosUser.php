@@ -120,7 +120,7 @@ class FosUser
 			return $this->values['salt'];
 		}
 
-		return 'mshop';
+		return '';
 	}
 
 
