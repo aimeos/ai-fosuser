@@ -107,7 +107,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 	public function testGetSaltGenerated()
 	{
 		$object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, [] );
-		$this->assertEquals( 'mshop', $object->getSalt() );
+		$this->assertEquals( '', $object->getSalt() );
 	}
 
 	public function testSetSalt()
