@@ -462,6 +462,8 @@ class FosUser
 				$item->setId( $this->newId( $conn, $path ) );
 			}
 
+			$this->addGroups( $item );
+
 			$dbm->release( $conn, $dbname );
 		}
 		catch( \Exception $e )
