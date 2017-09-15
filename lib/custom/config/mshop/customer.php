@@ -316,7 +316,7 @@ return array(
 						fos."birthday" AS "customer.birthday", fos."enabled" AS "customer.status",
 						fos."vdate" AS "customer.vdate", fos."password" AS "customer.password",
 						fos."ctime" AS "customer.ctime", fos."mtime" AS "customer.mtime",
-						fos."editor" AS "customer.editor", fos."roles", fos."salt"
+						fos."editor" AS "customer.editor", fos."roles", fos."salt", fos.*
 					FROM "fos_user" AS fos
 					:joins
 					WHERE :cond
