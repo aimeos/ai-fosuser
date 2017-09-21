@@ -67,14 +67,15 @@ class FosUser
 	 */
 	public function setPassword( $value )
 	{
-		if( $value == $this->getPassword() ) { return $this; }
+		if( (string) $value !== $this->getPassword() )
+		{
+			if( $this->helper !== null ) {
+				$value = $this->helper->encode( $value, $this->getSalt() );
+			}
 
-		if( $this->helper !== null ) {
-			$value = $this->helper->encode( $value, $this->getSalt() );
+			$this->values['customer.password'] = (string) $value;
+			$this->setModified();
 		}
-
-		$this->values['customer.password'] = (string) $value;
-		$this->setModified();
 
 		return $this;
 	}
@@ -131,8 +132,11 @@ class FosUser
 	 */
 	public function setSalt( $value )
 	{
-		$this->values['salt'] = (string) $value;
-		$this->setModified();
+		if( (string) $value !== $this->getSalt() )
+		{
+			$this->values['salt'] = (string) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}
