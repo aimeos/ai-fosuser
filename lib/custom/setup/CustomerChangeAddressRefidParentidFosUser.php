@@ -45,9 +45,9 @@ class CustomerChangeAddressRefidParentidFosUser extends \Aimeos\MW\Setup\Task\Ba
 
 
 	/**
-	 * Executes the task for MySQL databases.
+	 * Migrate database schema
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$this->process( $this->mysql );
 	}
