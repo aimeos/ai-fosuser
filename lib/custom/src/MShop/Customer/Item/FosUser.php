@@ -17,8 +17,7 @@ namespace Aimeos\MShop\Customer\Item;
  * @package MShop
  * @subpackage Customer
  */
-class FosUser
-	extends \Aimeos\MShop\Customer\Item\Standard
+class FosUser extends Standard implements Iface
 {
 	private $values;
 	private $helper;
