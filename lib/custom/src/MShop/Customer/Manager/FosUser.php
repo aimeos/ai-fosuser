@@ -203,7 +203,7 @@ class FosUser
 			'code' => 'customer.status',
 			'internalcode' => 'fos."enabled"',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL,
 		),
 		'customer.dateverified'=> array(
 			'label' => 'Customer verification date',
@@ -409,7 +409,7 @@ class FosUser
 			$stmt->bind( 23, $billingAddress->getLongitude() );
 			$stmt->bind( 24, $billingAddress->getLatitude() );
 			$stmt->bind( 25, $item->getBirthday() );
-			$stmt->bind( 26, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 26, ( $item->getStatus() > 0 ? true : false ), \Aimeos\MW\DB\Statement\Base::PARAM_BOOL );
 			$stmt->bind( 27, $item->getDateVerified() );
 			$stmt->bind( 28, $item->getPassword() );
 			$stmt->bind( 29, $date ); // Modification time
