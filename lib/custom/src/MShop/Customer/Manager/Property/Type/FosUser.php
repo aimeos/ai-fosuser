@@ -159,7 +159,7 @@ class FosUser
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->getSubManagerBase( 'customer', 'property/type/' . $manager, $name );
+		return $this->getSubManagerBase( 'customer', 'property/type/' . $manager, ( $name === null ? 'FosUser' : $name ) );
 	}
 
 
