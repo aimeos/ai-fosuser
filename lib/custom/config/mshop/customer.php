@@ -265,6 +265,138 @@ return array(
 				),
 			),
 		),
+		'property' => array(
+			'type' => array(
+				'fosuser' => array(
+					'delete' => array(
+						'ansi' => '
+							DELETE FROM "fos_user_property_type"
+							WHERE :cond AND siteid = ?
+						'
+					),
+					'insert' => array(
+						'ansi' => '
+							INSERT INTO "fos_user_property_type" (
+								"code", "domain", "label", "status",
+								"mtime", "editor", "siteid", "ctime"
+							) VALUES (
+								?, ?, ?, ?, ?, ?, ?, ?
+							)
+						'
+					),
+					'update' => array(
+						'ansi' => '
+							UPDATE "fos_user_property_type"
+							SET "code" = ?, "domain" = ?, "label" = ?,
+								"status" = ?, "mtime" = ?, "editor" = ?
+							WHERE "siteid" = ? AND "id" = ?
+						'
+					),
+					'search' => array(
+						'ansi' => '
+							SELECT fosprty."id" AS "customer.property.type.id", fosprty."siteid" AS "customer.property.type.siteid",
+								fosprty."code" AS "customer.property.type.code", fosprty."domain" AS "customer.property.type.domain",
+								fosprty."label" AS "customer.property.type.label", fosprty."status" AS "customer.property.type.status",
+								fosprty."mtime" AS "customer.property.type.mtime", fosprty."editor" AS "customer.property.type.editor",
+								fosprty."ctime" AS "customer.property.type.ctime"
+							FROM "fos_user_property_type" fosprty
+							:joins
+							WHERE :cond
+							GROUP BY fosprty."id", fosprty."siteid", fosprty."code", fosprty."domain",
+								fosprty."label", fosprty."status", fosprty."mtime", fosprty."editor",
+								fosprty."ctime" /*-columns*/ , :columns /*columns-*/
+							/*-orderby*/ ORDER BY :order /*orderby-*/
+							LIMIT :size OFFSET :start
+						'
+					),
+					'count' => array(
+						'ansi' => '
+							SELECT COUNT(*) AS "count"
+							FROM (
+								SELECT DISTINCT fosprty."id"
+								FROM "fos_user_property_type" fosprty
+								:joins
+								WHERE :cond
+								LIMIT 10000 OFFSET 0
+							) AS list
+						'
+					),
+					'newid' => array(
+						'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+						'mysql' => 'SELECT LAST_INSERT_ID()',
+						'oracle' => 'SELECT fos_user_property_type_seq.CURRVAL FROM DUAL',
+						'pgsql' => 'SELECT lastval()',
+						'sqlite' => 'SELECT last_insert_rowid()',
+						'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+						'sqlanywhere' => 'SELECT @@IDENTITY',
+					),
+				),
+			),
+			'fosuser' => array(
+				'delete' => array(
+					'ansi' => '
+						DELETE FROM "fos_user_property"
+						WHERE :cond AND siteid = ?
+					'
+				),
+				'insert' => array(
+					'ansi' => '
+						INSERT INTO "fos_user_property" (
+							"parentid", "typeid", "langid", "value",
+							"mtime", "editor", "siteid", "ctime"
+						) VALUES (
+							?, ?, ?, ?, ?, ?, ?, ?
+						)
+					'
+				),
+				'update' => array(
+					'ansi' => '
+						UPDATE "fos_user_property"
+						SET "parentid" = ?, "typeid" = ?, "langid" = ?,
+							"value" = ?, "mtime" = ?, "editor" = ?
+						WHERE "siteid" = ? AND "id" = ?
+					'
+				),
+				'search' => array(
+					'ansi' => '
+						SELECT fospr."id" AS "customer.property.id", fospr."parentid" AS "customer.property.parentid",
+							fospr."siteid" AS "customer.property.siteid", fospr."typeid" AS "customer.property.typeid",
+							fospr."langid" AS "customer.property.languageid", fospr."value" AS "customer.property.value",
+							fospr."mtime" AS "customer.property.mtime", fospr."editor" AS "customer.property.editor",
+							fospr."ctime" AS "customer.property.ctime"
+						FROM "fos_user_property" AS fospr
+						:joins
+						WHERE :cond
+						GROUP BY fospr."id", fospr."parentid", fospr."siteid", fospr."typeid",
+							fospr."langid", fospr."value", fospr."mtime", fospr."editor",
+							fospr."ctime" /*-columns*/ , :columns /*columns-*/
+						/*-orderby*/ ORDER BY :order /*orderby-*/
+						LIMIT :size OFFSET :start
+					'
+				),
+				'count' => array(
+					'ansi' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT fospr."id"
+							FROM "fos_user_property" AS fospr
+							:joins
+							WHERE :cond
+							LIMIT 10000 OFFSET 0
+						) AS list
+					'
+				),
+				'newid' => array(
+					'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+					'mysql' => 'SELECT LAST_INSERT_ID()',
+					'oracle' => 'SELECT fos_user_property_seq.CURRVAL FROM DUAL',
+					'pgsql' => 'SELECT lastval()',
+					'sqlite' => 'SELECT last_insert_rowid()',
+					'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+					'sqlanywhere' => 'SELECT @@IDENTITY',
+				),
+			),
+		),
 		'fosuser' => array(
 			'delete' => array(
 				'ansi' => '
