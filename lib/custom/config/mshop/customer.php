@@ -100,17 +100,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "fos_user_list_type"(
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						',
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "fos_user_list_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						',
@@ -127,11 +127,13 @@ return array(
 								foslity."code" AS "customer.lists.type.code", foslity."domain" AS "customer.lists.type.domain",
 								foslity."label" AS "customer.lists.type.label", foslity."status" AS "customer.lists.type.status",
 								foslity."mtime" AS "customer.lists.type.mtime", foslity."editor" AS "customer.lists.type.editor",
-								foslity."ctime" AS "customer.lists.type.ctime"
+								foslity."ctime" AS "customer.lists.type.ctime", foslity."pos" AS "customer.lists.type.position"
 							FROM "fos_user_list_type" AS foslity
 							:joins
-							WHERE
-								:cond
+							WHERE :cond
+							GROUP BY foslity."id", foslity."siteid", foslity."code", foslity."domain",
+								foslity."label", foslity."status", foslity."mtime", foslity."editor",
+								foslity."ctime", foslity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						',
@@ -238,6 +240,10 @@ return array(
 						FROM "fos_user_list" AS fosli
 						:joins
 						WHERE :cond
+						GROUP BY fosli."id", fosli."parentid", fosli."siteid", fosli."typeid",
+							fosli."domain", fosli."refid", fosli."start", fosli."end",
+							fosli."config", fosli."pos", fosli."status", fosli."mtime",
+							fosli."editor", fosli."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					',
@@ -277,17 +283,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "fos_user_property_type" (
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "fos_user_property_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -298,13 +304,13 @@ return array(
 								fosprty."code" AS "customer.property.type.code", fosprty."domain" AS "customer.property.type.domain",
 								fosprty."label" AS "customer.property.type.label", fosprty."status" AS "customer.property.type.status",
 								fosprty."mtime" AS "customer.property.type.mtime", fosprty."editor" AS "customer.property.type.editor",
-								fosprty."ctime" AS "customer.property.type.ctime"
+								fosprty."ctime" AS "customer.property.type.ctime", fosprty."pos" AS "customer.property.type.position"
 							FROM "fos_user_property_type" fosprty
 							:joins
 							WHERE :cond
 							GROUP BY fosprty."id", fosprty."siteid", fosprty."code", fosprty."domain",
 								fosprty."label", fosprty."status", fosprty."mtime", fosprty."editor",
-								fosprty."ctime" /*-columns*/ , :columns /*columns-*/
+								fosprty."ctime", fosprty."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'

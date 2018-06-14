@@ -169,6 +169,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.property.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine('&&', $conditions ) );
+		$search->setSortations( [$search->sort('-', 'customer.property.type.position' )] );
 		$search->setSlice(0, 1);
 		$items = $this->object->searchItems( $search, [], $total);
 

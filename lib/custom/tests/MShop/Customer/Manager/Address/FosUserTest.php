@@ -1,12 +1,14 @@
 <?php
 
-namespace Aimeos\MShop\Customer\Manager\Address;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2017
  */
+
+
+namespace Aimeos\MShop\Customer\Manager\Address;
+
+
 class FosUserTest extends \PHPUnit\Framework\TestCase
 {
 	private $fixture = null;

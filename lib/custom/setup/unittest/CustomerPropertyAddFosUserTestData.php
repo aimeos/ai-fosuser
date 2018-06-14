@@ -37,7 +37,7 @@ class CustomerPropertyAddFosUserTestData
 			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->msg( 'Adding customer property test data', 0 );
+		$this->msg( 'Adding customer property Fos user bundle test data', 0 );
 		$this->additional->setEditor( 'ai-fosuser:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
