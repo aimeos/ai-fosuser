@@ -303,7 +303,9 @@ class FosUser
 			throw new \Aimeos\MShop\Customer\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if( !$item->isModified() ) {
+		if( !$item->isModified() )
+		{
+			$item = $this->savePropertyItems( $item, 'customer' );
 			return $this->saveRefItems( $item, 'customer' );
 		}
 
@@ -472,6 +474,7 @@ class FosUser
 
 		$this->addGroups( $item );
 
+		$item = $this->savePropertyItems( $item, 'customer' );
 		return $this->saveRefItems( $item, 'customer' );
 	}
 
@@ -516,7 +519,12 @@ class FosUser
 			$addrItems = $this->getAddressItems( array_keys( $map ) );
 		}
 
-		return $this->buildItems( $map, $ref, 'customer', $addrItems );
+		$propItems = [];
+		if( in_array( 'customer/property', $ref, true ) ) {
+			$propItems = $this->getPropertyItems( array_keys( $map ), 'customer' );
+		}
+
+		return $this->buildItems( $map, $ref, 'customer', $addrItems, $propItems );
 	}
 
 
@@ -539,9 +547,12 @@ class FosUser
 	 * @param array $values List of attributes for customer item
 	 * @param array $listItems List items associated to the customer item
 	 * @param array $refItems Items referenced by the customer item via the list items
+	 * @param array $addresses List of address items of the customer item
+	 * @param array $propItems List of property items of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item
 	 */
-	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [], array $addresses = [] )
+	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [],
+		array $addresses = [], array $propItems = [] )
 	{
 		if( !isset( $this->addressManager ) ) {
 			$this->addressManager = $this->getObject()->getSubManager( 'address' );
@@ -554,6 +565,9 @@ class FosUser
 		$helper = $this->getPasswordHelper();
 		$address = $this->addressManager->createItem();
 
-		return new \Aimeos\MShop\Customer\Item\FosUser( $address, $values, $listItems, $refItems, null, $helper, $addresses );
+		return new \Aimeos\MShop\Customer\Item\FosUser(
+			$address, $values, $listItems, $refItems,
+			null, $helper, $addresses, $propItems
+		);
 	}
 }

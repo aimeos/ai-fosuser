@@ -32,10 +32,11 @@ class FosUser extends Standard implements Iface
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 * @param \Aimeos\MShop\Common\Item\Helper\Password\Iface|null $helper Password encryption helper object
 	 */
-	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = [], array $listItems = [],
-		array $refItems = [], $salt = '', \Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null, array $addresses = [] )
+	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address,
+		array $values = [], array $listItems = [], array $refItems = [], $salt = '',
+		\Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null, array $addresses = [], array $propItems = [] )
 	{
-		parent::__construct( $address, $values, $listItems, $refItems, $salt, $helper, $addresses );
+		parent::__construct( $address, $values, $listItems, $refItems, $salt, $helper, $addresses, $propItems, $propItems );
 
 		$this->values = $values;
 		$this->helper = $helper;
