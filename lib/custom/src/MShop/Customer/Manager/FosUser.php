@@ -306,6 +306,7 @@ class FosUser
 		if( !$item->isModified() )
 		{
 			$item = $this->savePropertyItems( $item, 'customer' );
+			$item = $this->saveAddressItems( $item, 'customer' );
 			return $this->saveRefItems( $item, 'customer' );
 		}
 
@@ -475,6 +476,7 @@ class FosUser
 		$this->addGroups( $item );
 
 		$item = $this->savePropertyItems( $item, 'customer' );
+		$item = $this->saveAddressItems( $item, 'customer' );
 		return $this->saveRefItems( $item, 'customer' );
 	}
 
@@ -516,7 +518,7 @@ class FosUser
 
 		$addrItems = [];
 		if( in_array( 'customer/address', $ref, true ) ) {
-			$addrItems = $this->getAddressItems( array_keys( $map ) );
+			$addrItems = $this->getAddressItems( array_keys( $map ), 'customer' );
 		}
 
 		$propItems = [];
