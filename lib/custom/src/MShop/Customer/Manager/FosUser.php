@@ -246,7 +246,9 @@ class FosUser
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/customer/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'address', 'lists' ) ) as $domain ) {
+		$default = ['address', 'group', 'lists', 'property'];
+
+		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 	}
@@ -273,8 +275,9 @@ class FosUser
 	public function getSearchAttributes( $withsub = true )
 	{
 		$path = 'mshop/customer/manager/submanagers';
+		$default = ['address', 'group', 'lists', 'property'];
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'address', 'lists' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
 	}
 
 
