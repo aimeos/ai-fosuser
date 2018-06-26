@@ -221,6 +221,9 @@ return array(
 			$table->addForeignKeyConstraint( 'fos_user', array( 'parentid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_fospr_pid' );
 
+			$table->addForeignKeyConstraint( 'fos_user_property_type', array( 'typeid' ), array( 'id' ),
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_fospr_typeid' );
+
 			return $schema;
 		},
 	),
