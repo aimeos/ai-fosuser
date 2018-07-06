@@ -13,6 +13,7 @@ return array(
 			$table = $schema->createTable( 'fos_user' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
+			$table->addColumn( 'superuser', 'smallint', array( 'default' => 0 ) );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'username', 'string', array( 'length' => 180 ) );
 			$table->addColumn( 'username_canonical', 'string', array( 'length' => 180 ) );
