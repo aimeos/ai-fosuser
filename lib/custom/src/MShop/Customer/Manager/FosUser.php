@@ -282,17 +282,6 @@ class FosUser
 
 
 	/**
-	 * Instantiates a new customer item object.
-	 *
-	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item object
-	 */
-	public function createItem()
-	{
-		return $this->createItemBase( ['customer.siteid' => $this->getContext()->getLocale()->getSiteId()] );
-	}
-
-
-	/**
 	 * Saves a customer item object.
 	 *
 	 * @param \Aimeos\MShop\Customer\Item\Iface $item Customer item object
