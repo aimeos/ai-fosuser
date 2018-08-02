@@ -290,10 +290,7 @@ class FosUser
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = '\\Aimeos\\MShop\\Customer\\Item\\FosUser';
-		if( !( $item instanceof $iface ) ) {
-			throw new \Aimeos\MShop\Customer\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
-		}
+		self::checkClass( '\\Aimeos\\MShop\\Customer\\Item\\FosUser', $item );
 
 		if( !$item->isModified() )
 		{
