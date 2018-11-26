@@ -17,13 +17,6 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
-		$addressValues = array(
-			'customer.address.parentid' => 'referenceid',
-			'customer.address.position' => 1,
-		);
-
-		$this->address = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.', $addressValues );
-
 		$values = array(
 			'customer.id' => 541,
 			'customer.siteid' => 123,
@@ -58,6 +51,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 			'salt' => 'test',
 		);
 
+		$this->address = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.', $values );
 		$this->object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, $values );
 	}
 

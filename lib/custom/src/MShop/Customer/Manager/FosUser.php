@@ -235,8 +235,6 @@ class FosUser
 		),
 	);
 
-	private $addressManager;
-
 
 	/**
 	 * Removes old entries from the storage.
@@ -545,16 +543,12 @@ class FosUser
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [],
 		array $addresses = [], array $propItems = [] )
 	{
-		if( !isset( $this->addressManager ) ) {
-			$this->addressManager = $this->getObject()->getSubManager( 'address' );
-		}
-
 		if( isset( $values['roles'] ) ) {
 			$values['roles'] = unserialize( $values['roles'] );
 		}
 
 		$helper = $this->getPasswordHelper();
-		$address = $this->addressManager->createItem();
+		$address = new \Aimeos\MShop\Common\Item\Address\Simple( 'customer.', $values );
 
 		return new \Aimeos\MShop\Customer\Item\FosUser(
 			$address, $values, $listItems, $refItems,
