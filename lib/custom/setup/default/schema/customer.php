@@ -42,8 +42,8 @@ return array(
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'telefax', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'longitude', 'decimal', array( 'precision' => 8, 'scale' => 6, 'notnull' => false ) );
-			$table->addColumn( 'latitude', 'decimal', array( 'precision' => 8, 'scale' => 6, 'notnull' => false ) );
+			$table->addColumn( 'longitude', 'float', array( 'notnull' => false ) );
+			$table->addColumn( 'latitude', 'float', array( 'notnull' => false ) );
 			$table->addColumn( 'birthday', 'date', array( 'notnull' => false ) );
 			$table->addColumn( 'vdate', 'date', array( 'notnull' => false ) );
 			$table->addColumn( 'mtime', 'datetime', array( 'notnull' => false ) );
@@ -72,6 +72,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'parentid', 'integer', [] );
+			$table->addColumn( 'pos', 'smallint', [] );
 			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
 			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'salutation', 'string', array( 'length' => 8 ) );
@@ -90,9 +91,8 @@ return array(
 			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'telefax', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'longitude', 'decimal', array( 'precision' => 8, 'scale' => 6, 'notnull' => false ) );
-			$table->addColumn( 'latitude', 'decimal', array( 'precision' => 8, 'scale' => 6, 'notnull' => false ) );
-			$table->addColumn( 'pos', 'smallint', [] );
+			$table->addColumn( 'longitude', 'float', array( 'notnull' => false ) );
+			$table->addColumn( 'latitude', 'float', array( 'notnull' => false ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );

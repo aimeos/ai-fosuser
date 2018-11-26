@@ -174,15 +174,15 @@ class FosUser
 			'label' => 'Customer longitude',
 			'code' => 'customer.longitude',
 			'internalcode' => 'fos."longitude"',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'type' => 'float',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'customer.latitude' => array(
 			'label' => 'Customer latitude',
 			'code' => 'customer.latitude',
 			'internalcode' => 'fos."latitude"',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'type' => 'float',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'customer.birthday' => array(
 			'label' => 'Customer birthday',
@@ -396,8 +396,8 @@ class FosUser
 			$stmt->bind( 20, $billingAddress->getEmail() );
 			$stmt->bind( 21, $billingAddress->getTelefax() );
 			$stmt->bind( 22, $billingAddress->getWebsite() );
-			$stmt->bind( 23, $billingAddress->getLongitude() );
-			$stmt->bind( 24, $billingAddress->getLatitude() );
+			$stmt->bind( 23, $billingAddress->getLongitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
+			$stmt->bind( 24, $billingAddress->getLatitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
 			$stmt->bind( 25, $item->getBirthday() );
 			$stmt->bind( 26, ( $item->getStatus() > 0 ? true : false ), \Aimeos\MW\DB\Statement\Base::PARAM_BOOL );
 			$stmt->bind( 27, $item->getDateVerified() );
