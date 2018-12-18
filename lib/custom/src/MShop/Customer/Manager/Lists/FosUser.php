@@ -53,13 +53,12 @@ class FosUser
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.lists.typeid' => array(
-			'code'=>'customer.lists.typeid',
-			'internalcode'=>'fosli."typeid"',
-			'label'=>'Customer list type ID',
-			'type'=> 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
+		'customer.lists.type' => array(
+			'code'=>'customer.lists.type',
+			'internalcode'=>'fosli."type"',
+			'label'=>'Customer list type',
+			'type'=> 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lists.refid'=> array(
 			'code'=>'customer.lists.refid',
@@ -135,7 +134,7 @@ class FosUser
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/customer/manager/lists/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -153,7 +152,7 @@ class FosUser
 	{
 		$path = 'mshop/customer/manager/lists/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 

@@ -182,14 +182,14 @@ return array(
 						FROM "fos_user_list"
 						WHERE "siteid" = ?
 							AND "parentid" = ?
-							AND "typeid" = ?
+							AND "type" = ?
 							AND "domain" = ?
 					',
 				),
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "fos_user_list"(
-							"parentid", "typeid", "domain", "refid", "start", "end",
+							"parentid", "type", "domain", "refid", "start", "end",
 							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -199,7 +199,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "fos_user_list"
-						SET "parentid"=?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+						SET "parentid"=?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					',
@@ -223,7 +223,7 @@ return array(
 							SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ?
 							AND "parentid" = ?
-							AND "typeid" = ?
+							AND "type" = ?
 							AND "domain" = ?
 							AND "pos" >= ?
 					',
@@ -231,7 +231,7 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT fosli."id" AS "customer.lists.id", fosli."siteid" AS "customer.lists.siteid",
-							fosli."parentid" AS "customer.lists.parentid", fosli."typeid" AS "customer.lists.typeid",
+							fosli."parentid" AS "customer.lists.parentid", fosli."type" AS "customer.lists.type",
 							fosli."domain" AS "customer.lists.domain", fosli."refid" AS "customer.lists.refid",
 							fosli."start" AS "customer.lists.datestart", fosli."end" AS "customer.lists.dateend",
 							fosli."config" AS "customer.lists.config", fosli."pos" AS "customer.lists.position",
@@ -240,7 +240,7 @@ return array(
 						FROM "fos_user_list" AS fosli
 						:joins
 						WHERE :cond
-						GROUP BY fosli."id", fosli."parentid", fosli."siteid", fosli."typeid",
+						GROUP BY fosli."id", fosli."parentid", fosli."siteid", fosli."type",
 							fosli."domain", fosli."refid", fosli."start", fosli."end",
 							fosli."config", fosli."pos", fosli."status", fosli."mtime",
 							fosli."editor", fosli."ctime" /*-columns*/ , :columns /*columns-*/
@@ -348,7 +348,7 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "fos_user_property" (
-							"parentid", "typeid", "langid", "value",
+							"parentid", "type", "langid", "value",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?
@@ -358,7 +358,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "fos_user_property"
-						SET "parentid" = ?, "typeid" = ?, "langid" = ?,
+						SET "parentid" = ?, "type" = ?, "langid" = ?,
 							"value" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -366,14 +366,14 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT fospr."id" AS "customer.property.id", fospr."parentid" AS "customer.property.parentid",
-							fospr."siteid" AS "customer.property.siteid", fospr."typeid" AS "customer.property.typeid",
+							fospr."siteid" AS "customer.property.siteid", fospr."type" AS "customer.property.type",
 							fospr."langid" AS "customer.property.languageid", fospr."value" AS "customer.property.value",
 							fospr."mtime" AS "customer.property.mtime", fospr."editor" AS "customer.property.editor",
 							fospr."ctime" AS "customer.property.ctime"
 						FROM "fos_user_property" AS fospr
 						:joins
 						WHERE :cond
-						GROUP BY fospr."id", fospr."parentid", fospr."siteid", fospr."typeid",
+						GROUP BY fospr."id", fospr."parentid", fospr."siteid", fospr."type",
 							fospr."langid", fospr."value", fospr."mtime", fospr."editor",
 							fospr."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/

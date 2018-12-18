@@ -24,7 +24,6 @@ class FosUser
 		'customer.lists.type.id' => array(
 			'code'=>'customer.lists.type.id',
 			'internalcode'=>'foslity."id"',
-			'internaldeps'=>array( 'LEFT JOIN "fos_user_list_type" AS foslity ON ( fosli."typeid" = foslity."id" )' ),
 			'label'=>'Customer list type ID',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
