@@ -18,7 +18,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelper::getContext();
 		$this->editor = $this->context->getEditor();
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context, 'FosUser' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context, 'FosUser' );
 		$this->object = $manager->getSubManager( 'lists', 'FosUser' );
 	}
 
@@ -283,7 +283,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 	protected function getListItems()
 	{
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context, 'FosUser' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context, 'FosUser' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC003' ) );

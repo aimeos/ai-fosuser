@@ -44,7 +44,7 @@ class CustomerAddFosUserTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 		}
 
 
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional, 'FosUser' );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'FosUser' );
 		$customerAddressManager = $customerManager->getSubManager( 'address', 'FosUser' );
 
 		$search = $customerManager->createSearch();

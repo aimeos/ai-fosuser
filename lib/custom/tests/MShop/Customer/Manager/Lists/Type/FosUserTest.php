@@ -16,7 +16,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$this->editor = \TestHelper::getContext()->getEditor();
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( \TestHelper::getContext(), 'FosUser' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( \TestHelper::getContext(), 'FosUser' );
 
 		$listManager = $manager->getSubManager( 'lists', 'FosUser' );
 		$this->object = $listManager->getSubManager( 'type', 'FosUser' );

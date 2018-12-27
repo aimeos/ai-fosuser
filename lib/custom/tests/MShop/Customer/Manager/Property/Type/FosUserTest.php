@@ -20,7 +20,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelper::getContext();
 		$this->editor = $context->getEditor();
 
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $context, 'FosUser' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $context, 'FosUser' );
 		$this->object = $manager->getSubManager( 'property', 'FosUser' )->getSubManager( 'type', 'FosUser' );
 	}
 
