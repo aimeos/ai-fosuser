@@ -75,7 +75,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 	public function testSetPasswordGenerated()
 	{
 		$helper = new \Aimeos\MShop\Common\Item\Helper\Password\Standard( array( 'format' => '%1$s{%2$s}' ) );
-		$object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, [], [], [], null, $helper );
+		$object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, [], [], [], [], [], $helper );
 
 		$object->setPassword( 'newpwd' );
 		$this->assertEquals( sha1( 'newpwd{' . $object->getSalt() . '}' ), $object->getPassword() );

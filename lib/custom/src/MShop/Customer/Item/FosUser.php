@@ -30,13 +30,16 @@ class FosUser extends Standard implements Iface
 	 * @param array $values List of attributes that belong to the customer item
 	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface[] $addrItems List of referenced address items
+	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
 	 * @param \Aimeos\MShop\Common\Item\Helper\Password\Iface|null $helper Password encryption helper object
+	 * @param string|null $salt Password salt
 	 */
-	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address,
-		array $values = [], array $listItems = [], array $refItems = [], $salt = '',
-		\Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null, array $addresses = [], array $propItems = [] )
+	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = [],
+		array $listItems = [], array $refItems = [], array $addrItems = [], array $propItems = [],
+		\Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null, $salt = null )
 	{
-		parent::__construct( $address, $values, $listItems, $refItems, $salt, $helper, $addresses, $propItems, $propItems );
+		parent::__construct( $address, $values, $listItems, $refItems, $addrItems, $propItems, $helper, $salt );
 
 		$this->values = $values;
 		$this->helper = $helper;
