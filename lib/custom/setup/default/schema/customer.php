@@ -38,7 +38,7 @@ return array(
 			$table->addColumn( 'city', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'state', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
-			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false, 'fixed' => true ) );
+			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false ) );
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'telefax', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
@@ -86,7 +86,7 @@ return array(
 			$table->addColumn( 'city', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'state', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
-			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false, 'fixed' => true ) );
+			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false ) );
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'telefax', 'string', array( 'length' => 255 ) );
