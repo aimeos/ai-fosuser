@@ -343,6 +343,8 @@ class FosUser
 	{
 		self::checkClass( '\\Aimeos\\MShop\\Customer\\Item\\FosUser', $item );
 
+		$item = $this->addGroups( $item );
+
 		if( !$item->isModified() )
 		{
 			$item = $this->savePropertyItems( $item, 'customer' );
@@ -512,8 +514,6 @@ class FosUser
 			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
-
-		$this->addGroups( $item );
 
 		$item = $this->savePropertyItems( $item, 'customer' );
 		$item = $this->saveAddressItems( $item, 'customer' );

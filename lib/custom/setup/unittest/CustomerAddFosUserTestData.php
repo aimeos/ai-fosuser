@@ -15,51 +15,28 @@ namespace Aimeos\MW\Setup\Task;
 class CustomerAddFosUserTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 {
 	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
+	 * Adds customer test data
 	 */
-	public function getPreDependencies()
+	public function migrate()
 	{
-		return array( 'TablesCreateFosUser' );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+
+		$this->msg( 'Adding Fos user bundle customer test data', 0 );
+
+		$this->additional->setEditor( 'ai-fosuser:unittest' );
+		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'customer.php' );
+
+		$this->status( 'done' );
 	}
 
 
 	/**
-	 * Adds attribute test data.
+	 * Returns the manager for the current setup task
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	public function migrate()
+	protected function getManager()
 	{
-		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Context\\Item\\Iface', $this->additional );
-
-		$this->msg( 'Adding Fos user bundle customer test data', 0 );
-
-		$parentIds = [];
-		$ds = DIRECTORY_SEPARATOR;
-		$this->additional->setEditor( 'ai-fosuser:unittest' );
-		$path = __DIR__ . $ds . 'data' . $ds . 'customer.php';
-
-		if( ( $testdata = include( $path ) ) === false ){
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
-		}
-
-
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'FosUser' );
-		$customerAddressManager = $customerManager->getSubManager( 'address', 'FosUser' );
-
-		$search = $customerManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.code', array( 'UTC001', 'UTC002', 'UTC003' ) ) );
-		$items = $customerManager->searchItems( $search );
-
-		$this->conn->begin();
-
-		$customerManager->deleteItems( array_keys( $items ) );
-		$parentIds = $this->addCustomerData( $testdata, $customerManager, $customerAddressManager->createItem() );
-		$this->addCustomerAddressData( $testdata, $customerAddressManager, $parentIds );
-
-		$this->conn->commit();
-
-
-		$this->status( 'done' );
+		return \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'FosUser' );
 	}
 }
