@@ -541,7 +541,8 @@ class FosUser
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$cfgPathSearch = 'mshop/customer/manager/fosuser/search';
 			$cfgPathCount = 'mshop/customer/manager/fosuser/count';
-			$required = array( 'customer' );
+			$ref[] = 'customer/group';
+			$required = ['customer'];
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
