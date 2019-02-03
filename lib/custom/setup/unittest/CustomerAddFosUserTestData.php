@@ -33,10 +33,15 @@ class CustomerAddFosUserTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 	/**
 	 * Returns the manager for the current setup task
 	 *
+	 * @param string $domain Domain name of the manager
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function getManager()
+	protected function getManager( $domain )
 	{
-		return \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'FosUser' );
+		if( $domain === 'customer' ) {
+			return \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'FosUser' );
+		}
+
+		return parent::getManager( $domain );
 	}
 }
