@@ -237,10 +237,10 @@ class FosUser
 			'code' => 'customer:has()',
 			'internalcode' => '(
 				SELECT fosli_has."id" FROM fos_user_list AS fosli_has
-				WHERE fos."id" = fosli_has."parentid" AND :site
-					AND fosli_has."domain" = $1 AND fosli_has."type" = $2 AND fosli_has."refid" = $3
+				WHERE fos."id" = fosli_has."parentid" AND :site AND fosli_has."domain" = $1 :type :refid
+				LIMIT 1
 			)',
-			'label' => 'Customer has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -249,11 +249,10 @@ class FosUser
 			'code' => 'customer:prop()',
 			'internalcode' => '(
 				SELECT fospr_prop."id" FROM fos_user_property AS fospr_prop
-				WHERE fos."id" = fospr_prop."parentid" AND :site
-					AND fospr_prop."type" = $1 AND fospr_prop."value" = $3
-					AND ( fospr_prop."langid" = $2 OR fospr_prop."langid" IS NULL )
+				WHERE fos."id" = fospr_prop."parentid" AND :site AND fospr_prop."type" = $1 :langid :value
+				LIMIT 1
 			)',
-			'label' => 'Customer has property item, parameter(<property type>,<language code>,<property value>)',
+			'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -286,6 +285,27 @@ class FosUser
 
 		$this->replaceSiteMarker( $this->searchConfig['customer:has'], 'fosli_has."siteid"', $siteIds, ':site' );
 		$this->replaceSiteMarker( $this->searchConfig['customer:prop'], 'fospr_prop."siteid"', $siteIds, ':site' );
+
+
+		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) {
+
+			$source = str_replace( ':type', isset( $params[1] ) ? 'AND fosli_has."type" = $2' : '', $source );
+			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND fosli_has."refid" = $3' : '', $source );
+
+			return $params;
+		};
+
+
+		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) {
+
+			$lang = 'AND fospr_prop."langid"';
+			$lang = isset( $params[1] ) ? ( $params[1] !== 'null' ? $lang . ' = $2' : $lang . ' IS NULL' ) : '';
+
+			$source = str_replace( ':langid', $lang, $source );
+			$source = str_replace( ':value', isset( $params[2] ) ? 'AND fospr_prop."value" = $3' : '', $source );
+
+			return $params;
+		};
 	}
 
 
