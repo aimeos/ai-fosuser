@@ -15,8 +15,9 @@ namespace Aimeos\MW\Setup\Task;
 class CustomerRemoveLostUserDataFosuser extends \Aimeos\MW\Setup\Task\Base
 {
 	private $sql = [
-		'address' => 'DELETE FROM "fos_user_address" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )',
-		'list' => 'DELETE FROM "fos_user_list" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )',
+		'fos_user_address' => 'DELETE FROM "fos_user_address" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )',
+		'fos_user_list' => 'DELETE FROM "fos_user_list" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )',
+		'fos_user_property' => 'DELETE FROM "fos_user_property" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )',
 	];
 
 
@@ -47,29 +48,21 @@ class CustomerRemoveLostUserDataFosuser extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		$this->msg( 'Remove left over FOS user address records', 0 );
+		$this->msg( 'Remove left over FOS user references', 0, '' );
 
-		if( $this->schema->tableExists( 'fos_user' ) && $this->schema->tableExists( 'fos_user_address' ) )
+		foreach( $this->sql as $table => $stmt )
 		{
-			$this->execute( $this->sql['address'] );
-			$this->status( 'done' );
-		}
-		else
-		{
-			$this->status( 'OK' );
-		}
+			$this->msg( sprintf( 'Remove unused %1$s records', $table ), 1 );
 
-
-		$this->msg( 'Remove left over FOS user list records', 0 );
-
-		if( $this->schema->tableExists( 'fos_user' ) && $this->schema->tableExists( 'fos_user_list' ) )
-		{
-			$this->execute( $this->sql['list'] );
-			$this->status( 'done' );
-		}
-		else
-		{
-			$this->status( 'OK' );
+			if( $this->schema->tableExists( 'fos_user' ) && $this->schema->tableExists( $table ) )
+			{
+				$this->execute( $stmt );
+				$this->status( 'done' );
+			}
+			else
+			{
+				$this->status( 'OK' );
+			}
 		}
 	}
 }
