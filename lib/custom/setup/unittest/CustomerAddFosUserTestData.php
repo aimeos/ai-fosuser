@@ -15,13 +15,35 @@ namespace Aimeos\MW\Setup\Task;
 class CustomerAddFosUserTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 {
 	/**
+	 * Returns the list of task names which this task depends on
+	 *
+	 * @return string[] List of task names
+	 */
+	public function getPreDependencies()
+	{
+		return ['MShopSetLocale'];
+	}
+
+
+	/**
+	 * Returns the list of task names which depends on this task.
+	 *
+	 * @return string[] List of task names
+	 */
+	public function getPostDependencies()
+	{
+		return ['CustomerAddTestData'];
+	}
+
+
+	/**
 	 * Adds customer test data
 	 */
 	public function migrate()
 	{
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
-		$this->msg( 'Adding Fos user bundle customer test data', 0 );
+		$this->msg( 'Adding FosUser customer test data', 0 );
 
 		$this->additional->setEditor( 'ai-fosuser:unittest' );
 		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'customer.php' );
