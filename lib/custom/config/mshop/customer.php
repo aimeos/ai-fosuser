@@ -176,14 +176,10 @@ return array(
 						GROUP BY "key"
 					',
 				),
-				'getposmax' => array(
+				'delete' => array(
 					'ansi' => '
-						SELECT MAX( "pos" ) AS pos
-						FROM "fos_user_list"
-						WHERE "siteid" = ?
-							AND "parentid" = ?
-							AND "type" = ?
-							AND "domain" = ?
+						DELETE FROM "fos_user_list"
+						WHERE :cond AND siteid = ?
 					',
 				),
 				'insert' => array(
@@ -202,30 +198,6 @@ return array(
 						SET "parentid"=?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
-					',
-				),
-				'updatepos' => array(
-					'ansi' => '
-						UPDATE "fos_user_list"
-							SET "pos" = ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "id" = ?
-					',
-				),
-				'delete' => array(
-					'ansi' => '
-						DELETE FROM "fos_user_list"
-						WHERE :cond AND siteid = ?
-					',
-				),
-				'move' => array(
-					'ansi' => '
-						UPDATE "fos_user_list"
-							SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ?
-							AND "parentid" = ?
-							AND "type" = ?
-							AND "domain" = ?
-							AND "pos" >= ?
 					',
 				),
 				'search' => array(
