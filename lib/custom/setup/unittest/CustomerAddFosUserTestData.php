@@ -45,7 +45,7 @@ class CustomerAddFosUserTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 
 		$this->msg( 'Adding FosUser customer test data', 0 );
 
-		$this->additional->setEditor( 'ai-fosuser:unittest' );
+		$this->additional->setEditor( 'ai-fosuser:lib/custom' );
 		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'customer.php' );
 
 		$this->status( 'done' );

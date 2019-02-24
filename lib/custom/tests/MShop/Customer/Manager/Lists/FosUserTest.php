@@ -42,7 +42,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'customer.lists.editor', 'ai-fosuser:unittest' ),
+			$search->compare( '==', 'customer.lists.editor', 'ai-fosuser:lib/custom' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

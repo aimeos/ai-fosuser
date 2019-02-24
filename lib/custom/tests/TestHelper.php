@@ -88,7 +88,7 @@ class TestHelper
 
 		$ctx->setLocale( $localeItem );
 
-		$ctx->setEditor( 'ai-fosuser:unittest' );
+		$ctx->setEditor( 'ai-fosuser:lib/custom' );
 
 		return $ctx;
 	}
