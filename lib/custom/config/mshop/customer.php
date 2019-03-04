@@ -185,17 +185,17 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "fos_user_list"(
-							"parentid", "type", "domain", "refid", "start", "end",
+							"parentid", "key", "type", "domain", "refid", "start", "end",
 							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "fos_user_list"
-						SET "parentid"=?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+						SET "parentid"=?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					',
