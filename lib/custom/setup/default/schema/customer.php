@@ -198,6 +198,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'parentid', 'integer', [] );
+			$table->addColumn( 'key', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'value', 'string', array( 'length' => 255 ) );
@@ -207,6 +208,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_fospr_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_fospr_sid_ty_lid_value' );
+			$table->addIndex( array( 'siteid', 'key' ), 'fk_fospr_sid_key' );
 			$table->addIndex( array( 'parentid' ), 'fk_fospr_pid' );
 
 			$table->addForeignKeyConstraint( 'fos_user', array( 'parentid' ), array( 'id' ),

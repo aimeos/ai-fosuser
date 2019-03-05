@@ -248,8 +248,7 @@ class FosUser
 			'code' => 'customer:prop()',
 			'internalcode' => '(
 				SELECT fospr_prop."id" FROM fos_user_property AS fospr_prop
-				WHERE fos."id" = fospr_prop."parentid" AND :site AND fospr_prop."type" = $1 :langid :value
-				LIMIT 1
+				WHERE fos."id" = fospr_prop."parentid" AND :site AND :key LIMIT 1
 			)',
 			'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
@@ -299,15 +298,15 @@ class FosUser
 		};
 
 
-		$this->replaceSiteMarker( $this->searchConfig['customer:prop'], 'fospr_prop."siteid"', $siteIds, ':site' );
+		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) {
+			foreach( $params as $key => $param ) {
+				$params[$key] = trim( $param, '\'' );
+			}
 
-			$lang = 'AND fospr_prop."langid"';
-			$lang = isset( $params[1] ) ? ( $params[1] !== 'null' ? $lang . ' = $2' : $lang . ' IS NULL' ) : '';
-
-			$source = str_replace( ':langid', $lang, $source );
-			$source = str_replace( ':value', isset( $params[2] ) ? 'AND fospr_prop."value" = $3' : '', $source );
+			$source = str_replace( ':site', $self->toExpression( 'fospr_prop."siteid"', $siteIds ), $source );
+			$str = $self->toExpression( 'fospr_prop."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
+			$source = str_replace( ':key', $str, $source );
 
 			return $params;
 		};

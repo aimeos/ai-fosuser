@@ -320,17 +320,17 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "fos_user_property" (
-							"parentid", "type", "langid", "value",
+							"parentid", "key", "type", "langid", "value",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "fos_user_property"
-						SET "parentid" = ?, "type" = ?, "langid" = ?,
+						SET "parentid" = ?, "key" = ?, "type" = ?, "langid" = ?,
 							"value" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
