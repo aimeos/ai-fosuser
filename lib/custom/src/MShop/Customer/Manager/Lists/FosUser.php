@@ -46,6 +46,14 @@ class FosUser
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'customer.lists.key' => array(
+			'code' => 'customer.lists.key',
+			'internalcode' => 'fosli."key"',
+			'label' => 'Unique key',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'customer.lists.domain'=> array(
 			'code'=>'customer.lists.domain',
 			'internalcode'=>'fosli."domain"',
