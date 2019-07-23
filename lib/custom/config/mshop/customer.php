@@ -56,7 +56,7 @@ return array(
 							fosad."longitude" AS "customer.address.longitude", fosad."latitude" AS "customer.address.latitude",
 							fosad."pos" AS "customer.address.position", fosad."mtime" AS "customer.address.mtime",
 							fosad."editor" AS "customer.address.editor", fosad."ctime" AS "customer.address.ctime",
-							fosad."siteid" AS "customer.address.siteid"
+							fosad."siteid" AS "customer.address.siteid", fosad.*
 						FROM "fos_user_address" AS fosad
 						:joins
 						WHERE :cond
@@ -127,7 +127,8 @@ return array(
 								foslity."code" AS "customer.lists.type.code", foslity."domain" AS "customer.lists.type.domain",
 								foslity."label" AS "customer.lists.type.label", foslity."status" AS "customer.lists.type.status",
 								foslity."mtime" AS "customer.lists.type.mtime", foslity."editor" AS "customer.lists.type.editor",
-								foslity."ctime" AS "customer.lists.type.ctime", foslity."pos" AS "customer.lists.type.position"
+								foslity."ctime" AS "customer.lists.type.ctime", foslity."pos" AS "customer.lists.type.position",
+								foslity.*
 							FROM "fos_user_list_type" AS foslity
 							:joins
 							WHERE :cond
@@ -208,7 +209,8 @@ return array(
 							fosli."start" AS "customer.lists.datestart", fosli."end" AS "customer.lists.dateend",
 							fosli."config" AS "customer.lists.config", fosli."pos" AS "customer.lists.position",
 							fosli."status" AS "customer.lists.status", fosli."mtime" AS "customer.lists.mtime",
-							fosli."editor" AS "customer.lists.editor", fosli."ctime" AS "customer.lists.ctime"
+							fosli."editor" AS "customer.lists.editor", fosli."ctime" AS "customer.lists.ctime",
+							fosli.*
 						FROM "fos_user_list" AS fosli
 						:joins
 						WHERE :cond
@@ -276,7 +278,8 @@ return array(
 								fosprty."code" AS "customer.property.type.code", fosprty."domain" AS "customer.property.type.domain",
 								fosprty."label" AS "customer.property.type.label", fosprty."status" AS "customer.property.type.status",
 								fosprty."mtime" AS "customer.property.type.mtime", fosprty."editor" AS "customer.property.type.editor",
-								fosprty."ctime" AS "customer.property.type.ctime", fosprty."pos" AS "customer.property.type.position"
+								fosprty."ctime" AS "customer.property.type.ctime", fosprty."pos" AS "customer.property.type.position",
+								fosprty.*
 							FROM "fos_user_property_type" fosprty
 							:joins
 							WHERE :cond
@@ -341,7 +344,7 @@ return array(
 							fospr."siteid" AS "customer.property.siteid", fospr."type" AS "customer.property.type",
 							fospr."langid" AS "customer.property.languageid", fospr."value" AS "customer.property.value",
 							fospr."mtime" AS "customer.property.mtime", fospr."editor" AS "customer.property.editor",
-							fospr."ctime" AS "customer.property.ctime"
+							fospr."ctime" AS "customer.property.ctime", fospr.*
 						FROM "fos_user_property" AS fospr
 						:joins
 						WHERE :cond
@@ -426,7 +429,7 @@ return array(
 						fos."birthday" AS "customer.birthday", fos."enabled" AS "customer.status",
 						fos."vdate" AS "customer.vdate", fos."password" AS "customer.password",
 						fos."ctime" AS "customer.ctime", fos."mtime" AS "customer.mtime",
-						fos."editor" AS "customer.editor", fos."roles", fos."salt"
+						fos."editor" AS "customer.editor", fos."roles", fos."salt", fos.*
 					FROM "fos_user" AS fos
 					:joins
 					WHERE :cond
