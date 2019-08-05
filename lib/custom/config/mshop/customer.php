@@ -43,7 +43,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT fosad."id" AS "customer.address.id", fosad."parentid" AS "customer.address.parentid",
+						SELECT DISTINCT fosad."id" AS "customer.address.id", fosad."parentid" AS "customer.address.parentid",
 							fosad."company" AS "customer.address.company", fosad."vatid" AS "customer.address.vatid",
 							fosad."salutation" AS "customer.address.salutation", fosad."title" AS "customer.address.title",
 							fosad."firstname" AS "customer.address.firstname", fosad."lastname" AS "customer.address.lastname",
@@ -60,13 +60,6 @@ return array(
 						FROM "fos_user_address" AS fosad
 						:joins
 						WHERE :cond
-						GROUP BY fosad."id", fosad."parentid",fosad."company", fosad."vatid",
-							fosad."salutation", fosad."title", fosad."firstname", fosad."lastname",
-							fosad."address1", fosad."address2", fosad."address3", fosad."postal",
-							fosad."city", fosad."state", fosad."countryid", fosad."langid",
-							fosad."telephone", fosad."email", fosad."telefax", fosad."website",
-							fosad."longitude", fosad."latitude", fosad."pos",
-							fosad."mtime", fosad."editor", fosad."ctime"
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					',
@@ -123,7 +116,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT foslity."id" AS "customer.lists.type.id", foslity."siteid" AS "customer.lists.type.siteid",
+							SELECT DISTINCT foslity."id" AS "customer.lists.type.id", foslity."siteid" AS "customer.lists.type.siteid",
 								foslity."code" AS "customer.lists.type.code", foslity."domain" AS "customer.lists.type.domain",
 								foslity."label" AS "customer.lists.type.label", foslity."status" AS "customer.lists.type.status",
 								foslity."mtime" AS "customer.lists.type.mtime", foslity."editor" AS "customer.lists.type.editor",
@@ -132,9 +125,6 @@ return array(
 							FROM "fos_user_list_type" AS foslity
 							:joins
 							WHERE :cond
-							GROUP BY foslity."id", foslity."siteid", foslity."code", foslity."domain",
-								foslity."label", foslity."status", foslity."mtime", foslity."editor",
-								foslity."ctime", foslity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						',
@@ -203,7 +193,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT fosli."id" AS "customer.lists.id", fosli."siteid" AS "customer.lists.siteid",
+						SELECT DISTINCT fosli."id" AS "customer.lists.id", fosli."siteid" AS "customer.lists.siteid",
 							fosli."parentid" AS "customer.lists.parentid", fosli."type" AS "customer.lists.type",
 							fosli."domain" AS "customer.lists.domain", fosli."refid" AS "customer.lists.refid",
 							fosli."start" AS "customer.lists.datestart", fosli."end" AS "customer.lists.dateend",
@@ -214,10 +204,6 @@ return array(
 						FROM "fos_user_list" AS fosli
 						:joins
 						WHERE :cond
-						GROUP BY fosli."id", fosli."parentid", fosli."siteid", fosli."type",
-							fosli."domain", fosli."refid", fosli."start", fosli."end",
-							fosli."config", fosli."pos", fosli."status", fosli."mtime",
-							fosli."editor", fosli."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					',
@@ -274,7 +260,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT fosprty."id" AS "customer.property.type.id", fosprty."siteid" AS "customer.property.type.siteid",
+							SELECT DISTINCT fosprty."id" AS "customer.property.type.id", fosprty."siteid" AS "customer.property.type.siteid",
 								fosprty."code" AS "customer.property.type.code", fosprty."domain" AS "customer.property.type.domain",
 								fosprty."label" AS "customer.property.type.label", fosprty."status" AS "customer.property.type.status",
 								fosprty."mtime" AS "customer.property.type.mtime", fosprty."editor" AS "customer.property.type.editor",
@@ -283,9 +269,6 @@ return array(
 							FROM "fos_user_property_type" fosprty
 							:joins
 							WHERE :cond
-							GROUP BY fosprty."id", fosprty."siteid", fosprty."code", fosprty."domain",
-								fosprty."label", fosprty."status", fosprty."mtime", fosprty."editor",
-								fosprty."ctime", fosprty."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -340,7 +323,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT fospr."id" AS "customer.property.id", fospr."parentid" AS "customer.property.parentid",
+						SELECT DISTINCT fospr."id" AS "customer.property.id", fospr."parentid" AS "customer.property.parentid",
 							fospr."siteid" AS "customer.property.siteid", fospr."type" AS "customer.property.type",
 							fospr."langid" AS "customer.property.languageid", fospr."value" AS "customer.property.value",
 							fospr."mtime" AS "customer.property.mtime", fospr."editor" AS "customer.property.editor",
@@ -348,9 +331,6 @@ return array(
 						FROM "fos_user_property" AS fospr
 						:joins
 						WHERE :cond
-						GROUP BY fospr."id", fospr."parentid", fospr."siteid", fospr."type",
-							fospr."langid", fospr."value", fospr."mtime", fospr."editor",
-							fospr."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -414,7 +394,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT fos."id" AS "customer.id", fos."siteid" AS "customer.siteid",
+					SELECT DISTINCT fos."id" AS "customer.id", fos."siteid" AS "customer.siteid",
 						fos."username_canonical" as "customer.code", fos."username" as "customer.label",
 						fos."company" AS "customer.company", fos."vatid" AS "customer.vatid",
 						fos."salutation" AS "customer.salutation", fos."title" AS "customer.title",
@@ -433,14 +413,6 @@ return array(
 					FROM "fos_user" AS fos
 					:joins
 					WHERE :cond
-					GROUP BY fos."id", fos."siteid", fos."username_canonical", fos."username",
-						fos."company", fos."vatid", fos."salutation", fos."title",
-						fos."firstname", fos."lastname", fos."address1", fos."address2",
-						fos."address3", fos."postal", fos."city", fos."state",
-						fos."countryid", fos."langid", fos."telephone", fos."email_canonical",
-						fos."telefax", fos."website", fos."longitude", fos."latitude",
-						fos."birthday", fos."enabled", fos."vdate", fos."password",
-						fos."ctime", fos."mtime", fos."editor", fos."roles", fos."salt"
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				',
