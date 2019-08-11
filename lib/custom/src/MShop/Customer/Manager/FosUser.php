@@ -385,6 +385,7 @@ class FosUser
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
 			$billingAddress = $item->getPaymentAddress();
+			$columns = $this->getObject()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -418,6 +419,7 @@ class FosUser
 				 * @see mshop/customer/manager/fosuser/count
 				 */
 				$path = 'mshop/customer/manager/fosuser/insert';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 			else
 			{
@@ -448,48 +450,54 @@ class FosUser
 				 * @see mshop/customer/manager/fosuser/count
 				 */
 				$path = 'mshop/customer/manager/fosuser/update';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
-			$stmt = $this->getCachedStatement( $conn, $path );
+			$idx = 1;
+			$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getCode() ); // canonical username
-			$stmt->bind( 3, $item->getCode() ); // username
-			$stmt->bind( 4, $billingAddress->getCompany() );
-			$stmt->bind( 5, $billingAddress->getVatID() );
-			$stmt->bind( 6, $billingAddress->getSalutation() );
-			$stmt->bind( 7, $billingAddress->getTitle() );
-			$stmt->bind( 8, $billingAddress->getFirstname() );
-			$stmt->bind( 9, $billingAddress->getLastname() );
-			$stmt->bind( 10, $billingAddress->getAddress1() );
-			$stmt->bind( 11, $billingAddress->getAddress2() );
-			$stmt->bind( 12, $billingAddress->getAddress3() );
-			$stmt->bind( 13, $billingAddress->getPostal() );
-			$stmt->bind( 14, $billingAddress->getCity() );
-			$stmt->bind( 15, $billingAddress->getState() );
-			$stmt->bind( 16, $billingAddress->getCountryId() );
-			$stmt->bind( 17, $billingAddress->getLanguageId() );
-			$stmt->bind( 18, $billingAddress->getTelephone() );
-			$stmt->bind( 19, $billingAddress->getEmail() );
-			$stmt->bind( 20, $billingAddress->getEmail() );
-			$stmt->bind( 21, $billingAddress->getTelefax() );
-			$stmt->bind( 22, $billingAddress->getWebsite() );
-			$stmt->bind( 23, $billingAddress->getLongitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
-			$stmt->bind( 24, $billingAddress->getLatitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
-			$stmt->bind( 25, $item->getBirthday() );
-			$stmt->bind( 26, ( $item->getStatus() > 0 ? true : false ), \Aimeos\MW\DB\Statement\Base::PARAM_BOOL );
-			$stmt->bind( 27, $item->getDateVerified() );
-			$stmt->bind( 28, $item->getPassword() );
-			$stmt->bind( 29, $date ); // Modification time
-			$stmt->bind( 30, $context->getEditor() );
-			$stmt->bind( 31, serialize( $item->getRoles() ) );
-			$stmt->bind( 32, $item->getSalt() );
+			foreach( $columns as $name => $entry ) {
+				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			}
+
+			$stmt->bind( $idx++, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getCode() ); // canonical username
+			$stmt->bind( $idx++, $item->getCode() ); // username
+			$stmt->bind( $idx++, $billingAddress->getCompany() );
+			$stmt->bind( $idx++, $billingAddress->getVatID() );
+			$stmt->bind( $idx++, $billingAddress->getSalutation() );
+			$stmt->bind( $idx++, $billingAddress->getTitle() );
+			$stmt->bind( $idx++, $billingAddress->getFirstname() );
+			$stmt->bind( $idx++, $billingAddress->getLastname() );
+			$stmt->bind( $idx++, $billingAddress->getAddress1() );
+			$stmt->bind( $idx++, $billingAddress->getAddress2() );
+			$stmt->bind( $idx++, $billingAddress->getAddress3() );
+			$stmt->bind( $idx++, $billingAddress->getPostal() );
+			$stmt->bind( $idx++, $billingAddress->getCity() );
+			$stmt->bind( $idx++, $billingAddress->getState() );
+			$stmt->bind( $idx++, $billingAddress->getCountryId() );
+			$stmt->bind( $idx++, $billingAddress->getLanguageId() );
+			$stmt->bind( $idx++, $billingAddress->getTelephone() );
+			$stmt->bind( $idx++, $billingAddress->getEmail() );
+			$stmt->bind( $idx++, $billingAddress->getEmail() );
+			$stmt->bind( $idx++, $billingAddress->getTelefax() );
+			$stmt->bind( $idx++, $billingAddress->getWebsite() );
+			$stmt->bind( $idx++, $billingAddress->getLongitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
+			$stmt->bind( $idx++, $billingAddress->getLatitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
+			$stmt->bind( $idx++, $item->getBirthday() );
+			$stmt->bind( $idx++, ( $item->getStatus() > 0 ? true : false ), \Aimeos\MW\DB\Statement\Base::PARAM_BOOL );
+			$stmt->bind( $idx++, $item->getDateVerified() );
+			$stmt->bind( $idx++, $item->getPassword() );
+			$stmt->bind( $idx++, $date ); // Modification time
+			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, serialize( $item->getRoles() ) );
+			$stmt->bind( $idx++, $item->getSalt() );
 
 			if( $id !== null ) {
-				$stmt->bind( 33, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 33, $date ); // Creation time
+				$stmt->bind( $idx, $date ); // Creation time
 			}
 
 			$stmt->execute()->finish();

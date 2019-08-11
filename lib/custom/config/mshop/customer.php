@@ -18,13 +18,13 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "fos_user_address" (
+						INSERT INTO "fos_user_address" ( :names
 							"parentid", "company", "vatid", "salutation", "title",
 							"firstname", "lastname", "address1", "address2", "address3",
 							"postal", "city", "state", "countryid", "langid", "telephone",
 							"email", "telefax", "website", "longitude", "latitude",
 							"pos", "mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
@@ -32,7 +32,8 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "fos_user_address"
-						SET "parentid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
+						SET :names
+							"parentid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
 							"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?,
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
@@ -92,10 +93,10 @@ return array(
 				'fosuser' => array(
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "fos_user_list_type"(
+							INSERT INTO "fos_user_list_type" ( :names
 								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
-							) VALUES (
+							) VALUES ( :values
 								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						',
@@ -103,7 +104,8 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "fos_user_list_type"
-							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
+							SET :names
+								"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						',
@@ -175,10 +177,10 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "fos_user_list"(
+						INSERT INTO "fos_user_list" ( :names
 							"parentid", "key", "type", "domain", "refid", "start", "end",
 							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
@@ -186,8 +188,9 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "fos_user_list"
-						SET "parentid"=?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
-							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+						SET :names
+							"parentid"=?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?,
+							"end" = ?, "config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					',
 				),
@@ -242,10 +245,10 @@ return array(
 					),
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "fos_user_property_type" (
+							INSERT INTO "fos_user_property_type" ( :names
 								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
-							) VALUES (
+							) VALUES ( :values
 								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
@@ -253,7 +256,8 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "fos_user_property_type"
-							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
+							SET :names
+								"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -305,10 +309,10 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "fos_user_property" (
+						INSERT INTO "fos_user_property" ( :names
 							"parentid", "key", "type", "langid", "value",
 							"mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
@@ -316,7 +320,8 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "fos_user_property"
-						SET "parentid" = ?, "key" = ?, "type" = ?, "langid" = ?,
+						SET :names
+							"parentid" = ?, "key" = ?, "type" = ?, "langid" = ?,
 							"value" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -367,14 +372,14 @@ return array(
 			),
 			'insert' => array(
 				'ansi' => '
-					INSERT INTO "fos_user" (
+					INSERT INTO "fos_user" ( :names
 						"siteid", "username_canonical", "username", "company", "vatid", "salutation", "title",
 						"firstname", "lastname", "address1", "address2", "address3",
 						"postal", "city", "state", "countryid", "langid", "telephone",
 						"email_canonical", "email", "telefax", "website", "longitude", "latitude",
 						"birthday", "enabled", "vdate", "password", "mtime", "editor", "roles", "salt",
 						"ctime"
-					) VALUES (
+					) VALUES ( :values
 						?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 					)
 				',
@@ -382,7 +387,8 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "fos_user"
-					SET "siteid" = ?, "username_canonical" = ?, "username" = ?, "company" = ?, "vatid" = ?,
+					SET :names
+						"siteid" = ?, "username_canonical" = ?, "username" = ?, "company" = ?, "vatid" = ?,
 						"salutation" = ?, "title" = ?, "firstname" = ?, "lastname" = ?,
 						"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 						"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
