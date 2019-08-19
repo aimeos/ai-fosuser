@@ -44,7 +44,8 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT fosad."id" AS "customer.address.id", fosad."parentid" AS "customer.address.parentid",
+						SELECT DISTINCT :columns
+							fosad."id" AS "customer.address.id", fosad."parentid" AS "customer.address.parentid",
 							fosad."company" AS "customer.address.company", fosad."vatid" AS "customer.address.vatid",
 							fosad."salutation" AS "customer.address.salutation", fosad."title" AS "customer.address.title",
 							fosad."firstname" AS "customer.address.firstname", fosad."lastname" AS "customer.address.lastname",
@@ -57,7 +58,7 @@ return array(
 							fosad."longitude" AS "customer.address.longitude", fosad."latitude" AS "customer.address.latitude",
 							fosad."pos" AS "customer.address.position", fosad."mtime" AS "customer.address.mtime",
 							fosad."editor" AS "customer.address.editor", fosad."ctime" AS "customer.address.ctime",
-							fosad."siteid" AS "customer.address.siteid", fosad.*
+							fosad."siteid" AS "customer.address.siteid"
 						FROM "fos_user_address" AS fosad
 						:joins
 						WHERE :cond
@@ -118,12 +119,12 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT foslity."id" AS "customer.lists.type.id", foslity."siteid" AS "customer.lists.type.siteid",
+							SELECT DISTINCT :columns
+								foslity."id" AS "customer.lists.type.id", foslity."siteid" AS "customer.lists.type.siteid",
 								foslity."code" AS "customer.lists.type.code", foslity."domain" AS "customer.lists.type.domain",
 								foslity."label" AS "customer.lists.type.label", foslity."status" AS "customer.lists.type.status",
 								foslity."mtime" AS "customer.lists.type.mtime", foslity."editor" AS "customer.lists.type.editor",
-								foslity."ctime" AS "customer.lists.type.ctime", foslity."pos" AS "customer.lists.type.position",
-								foslity.*
+								foslity."ctime" AS "customer.lists.type.ctime", foslity."pos" AS "customer.lists.type.position"
 							FROM "fos_user_list_type" AS foslity
 							:joins
 							WHERE :cond
@@ -196,14 +197,14 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT fosli."id" AS "customer.lists.id", fosli."siteid" AS "customer.lists.siteid",
+						SELECT DISTINCT :columns
+							fosli."id" AS "customer.lists.id", fosli."siteid" AS "customer.lists.siteid",
 							fosli."parentid" AS "customer.lists.parentid", fosli."type" AS "customer.lists.type",
 							fosli."domain" AS "customer.lists.domain", fosli."refid" AS "customer.lists.refid",
 							fosli."start" AS "customer.lists.datestart", fosli."end" AS "customer.lists.dateend",
 							fosli."config" AS "customer.lists.config", fosli."pos" AS "customer.lists.position",
 							fosli."status" AS "customer.lists.status", fosli."mtime" AS "customer.lists.mtime",
-							fosli."editor" AS "customer.lists.editor", fosli."ctime" AS "customer.lists.ctime",
-							fosli.*
+							fosli."editor" AS "customer.lists.editor", fosli."ctime" AS "customer.lists.ctime"
 						FROM "fos_user_list" AS fosli
 						:joins
 						WHERE :cond
@@ -264,12 +265,12 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT fosprty."id" AS "customer.property.type.id", fosprty."siteid" AS "customer.property.type.siteid",
+							SELECT DISTINCT :columns
+								fosprty."id" AS "customer.property.type.id", fosprty."siteid" AS "customer.property.type.siteid",
 								fosprty."code" AS "customer.property.type.code", fosprty."domain" AS "customer.property.type.domain",
 								fosprty."label" AS "customer.property.type.label", fosprty."status" AS "customer.property.type.status",
 								fosprty."mtime" AS "customer.property.type.mtime", fosprty."editor" AS "customer.property.type.editor",
-								fosprty."ctime" AS "customer.property.type.ctime", fosprty."pos" AS "customer.property.type.position",
-								fosprty.*
+								fosprty."ctime" AS "customer.property.type.ctime", fosprty."pos" AS "customer.property.type.position"
 							FROM "fos_user_property_type" fosprty
 							:joins
 							WHERE :cond
@@ -328,11 +329,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT fospr."id" AS "customer.property.id", fospr."parentid" AS "customer.property.parentid",
+						SELECT DISTINCT :columns
+							fospr."id" AS "customer.property.id", fospr."parentid" AS "customer.property.parentid",
 							fospr."siteid" AS "customer.property.siteid", fospr."type" AS "customer.property.type",
 							fospr."langid" AS "customer.property.languageid", fospr."value" AS "customer.property.value",
 							fospr."mtime" AS "customer.property.mtime", fospr."editor" AS "customer.property.editor",
-							fospr."ctime" AS "customer.property.ctime", fospr.*
+							fospr."ctime" AS "customer.property.ctime"
 						FROM "fos_user_property" AS fospr
 						:joins
 						WHERE :cond
@@ -400,7 +402,8 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT fos."id" AS "customer.id", fos."siteid" AS "customer.siteid",
+					SELECT DISTINCT :columns
+						fos."id" AS "customer.id", fos."siteid" AS "customer.siteid",
 						fos."username_canonical" as "customer.code", fos."username" as "customer.label",
 						fos."company" AS "customer.company", fos."vatid" AS "customer.vatid",
 						fos."salutation" AS "customer.salutation", fos."title" AS "customer.title",
@@ -415,7 +418,7 @@ return array(
 						fos."birthday" AS "customer.birthday", fos."enabled" AS "customer.status",
 						fos."vdate" AS "customer.vdate", fos."password" AS "customer.password",
 						fos."ctime" AS "customer.ctime", fos."mtime" AS "customer.mtime",
-						fos."editor" AS "customer.editor", fos."roles", fos."salt", fos.*
+						fos."editor" AS "customer.editor", fos."roles", fos."salt"
 					FROM "fos_user" AS fos
 					:joins
 					WHERE :cond
