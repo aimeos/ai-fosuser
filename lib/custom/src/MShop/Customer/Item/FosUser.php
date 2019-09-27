@@ -19,7 +19,6 @@ namespace Aimeos\MShop\Customer\Item;
  */
 class FosUser extends Standard implements Iface
 {
-	private $values;
 	private $helper;
 
 
@@ -41,24 +40,7 @@ class FosUser extends Standard implements Iface
 	{
 		parent::__construct( $address, $values, $listItems, $refItems, $addrItems, $propItems, $helper, $salt );
 
-		$this->values = $values;
 		$this->helper = $helper;
-	}
-
-
-
-	/**
-	 * Returns the password of the customer item.
-	 *
-	 * @return string Password string
-	 */
-	public function getPassword()
-	{
-		if( isset( $this->values['customer.password'] ) ) {
-			return (string) $this->values['customer.password'];
-		}
-
-		return '';
 	}
 
 
@@ -70,17 +52,11 @@ class FosUser extends Standard implements Iface
 	 */
 	public function setPassword( $value )
 	{
-		if( (string) $value !== $this->getPassword() )
-		{
-			if( $this->helper !== null ) {
-				$value = $this->helper->encode( $value, $this->getSalt() );
-			}
-
-			$this->values['customer.password'] = (string) $value;
-			$this->setModified();
+		if( (string) $value !== $this->getPassword() && $this->helper !== null ) {
+			$value = $this->helper->encode( $value, $this->getSalt() );
 		}
 
-		return $this;
+		return $this->set( 'customer.password', (string) $value );
 	}
 
 
@@ -91,11 +67,7 @@ class FosUser extends Standard implements Iface
 	 */
 	public function getRoles()
 	{
-		if( isset( $this->values['roles'] ) ) {
-			return (array) $this->values['roles'];
-		}
-
-		return [];
+		return (array) $this->get( 'roles', [] );
 	}
 
 
@@ -106,10 +78,7 @@ class FosUser extends Standard implements Iface
 	 */
 	public function setRoles( array $roles )
 	{
-		$this->values['roles'] = $roles;
-		$this->setModified();
-
-		return $this;
+		return $this->set( 'roles', $roles );
 	}
 
 
@@ -120,11 +89,7 @@ class FosUser extends Standard implements Iface
 	 */
 	public function getSalt()
 	{
-		if( isset( $this->values['salt'] ) ) {
-			return $this->values['salt'];
-		}
-
-		return '';
+		return (string) $this->get( 'salt', '' );
 	}
 
 
@@ -135,12 +100,6 @@ class FosUser extends Standard implements Iface
 	 */
 	public function setSalt( $value )
 	{
-		if( (string) $value !== $this->getSalt() )
-		{
-			$this->values['salt'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'salt', (string) $value );
 	}
 }
