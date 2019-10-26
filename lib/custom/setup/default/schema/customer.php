@@ -8,7 +8,7 @@
 
 return array(
 	'table' => array(
-		'fos_user' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fos_user' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fos_user' );
 
@@ -48,7 +48,7 @@ return array(
 			$table->addColumn( 'vdate', 'date', array( 'notnull' => false ) );
 			$table->addColumn( 'mtime', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'ctime', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_fosus_id' );
 			$table->addUniqueIndex( array( 'confirmation_token' ), 'unq_fosus_confirmtoken' );
@@ -65,7 +65,7 @@ return array(
 			return $schema;
 		},
 
-		'fos_user_address' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fos_user_address' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fos_user_address' );
 
@@ -95,7 +95,7 @@ return array(
 			$table->addColumn( 'latitude', 'float', array( 'notnull' => false ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_fosad_id' );
 			$table->addIndex( array( 'parentid' ), 'idx_fosad_pid' );
@@ -112,7 +112,7 @@ return array(
 			return $schema;
 		},
 
-		'fos_user_list_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fos_user_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fos_user_list_type' );
 
@@ -136,7 +136,7 @@ return array(
 			return $schema;
 		},
 
-		'fos_user_list' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fos_user_list' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fos_user_list' );
 
@@ -167,7 +167,7 @@ return array(
 			return $schema;
 		},
 
-		'fos_user_property_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fos_user_property_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fos_user_property_type' );
 
@@ -191,7 +191,7 @@ return array(
 			return $schema;
 		},
 
-		'fos_user_property' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fos_user_property' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fos_user_property' );
 
