@@ -61,23 +61,14 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
-		$conditions = array(
-			$search->compare( '==', 'customer.code', 'UTC003' ),
-			$search->compare( '==', 'customer.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search, array( 'text' ) );
-
-		if( ( $expected = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No customer item with code "UTC003" found' );
-		}
-
-		$actual = $this->object->getItem( $expected->getId(), array( 'text' ) );
+		$domains = ['text', 'customer/property' => ['newsletter']];
+		$expected = $this->object->findItem( 'UTC001', $domains );
+		$actual = $this->object->getItem( $expected->getId(), $domains );
 
 		$this->assertEquals( $expected, $actual );
-		$this->assertEquals( 3, count( $actual->getListItems( 'text' ) ) );
-		$this->assertEquals( 3, count( $actual->getRefItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $actual->getListItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $actual->getRefItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $actual->getPropertyItems() ) );
 	}
 
 
