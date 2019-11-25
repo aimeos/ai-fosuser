@@ -15,9 +15,15 @@ namespace Aimeos\MW\Setup\Task;
 class CustomerRemoveLostUserDataFosuser extends \Aimeos\MW\Setup\Task\Base
 {
 	private $sql = [
-		'fos_user_address' => 'DELETE FROM "fos_user_address" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )',
-		'fos_user_list' => 'DELETE FROM "fos_user_list" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )',
-		'fos_user_property' => 'DELETE FROM "fos_user_property" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )',
+		'fos_user_address' => [
+			'fk_fosad_pid' => 'DELETE FROM "fos_user_address" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )'
+		],
+		'fos_user_list' => [
+			'fk_fosli_pid' => 'DELETE FROM "fos_user_list" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )'
+		],
+		'fos_user_property' => [
+			'fk_fospr_pid' => 'DELETE FROM "fos_user_property" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )'
+		],
 	];
 
 
@@ -39,18 +45,24 @@ class CustomerRemoveLostUserDataFosuser extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Remove left over FOS user references', 0, '' );
 
-		foreach( $this->sql as $table => $stmt )
-		{
-			$this->msg( sprintf( 'Remove unused %1$s records', $table ), 1 );
+		$schema = $this->getSchema( 'db-customer' );
 
-			if( $this->schema->tableExists( 'fos_user' ) && $this->schema->tableExists( $table ) )
+		foreach( $this->sql as $table => $map )
+		{
+			foreach( $map as $constraint => $sql )
 			{
-				$this->execute( $stmt );
-				$this->status( 'done' );
-			}
-			else
-			{
-				$this->status( 'OK' );
+				$this->msg( sprintf( 'Remove records from %1$s', $table ), 1 );
+
+				if( $schema->tableExists( 'fe_users' ) && $schema->tableExists( $table )
+					&& $schema->constraintExists( $table, $constraint ) === false
+				) {
+					$this->execute( $sql, 'db-customer' );
+					$this->status( 'done' );
+				}
+				else
+				{
+					$this->status( 'OK' );
+				}
 			}
 		}
 	}
