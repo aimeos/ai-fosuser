@@ -280,7 +280,7 @@ class FosUser
 				$params[$key] = trim( $param, '\'' );
 			}
 
-			$source = str_replace( ':site', $self->toExpression( 'fosli_has."siteid"', $siteIds ), $source );
+			$source = str_replace( ':site', $siteIds ? $self->toExpression( 'fosli_has."siteid"', $siteIds ) : '1=1', $source );
 			$str = $self->toExpression( 'fosli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
 			$source = str_replace( ':key', $str, $source );
 
@@ -295,7 +295,7 @@ class FosUser
 			}
 
 			$params[2] = ( isset( $params[2] ) ? md5( $params[2] ) : null );
-			$source = str_replace( ':site', $self->toExpression( 'fospr_prop."siteid"', $siteIds ), $source );
+			$source = str_replace( ':site', $siteIds ? $self->toExpression( 'fospr_prop."siteid"', $siteIds ) : '1=1', $source );
 			$str = $self->toExpression( 'fospr_prop."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
 			$source = str_replace( ':key', $str, $source );
 
