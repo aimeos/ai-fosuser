@@ -34,8 +34,8 @@ class FosUser
 			'code'=>'customer.lists.siteid',
 			'internalcode'=>'fosli."siteid"',
 			'label'=>'Customer list site ID',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type'=> 'string',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.lists.parentid'=> array(
