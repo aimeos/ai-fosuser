@@ -461,7 +461,7 @@ class FosUser
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
-			$stmt->bind( $idx++, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
 			$stmt->bind( $idx++, $item->getCode() ); // canonical username
 			$stmt->bind( $idx++, $item->getCode() ); // username
 			$stmt->bind( $idx++, $billingAddress->getCompany() );
