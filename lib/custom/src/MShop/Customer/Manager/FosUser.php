@@ -235,7 +235,7 @@ class FosUser
 		),
 		'customer:has' => array(
 			'code' => 'customer:has()',
-			'internalcode' => ':site :key AND fosli."id"',
+			'internalcode' => ':site AND :key AND fosli."id"',
 			'internaldeps' => ['LEFT JOIN "fos_user_list" AS fosli ON ( fosli."parentid" = fos."id" )'],
 			'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -244,7 +244,7 @@ class FosUser
 		),
 		'customer:prop' => array(
 			'code' => 'customer:prop()',
-			'internalcode' => ':site :key AND fospr."id"',
+			'internalcode' => ':site AND :key AND fospr."id"',
 			'internaldeps' => ['LEFT JOIN "fos_user_property" AS fospr ON ( fospr."parentid" = fos."id" )'],
 			'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
@@ -266,11 +266,8 @@ class FosUser
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/customer/manager/sitemode', $level );
 
-		$siteIds = $this->getSiteIds( $level );
-		$self = $this;
 
-
-		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
+		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) use ( $level ) {
 
 			array_walk_recursive( $params, function( &$v ) {
 				$v = trim( $v, '\'' );
@@ -286,15 +283,15 @@ class FosUser
 				}
 			}
 
-			$sitestr = $siteIds ? $self->toExpression( 'fosli."siteid"', $siteIds ) . ' AND' : '';
-			$keystr = $self->toExpression( 'fosli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 'fosli."siteid"', $level );
+			$keystr = $this->toExpression( 'fosli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
 		};
 
 
-		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
+		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) use ( $level ) {
 
 			array_walk_recursive( $params, function( &$v ) {
 				$v = trim( $v, '\'' );
@@ -310,8 +307,8 @@ class FosUser
 				}
 			}
 
-			$sitestr = $siteIds ? $self->toExpression( 'fospr."siteid"', $siteIds ) . ' AND' : '';
-			$keystr = $self->toExpression( 'fospr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 'fospr."siteid"', $level );
+			$keystr = $this->toExpression( 'fospr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
