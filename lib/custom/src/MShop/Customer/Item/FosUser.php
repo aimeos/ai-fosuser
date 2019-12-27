@@ -36,7 +36,7 @@ class FosUser extends Standard implements Iface
 	 */
 	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = [],
 		array $listItems = [], array $refItems = [], array $addrItems = [], array $propItems = [],
-		\Aimeos\MShop\Common\Helper\Password\Iface $helper = null, $salt = null )
+		\Aimeos\MShop\Common\Helper\Password\Iface $helper = null, string $salt = null )
 	{
 		parent::__construct( $address, $values, $listItems, $refItems, $addrItems, $propItems, $helper, $salt );
 
@@ -50,13 +50,13 @@ class FosUser extends Standard implements Iface
 	 * @param string $value Password of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setPassword( $value )
+	public function setPassword( string $value ) : \Aimeos\MShop\Customer\Item\Iface
 	{
-		if( (string) $value !== $this->getPassword() && $this->helper !== null ) {
+		if( $value !== $this->getPassword() && $this->helper !== null ) {
 			$value = $this->helper->encode( $value, $this->getSalt() );
 		}
 
-		return $this->set( 'customer.password', (string) $value );
+		return $this->set( 'customer.password', $value );
 	}
 
 
@@ -65,9 +65,9 @@ class FosUser extends Standard implements Iface
 	 *
 	 * @return array List of Symfony roles
 	 */
-	public function getRoles()
+	public function getRoles() : array
 	{
-		return (array) $this->get( 'roles', [] );
+		return $this->get( 'roles', [] );
 	}
 
 
@@ -75,8 +75,9 @@ class FosUser extends Standard implements Iface
 	 * Sets the associated user roles
 	 *
 	 * @param array $roles List of Symfony roles
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setRoles( array $roles )
+	public function setRoles( array $roles ) : \Aimeos\MShop\Customer\Item\Iface
 	{
 		return $this->set( 'roles', $roles );
 	}
@@ -87,9 +88,9 @@ class FosUser extends Standard implements Iface
 	 *
 	 * @return string Password salt
 	 */
-	public function getSalt()
+	public function getSalt() : string
 	{
-		return (string) $this->get( 'salt', '' );
+		return $this->get( 'salt', '' );
 	}
 
 
@@ -97,9 +98,10 @@ class FosUser extends Standard implements Iface
 	 * Sets the password salt
 	 *
 	 * @param string $value Password salt
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setSalt( $value )
+	public function setSalt( string $value ) : \Aimeos\MShop\Customer\Item\Iface
 	{
-		return $this->set( 'salt', (string) $value );
+		return $this->set( 'salt', $value );
 	}
 }
