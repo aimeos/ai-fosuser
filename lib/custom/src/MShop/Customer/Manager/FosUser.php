@@ -580,7 +580,8 @@ class FosUser
 			$required = ['customer'];
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-			while( ( $row = $results->fetch() ) !== false ) {
+
+			while( ( $row = $results->fetch() ) !== null ) {
 				$map[(string) $row['customer.id']] = $row;
 			}
 
