@@ -15,7 +15,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$values = array(
 			'customer.id' => 541,
@@ -55,7 +55,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, $values );
 	}
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
