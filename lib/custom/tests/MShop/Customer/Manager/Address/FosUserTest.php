@@ -28,9 +28,8 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $customer->searchItems( $search );
 
-		if( ( $customerItem = reset( $result ) ) === false ) {
+		if( ( $customerItem = $customer->searchItems( $search )->first() ) === null ) {
 			throw new \RuntimeException( sprintf( 'No customer item found for code "%1$s"', 'UTC001' ) );
 		}
 
@@ -100,9 +99,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '~=', 'customer.address.company', 'Example company' ) );
 
-		$items = $this->object->searchItems( $search );
-
-		if( ( $item = reset( $items ) ) === false ) {
+		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No address item found' );
 		}
 

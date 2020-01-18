@@ -297,9 +297,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
 
-		$results = $this->object->searchItems( $search, ['customer/address', 'text'] );
-
-		if( ( $item = reset( $results ) ) === false ) {
+		if( ( $item = $this->object->searchItems( $search, ['customer/address', 'text'] )->first() ) === null ) {
 			throw new \Exception( 'No customer item for "UTC001" available' );
 		}
 

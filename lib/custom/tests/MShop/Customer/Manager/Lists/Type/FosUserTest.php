@@ -1,12 +1,14 @@
 <?php
 
-namespace Aimeos\MShop\Customer\Manager\Lists\Type;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2018
  */
+
+
+ namespace Aimeos\MShop\Customer\Manager\Lists\Type;
+
+
 class FosUserTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
@@ -59,25 +61,21 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
-		$search->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search );
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
-		if( ( $expected = reset( $results ) ) === false ) {
+		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No list type item found' );
 		}
 
-		$this->assertEquals( $expected, $this->object->getItem( $expected->getId() ) );
+		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
-		$search->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search );
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
-		if( ( $item = reset( $results ) ) === false ) {
+		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No type item found' );
 		}
 
