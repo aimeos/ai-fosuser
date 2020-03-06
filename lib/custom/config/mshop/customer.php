@@ -302,7 +302,7 @@ return array(
 							FROM "fos_user_list" AS fosli
 							:joins
 							WHERE :cond
-							LIMIT 10000 OFFSET 0
+							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
 					'mysql' => '
@@ -312,7 +312,7 @@ return array(
 							FROM "fos_user_list" AS fosli
 							:joins
 							WHERE :cond
-							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+							LIMIT 10000 OFFSET 0
 						) AS list
 					',
 				),
