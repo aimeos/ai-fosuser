@@ -24,7 +24,7 @@ class FosUser
 		'customer.property.id' => array(
 			'code' => 'customer.property.id',
 			'internalcode' => 'fospr."id"',
-			'internaldeps'=>array( 'LEFT JOIN "fos_user_property" AS fospr ON ( fospr."parentid" = fos."id" )' ),
+			'internaldeps'=> ['LEFT JOIN "fos_user_property" AS fospr ON ( fospr."parentid" = fos."id" )'],
 			'label' => 'Property ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

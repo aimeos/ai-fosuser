@@ -45,6 +45,11 @@ class CustomerAddFosUserTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 
 		$this->msg( 'Adding FosUser customer test data', 0 );
 
+		$dbm = $this->additional->getDatabaseManager();
+		$conn = $dbm->acquire( 'db-customer' );
+		$conn->create( 'DELETE FROM "fos_user" WHERE "email" LIKE \'test%@example.com\'' )->execute()->finish();
+		$dbm->release( $conn, 'db-customer' );
+
 		$this->additional->setEditor( 'ai-fosuser:lib/custom' );
 		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'customer.php' );
 

@@ -21,13 +21,20 @@ class FosUser
 	extends \Aimeos\MShop\Customer\Manager\Standard
 {
 	private $searchConfig = array(
-		// customer.siteid is only for informational purpuse, not for filtering
 		'customer.id' => array(
 			'label' => 'Customer ID',
 			'code' => 'customer.id',
 			'internalcode' => 'fos."id"',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
+		'customer.siteid' => array(
+			'code' => 'customer.siteid',
+			'internalcode' => 'fos."siteid"',
+			'label' => 'Customer site ID',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.code' => array(
@@ -227,8 +234,8 @@ class FosUser
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.editor'=> array(
-			'label'=>'Customer editor',
-			'code'=>'customer.editor',
+			'label' => 'Customer editor',
+			'code' => 'customer.editor',
 			'internalcode' => 'fos."editor"',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -325,13 +332,13 @@ class FosUser
 	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/submanagers';
-		$default = ['address', 'lists', 'property'];
+		$default = ['address', 'group', 'lists', 'property'];
 
 		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this;
+		return $this->clearBase( $siteids, 'mshop/customer/manager/fosuser/delete' );
 	}
 
 
@@ -344,7 +351,7 @@ class FosUser
 	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/fosuser/delete';
-		return $this->deleteItemsBase( $itemIds, $path, false )->deleteRefItems( $itemIds );
+		return $this->deleteItemsBase( $itemIds, $path )->deleteRefItems( $itemIds );
 	}
 
 

@@ -507,7 +507,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "fos_user"
-					WHERE :cond
+					WHERE :cond AND siteid = ?
 				',
 			),
 			'insert' => array(
