@@ -495,7 +495,7 @@ class FosUser
 			$stmt->bind( $idx++, $billingAddress->getWebsite() );
 			$stmt->bind( $idx++, $billingAddress->getLongitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
 			$stmt->bind( $idx++, $billingAddress->getLatitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
-			$stmt->bind( $idx++, $item->getBirthday() );
+			$stmt->bind( $idx++, $billingAddress->getBirthday() );
 			$stmt->bind( $idx++, ( $item->getStatus() > 0 ? true : false ), \Aimeos\MW\DB\Statement\Base::PARAM_BOOL );
 			$stmt->bind( $idx++, $item->getDateVerified() );
 			$stmt->bind( $idx++, $item->getPassword() );

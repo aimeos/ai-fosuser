@@ -23,9 +23,9 @@ return array(
 							"firstname", "lastname", "address1", "address2", "address3",
 							"postal", "city", "state", "countryid", "langid", "telephone",
 							"email", "telefax", "website", "longitude", "latitude",
-							"pos", "mtime", "editor", "siteid", "ctime"
+							"pos", "birthday", "mtime", "editor", "siteid", "ctime"
 						) VALUES ( :values
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
 				),
@@ -38,7 +38,7 @@ return array(
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-							"pos" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
+							"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
 						WHERE "id" = ?
 					',
 				),
@@ -58,7 +58,7 @@ return array(
 							fosad."longitude" AS "customer.address.longitude", fosad."latitude" AS "customer.address.latitude",
 							fosad."pos" AS "customer.address.position", fosad."mtime" AS "customer.address.mtime",
 							fosad."editor" AS "customer.address.editor", fosad."ctime" AS "customer.address.ctime",
-							fosad."siteid" AS "customer.address.siteid"
+							fosad."siteid" AS "customer.address.siteid", fosad."birthday" AS "customer.address.birthday"
 						FROM "fos_user_address" AS fosad
 						:joins
 						WHERE :cond
@@ -80,7 +80,7 @@ return array(
 							fosad."longitude" AS "customer.address.longitude", fosad."latitude" AS "customer.address.latitude",
 							fosad."pos" AS "customer.address.position", fosad."mtime" AS "customer.address.mtime",
 							fosad."editor" AS "customer.address.editor", fosad."ctime" AS "customer.address.ctime",
-							fosad."siteid" AS "customer.address.siteid"
+							fosad."siteid" AS "customer.address.siteid", fosad."birthday" AS "customer.address.birthday"
 						FROM "fos_user_address" AS fosad
 						:joins
 						WHERE :cond

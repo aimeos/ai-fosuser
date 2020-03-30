@@ -99,7 +99,6 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
-		$this->assertEquals( $item->getBirthday(), $itemSaved->getBirthday() );
 		$this->assertEquals( $item->getPassword(), $itemSaved->getPassword() );
 		$this->assertEquals( $item->getRoles(), $itemSaved->getRoles() );
 		$this->assertEquals( $item->getSalt(), $itemSaved->getSalt() );
@@ -113,7 +112,6 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
-		$this->assertEquals( $itemExp->getBirthday(), $itemUpd->getBirthday() );
 		$this->assertEquals( $itemExp->getPassword(), $itemUpd->getPassword() );
 		$this->assertEquals( $itemExp->getRoles(), $itemUpd->getRoles() );
 		$this->assertEquals( $itemExp->getSalt(), $itemUpd->getSalt() );
@@ -180,7 +178,6 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'customer.id', null );
 		$expr[] = $search->compare( '==', 'customer.label', 'UTC001' );
 		$expr[] = $search->compare( '==', 'customer.code', 'UTC001' );
-		$expr[] = $search->compare( '==', 'customer.birthday', null );
 		$expr[] = $search->compare( '>=', 'customer.password', '' );
 		$expr[] = $search->compare( '==', 'customer.status', 1 );
 		$expr[] = $search->compare( '>', 'customer.mtime', '1970-01-01 00:00:00' );
@@ -207,6 +204,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.website', 'www.example.com' );
 		$expr[] = $search->compare( '==', 'customer.longitude', '10.0' );
 		$expr[] = $search->compare( '==', 'customer.latitude', '50.0' );
+		$expr[] = $search->compare( '==', 'customer.birthday', '1999-01-01' );
 
 		$param = ['text', 'default', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:has', $param ), null );
@@ -249,6 +247,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.address.longitude', '10.0' );
 		$expr[] = $search->compare( '==', 'customer.address.latitude', '50.0' );
 		$expr[] = $search->compare( '==', 'customer.address.position', 0 );
+		$expr[] = $search->compare( '==', 'customer.address.birthday', '2000-01-01' );
 		$expr[] = $search->compare( '>=', 'customer.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.address.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
