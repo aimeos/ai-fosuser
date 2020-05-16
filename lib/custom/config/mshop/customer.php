@@ -44,7 +44,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							fosad."id" AS "customer.address.id", fosad."parentid" AS "customer.address.parentid",
 							fosad."company" AS "customer.address.company", fosad."vatid" AS "customer.address.vatid",
 							fosad."salutation" AS "customer.address.salutation", fosad."title" AS "customer.address.title",
@@ -66,7 +66,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							fosad."id" AS "customer.address.id", fosad."parentid" AS "customer.address.parentid",
 							fosad."company" AS "customer.address.company", fosad."vatid" AS "customer.address.vatid",
 							fosad."salutation" AS "customer.address.salutation", fosad."title" AS "customer.address.title",
@@ -92,7 +92,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT fosad."id"
+							SELECT fosad."id"
 							FROM "fos_user_address" AS fosad
 							:joins
 							WHERE :cond
@@ -102,7 +102,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT fosad."id"
+							SELECT fosad."id"
 							FROM "fos_user_address" AS fosad
 							:joins
 							WHERE :cond
@@ -151,7 +151,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								foslity."id" AS "customer.lists.type.id", foslity."siteid" AS "customer.lists.type.siteid",
 								foslity."code" AS "customer.lists.type.code", foslity."domain" AS "customer.lists.type.domain",
 								foslity."label" AS "customer.lists.type.label", foslity."status" AS "customer.lists.type.status",
@@ -164,7 +164,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								foslity."id" AS "customer.lists.type.id", foslity."siteid" AS "customer.lists.type.siteid",
 								foslity."code" AS "customer.lists.type.code", foslity."domain" AS "customer.lists.type.domain",
 								foslity."label" AS "customer.lists.type.label", foslity."status" AS "customer.lists.type.status",
@@ -181,7 +181,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT foslity."id"
+								SELECT foslity."id"
 								FROM "fos_user_list_type" AS foslity
 								:joins
 								WHERE :cond
@@ -191,7 +191,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT foslity."id"
+								SELECT foslity."id"
 								FROM "fos_user_list_type" AS foslity
 								:joins
 								WHERE :cond
@@ -213,7 +213,7 @@ return array(
 			'fosuser' => array(
 				'aggregate' => array(
 					'ansi' => '
-						SELECT "key", COUNT(DISTINCT "id") AS "count"
+						SELECT "key", COUNT("id") AS "count"
 						FROM (
 							SELECT :key AS "key", fosli."id" AS "id"
 							FROM "fos_user_list" AS fosli
@@ -225,7 +225,7 @@ return array(
 						GROUP BY "key"
 					',
 					'mysql' => '
-						SELECT "key", COUNT(DISTINCT "id") AS "count"
+						SELECT "key", COUNT("id") AS "count"
 						FROM (
 							SELECT :key AS "key", fosli."id" AS "id"
 							FROM "fos_user_list" AS fosli
@@ -264,7 +264,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							fosli."id" AS "customer.lists.id", fosli."siteid" AS "customer.lists.siteid",
 							fosli."parentid" AS "customer.lists.parentid", fosli."type" AS "customer.lists.type",
 							fosli."domain" AS "customer.lists.domain", fosli."refid" AS "customer.lists.refid",
@@ -279,7 +279,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							fosli."id" AS "customer.lists.id", fosli."siteid" AS "customer.lists.siteid",
 							fosli."parentid" AS "customer.lists.parentid", fosli."type" AS "customer.lists.type",
 							fosli."domain" AS "customer.lists.domain", fosli."refid" AS "customer.lists.refid",
@@ -298,7 +298,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT fosli."id"
+							SELECT fosli."id"
 							FROM "fos_user_list" AS fosli
 							:joins
 							WHERE :cond
@@ -308,7 +308,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT fosli."id"
+							SELECT fosli."id"
 							FROM "fos_user_list" AS fosli
 							:joins
 							WHERE :cond
@@ -357,7 +357,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								fosprty."id" AS "customer.property.type.id", fosprty."siteid" AS "customer.property.type.siteid",
 								fosprty."code" AS "customer.property.type.code", fosprty."domain" AS "customer.property.type.domain",
 								fosprty."label" AS "customer.property.type.label", fosprty."status" AS "customer.property.type.status",
@@ -370,7 +370,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								fosprty."id" AS "customer.property.type.id", fosprty."siteid" AS "customer.property.type.siteid",
 								fosprty."code" AS "customer.property.type.code", fosprty."domain" AS "customer.property.type.domain",
 								fosprty."label" AS "customer.property.type.label", fosprty."status" AS "customer.property.type.status",
@@ -387,7 +387,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT fosprty."id"
+								SELECT fosprty."id"
 								FROM "fos_user_property_type" fosprty
 								:joins
 								WHERE :cond
@@ -397,7 +397,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT fosprty."id"
+								SELECT fosprty."id"
 								FROM "fos_user_property_type" fosprty
 								:joins
 								WHERE :cond
@@ -444,7 +444,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							fospr."id" AS "customer.property.id", fospr."parentid" AS "customer.property.parentid",
 							fospr."siteid" AS "customer.property.siteid", fospr."type" AS "customer.property.type",
 							fospr."langid" AS "customer.property.languageid", fospr."value" AS "customer.property.value",
@@ -457,7 +457,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							fospr."id" AS "customer.property.id", fospr."parentid" AS "customer.property.parentid",
 							fospr."siteid" AS "customer.property.siteid", fospr."type" AS "customer.property.type",
 							fospr."langid" AS "customer.property.languageid", fospr."value" AS "customer.property.value",
@@ -474,7 +474,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT fospr."id"
+							SELECT fospr."id"
 							FROM "fos_user_property" AS fospr
 							:joins
 							WHERE :cond
@@ -484,7 +484,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT fospr."id"
+							SELECT fospr."id"
 							FROM "fos_user_property" AS fospr
 							:joins
 							WHERE :cond
@@ -540,7 +540,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						fos."id" AS "customer.id", fos."siteid" AS "customer.siteid",
 						fos."username_canonical" as "customer.code", fos."username" as "customer.label",
 						fos."company" AS "customer.company", fos."vatid" AS "customer.vatid",
@@ -560,11 +560,12 @@ return array(
 					FROM "fos_user" AS fos
 					:joins
 					WHERE :cond
+					GROUP BY :group fos."id"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						fos."id" AS "customer.id", fos."siteid" AS "customer.siteid",
 						fos."username_canonical" as "customer.code", fos."username" as "customer.label",
 						fos."company" AS "customer.company", fos."vatid" AS "customer.vatid",
@@ -584,6 +585,7 @@ return array(
 					FROM "fos_user" AS fos
 					:joins
 					WHERE :cond
+					GROUP BY :group fos."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				',
@@ -592,20 +594,22 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT fos."id"
+						SELECT fos."id"
 						FROM "fos_user" AS fos
 						:joins
 						WHERE :cond
+						GROUP BY fos."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT fos."id"
+						SELECT fos."id"
 						FROM "fos_user" AS fos
 						:joins
 						WHERE :cond
+						GROUP BY fos."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				',
