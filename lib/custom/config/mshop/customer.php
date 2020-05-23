@@ -560,7 +560,13 @@ return array(
 					FROM "fos_user" AS fos
 					:joins
 					WHERE :cond
-					GROUP BY :group fos."id"
+					GROUP BY :columns :group
+						fos."id", fos."siteid", fos."username_canonical", fos."username", fos."company", fos."vatid",
+						fos."salutation", fos."title", fos."firstname", fos."lastname", fos."address1", fos."address2",
+						fos."address3", fos."postal", fos."city", fos."state", fos."countryid", fos."langid",
+						fos."telephone", fos."email_canonical", fos."telefax", fos."website", fos."longitude", fos."latitude",
+						fos."birthday", fos."enabled", fos."vdate", fos."password", fos."ctime", fos."mtime",
+						fos."editor", fos."roles", fos."salt"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
