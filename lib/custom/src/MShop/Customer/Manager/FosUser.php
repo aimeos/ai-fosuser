@@ -471,7 +471,6 @@ class FosUser
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
-			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
 			$stmt->bind( $idx++, $item->getCode() ); // canonical username
 			$stmt->bind( $idx++, $item->getCode() ); // username
 			$stmt->bind( $idx++, $billingAddress->getCompany() );
@@ -503,6 +502,7 @@ class FosUser
 			$stmt->bind( $idx++, $context->getEditor() );
 			$stmt->bind( $idx++, serialize( $item->getRoles() ) );
 			$stmt->bind( $idx++, $item->getSalt() );
+			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
 
 			if( $id !== null ) {
 				$stmt->bind( $idx, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

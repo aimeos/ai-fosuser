@@ -513,12 +513,12 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "fos_user" ( :names
-						"siteid", "username_canonical", "username", "company", "vatid", "salutation", "title",
+						"username_canonical", "username", "company", "vatid", "salutation", "title",
 						"firstname", "lastname", "address1", "address2", "address3",
 						"postal", "city", "state", "countryid", "langid", "telephone",
 						"email_canonical", "email", "telefax", "website", "longitude", "latitude",
 						"birthday", "enabled", "vdate", "password", "mtime", "editor", "roles", "salt",
-						"ctime"
+						"siteid", "ctime"
 					) VALUES ( :values
 						?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 					)
@@ -528,14 +528,14 @@ return array(
 				'ansi' => '
 					UPDATE "fos_user"
 					SET :names
-						"siteid" = ?, "username_canonical" = ?, "username" = ?, "company" = ?, "vatid" = ?,
+						"username_canonical" = ?, "username" = ?, "company" = ?, "vatid" = ?,
 						"salutation" = ?, "title" = ?, "firstname" = ?, "lastname" = ?,
 						"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 						"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
 						"telephone" = ?, "email_canonical" = ?, "email" = ?, "telefax" = ?,
 						"website" = ?, "longitude" = ?, "latitude" = ?, "birthday" = ?, "enabled" = ?,
 						"vdate" = ?, "password" = ?, "mtime" = ?, "editor" = ?, "roles" = ?, "salt" = ?
-					WHERE "id" = ?
+					WHERE "siteid" = ? AND "id" = ?
 				',
 			),
 			'search' => array(

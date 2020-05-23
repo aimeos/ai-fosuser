@@ -16,7 +16,7 @@ return array(
 			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => '1.'] );
 			$table->addColumn( 'username', 'string', array( 'length' => 180 ) );
 			$table->addColumn( 'username_canonical', 'string', array( 'length' => 180 ) );
 			$table->addColumn( 'email', 'string', array( 'length' => 180 ) );
@@ -74,7 +74,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', [] );
-			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
 			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'salutation', 'string', array( 'length' => 8 ) );
