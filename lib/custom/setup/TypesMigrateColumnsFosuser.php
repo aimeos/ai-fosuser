@@ -24,8 +24,8 @@ class TypesMigrateColumnsFosuser extends \Aimeos\MW\Setup\Task\TypesMigrateColum
 
 	private $migrations = [
 		'db-customer' => [
-			'fos_user_list' => 'UPDATE "fos_user_list" SET "type" = ( SELECT "code" FROM "fos_user_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
-			'fos_user_property' => 'UPDATE "fos_user_property" SET "type" = ( SELECT "code" FROM "fos_user_property_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
+			'fos_user_list' => 'UPDATE "fos_user_list" SET "type" = ( SELECT "code" FROM "fos_user_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" ) WHERE "type" = \'\'',
+			'fos_user_property' => 'UPDATE "fos_user_property" SET "type" = ( SELECT "code" FROM "fos_user_property_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" ) WHERE "type" = \'\'',
 		],
 	];
 
