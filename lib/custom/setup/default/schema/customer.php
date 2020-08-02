@@ -16,7 +16,7 @@ return array(
 			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => '1.'] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
 			$table->addColumn( 'username', 'string', array( 'length' => 180 ) );
 			$table->addColumn( 'username_canonical', 'string', array( 'length' => 180 ) );
 			$table->addColumn( 'email', 'string', array( 'length' => 180 ) );
