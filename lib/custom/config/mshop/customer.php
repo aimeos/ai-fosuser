@@ -13,7 +13,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "fos_user_address"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND ( "siteid" = ? OR "siteid" = \'\' )
 					',
 				),
 				'insert' => array(
@@ -38,8 +38,8 @@ return array(
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-							"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
-						WHERE "id" = ?
+							"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?
+						WHERE ( "siteid" = ? OR "siteid" = \'\' ) AND "id" = ?
 					',
 				),
 				'search' => array(
@@ -507,7 +507,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "fos_user"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND ( "siteid" = ? OR "siteid" = \'\' )
 				',
 			),
 			'insert' => array(
@@ -535,7 +535,7 @@ return array(
 						"telephone" = ?, "email_canonical" = ?, "email" = ?, "telefax" = ?,
 						"website" = ?, "longitude" = ?, "latitude" = ?, "birthday" = ?, "enabled" = ?,
 						"vdate" = ?, "password" = ?, "mtime" = ?, "editor" = ?, "roles" = ?, "salt" = ?
-					WHERE "siteid" = ? AND "id" = ?
+					WHERE ( "siteid" = ? OR "siteid" = \'\' ) AND "id" = ?
 				',
 			),
 			'search' => array(
