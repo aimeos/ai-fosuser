@@ -163,7 +163,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $this->object->filter() );
 	}
 
 
@@ -172,7 +172,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->findItem( 'test@example.com', ['text'] );
 		$listItem = $item->getListItems( 'text', 'default' )->first( new \RuntimeException( 'No list item found' ) );
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'customer.id', null );
@@ -262,7 +262,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 	{
 		$total = 0;
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'customer.address.editor', $this->editor ) );
 		$search->setSlice( 0, 2 );
 
@@ -278,7 +278,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsCriteria()
 	{
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$conditions = array(
 			$search->compare( '==', 'customer.address.editor', $this->editor ),
 			$search->getConditions()
@@ -290,7 +290,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsRef()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'test@example.com' ) );
 
 		if( ( $item = $this->object->search( $search, ['customer/address', 'text'] )->first() ) === null ) {
