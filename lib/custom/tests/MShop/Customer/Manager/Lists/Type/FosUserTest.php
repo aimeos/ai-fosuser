@@ -54,7 +54,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Type\\Iface', $item );
 	}
 
