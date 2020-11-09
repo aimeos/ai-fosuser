@@ -87,7 +87,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$itemExp = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $item );
@@ -137,7 +137,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 		$item2 = $this->object->find( 'xyz', ['customer/address'] );
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 		$this->assertEquals( 2, count( $item->getAddressItems() ) );
 		$this->assertEquals( 2, count( $item2->getAddressItems() ) );
@@ -154,7 +154,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 		$item2 = $this->object->find( 'xyz', ['customer/property'] );
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 		$this->assertEquals( 1, count( $item->getPropertyItems() ) );
 		$this->assertEquals( 1, count( $item2->getPropertyItems() ) );
