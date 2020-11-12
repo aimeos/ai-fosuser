@@ -78,13 +78,13 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 		$item->setCode( 'unitTest' );
 		$item->setLabel( 'unitTest' );
-		$item = $this->object->saveItem( $item );
+		$item = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unitTest2' );
 		$itemExp->setLabel( 'unitTest2' );
-		$itemExp = $this->object->saveItem( $itemExp );
+		$itemExp = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->delete( $item->getId() );
@@ -133,7 +133,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$item->setId( null )->setCode( 'xyz' );
 		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
 		$item->addAddressItem( new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.address.' ) );
-		$this->object->saveItem( $item );
+		$this->object->save( $item );
 
 		$item2 = $this->object->find( 'xyz', ['customer/address'] );
 
@@ -150,7 +150,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 		$item->setId( null )->setCode( 'xyz' );
 		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
-		$this->object->saveItem( $item );
+		$this->object->save( $item );
 
 		$item2 = $this->object->find( 'xyz', ['customer/property'] );
 
