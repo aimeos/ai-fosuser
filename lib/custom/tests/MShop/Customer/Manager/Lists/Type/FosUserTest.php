@@ -61,7 +61,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 
 		if( ( $item = $this->object->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No list type item found' );
@@ -73,7 +73,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 
 		if( ( $item = $this->object->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No type item found' );
@@ -140,7 +140,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.lists.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 
 		$results = $this->object->search( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
