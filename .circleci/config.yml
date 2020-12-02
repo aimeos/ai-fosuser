@@ -95,7 +95,7 @@ jobs:
           paths: [./vendor]
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
       - run: ./vendor/bin/phing -Ddir=ext/ai-fosuser setup coverageext checkext
-      - run: ./vendor/bin/php-coveralls -x ext/ai-fosuser/admin/jqadm/tests/coverage.xml -vvv
+      - run: ./vendor/bin/php-coveralls -x ext/ai-fosuser/lib/custom/tests/coverage.xml -vvv
 
 workflows:
   version: 2
