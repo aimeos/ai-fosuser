@@ -27,7 +27,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.code', 'test@example.com' ),
 			$search->compare( '==', 'customer.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 
 		if( ( $customerItem = $customer->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( sprintf( 'No customer item found for code "%1$s"', 'test@example.com' ) );
@@ -230,7 +230,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '>=', 'customer.address.ctime', '1970-01-01 00:00:00' ),
 			$search->compare( '==', 'customer.address.editor', $this->editor ),
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$this->assertEquals( 1, count( $this->object->search( $search ) ) );
 	}
 
@@ -245,7 +245,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.address.editor', $this->editor )
 		);
 
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 2 );
 
 		$results = $this->object->search( $search, [], $total );
