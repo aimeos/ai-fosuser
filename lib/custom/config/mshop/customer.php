@@ -213,28 +213,28 @@ return array(
 			'fosuser' => array(
 				'aggregate' => array(
 					'ansi' => '
-						SELECT "key", COUNT("id") AS "count"
+						SELECT :keys, COUNT("id") AS "count"
 						FROM (
-							SELECT :key AS "key", fosli."id" AS "id"
+							SELECT :acols, fosli."id" AS "id"
 							FROM "fos_user_list" AS fosli
 							:joins
 							WHERE :cond
 							ORDER BY :order
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						) AS list
-						GROUP BY "key"
+						GROUP BY :keys
 					',
 					'mysql' => '
-						SELECT "key", COUNT("id") AS "count"
+						SELECT :keys, COUNT("id") AS "count"
 						FROM (
-							SELECT :key AS "key", fosli."id" AS "id"
+							SELECT :acols, fosli."id" AS "id"
 							FROM "fos_user_list" AS fosli
 							:joins
 							WHERE :cond
 							ORDER BY :order
 							LIMIT :size OFFSET :start
 						) AS list
-						GROUP BY "key"
+						GROUP BY :keys
 					',
 				),
 				'delete' => array(
