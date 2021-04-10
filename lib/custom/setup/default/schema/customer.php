@@ -164,8 +164,8 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_fosli_id' );
-			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_fosli_pid_sid_dm_ty_rid' );
-			$table->addIndex( array( 'siteid', 'key' ), 'idx_fosli_sid_key' );
+			$table->addUniqueIndex( array( 'parentid', 'domain', 'siteid', 'type', 'refid' ), 'unq_fosli_pid_dm_sid_ty_rid' );
+			$table->addIndex( array( 'key', 'siteid' ), 'idx_fosli_key_sid' );
 			$table->addIndex( array( 'parentid' ), 'fk_fosli_pid' );
 
 			$table->addForeignKeyConstraint( 'fos_user', array( 'parentid' ), array( 'id' ),
@@ -217,7 +217,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_fospr_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_fospr_sid_ty_lid_value' );
-			$table->addIndex( array( 'siteid', 'key' ), 'fk_fospr_sid_key' );
+			$table->addIndex( array( 'key', 'siteid' ), 'fk_fospr_key_sid' );
 			$table->addIndex( array( 'parentid' ), 'fk_fospr_pid' );
 
 			$table->addForeignKeyConstraint( 'fos_user', array( 'parentid' ), array( 'id' ),
