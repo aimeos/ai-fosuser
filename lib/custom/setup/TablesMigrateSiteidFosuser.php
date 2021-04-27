@@ -54,7 +54,7 @@ class TablesMigrateSiteidFosuser extends TablesMigrateSiteid
 		$this->process( $this->resources );
 
 		if( $this->getSchema( 'db-customer' )->columnExists( 'fosuser', 'siteid' ) !== false ) {
-			$this->execute( 'UPDATE fosuser SET siteid=\'\' WHERE siteid IS NULL' );
+			$this->execute( 'UPDATE fosuser SET siteid=\'\' WHERE siteid IS NULL', 'db-customer' );
 		}
 	}
 }
