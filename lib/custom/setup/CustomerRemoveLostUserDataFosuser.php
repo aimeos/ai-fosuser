@@ -16,13 +16,13 @@ class CustomerRemoveLostUserDataFosuser extends \Aimeos\MW\Setup\Task\Base
 {
 	private $sql = [
 		'fos_user_address' => [
-			'fk_fosad_pid' => 'DELETE FROM "fos_user_address" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )'
+			'fk_mcusad_pid' => 'DELETE FROM "fos_user_address" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )'
 		],
 		'fos_user_list' => [
-			'fk_fosli_pid' => 'DELETE FROM "fos_user_list" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )'
+			'fk_mcusli_pid' => 'DELETE FROM "fos_user_list" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )'
 		],
 		'fos_user_property' => [
-			'fk_fospr_pid' => 'DELETE FROM "fos_user_property" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )'
+			'fk_mcuspr_pid' => 'DELETE FROM "fos_user_property" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )'
 		],
 	];
 

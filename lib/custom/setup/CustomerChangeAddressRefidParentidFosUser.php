@@ -17,7 +17,7 @@ class CustomerChangeAddressRefidParentidFosUser extends \Aimeos\MW\Setup\Task\Ba
 	private $mysql = array(
 		'refid' => array(
 			'ALTER TABLE "fos_user_address" CHANGE "refid" "parentid" INTEGER NOT NULL',
-			'ALTER TABLE "fos_user_address" DROP INDEX "idx_fosad_refid", ADD INDEX "idx_fosad_pid" ("parentid")',
+			'ALTER TABLE "fos_user_address" DROP INDEX "idx_mcusad_refid", ADD INDEX "idx_mcusad_pid" ("parentid")',
 		),
 	);
 

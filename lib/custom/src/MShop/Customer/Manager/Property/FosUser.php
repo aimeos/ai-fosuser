@@ -23,8 +23,8 @@ class FosUser
 	private $searchConfig = array(
 		'customer.property.id' => array(
 			'code' => 'customer.property.id',
-			'internalcode' => 'fospr."id"',
-			'internaldeps'=> ['LEFT JOIN "fos_user_property" AS fospr ON ( fospr."parentid" = fos."id" )'],
+			'internalcode' => 'mcuspr."id"',
+			'internaldeps'=> ['LEFT JOIN "fos_user_property" AS mcuspr ON ( mcuspr."parentid" = mcus."id" )'],
 			'label' => 'Property ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -32,7 +32,7 @@ class FosUser
 		),
 		'customer.property.parentid' => array(
 			'code' => 'customer.property.parentid',
-			'internalcode' => 'fospr."parentid"',
+			'internalcode' => 'mcuspr."parentid"',
 			'label' => 'Property parent ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -40,7 +40,7 @@ class FosUser
 		),
 		'customer.property.siteid' => array(
 			'code' => 'customer.property.siteid',
-			'internalcode' => 'fospr."siteid"',
+			'internalcode' => 'mcuspr."siteid"',
 			'label' => 'Property site ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -48,28 +48,28 @@ class FosUser
 		),
 		'customer.property.type' => array(
 			'code' => 'customer.property.type',
-			'internalcode' => 'fospr."type"',
+			'internalcode' => 'mcuspr."type"',
 			'label' => 'Property type',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.property.value' => array(
 			'code' => 'customer.property.value',
-			'internalcode' => 'fospr."value"',
+			'internalcode' => 'mcuspr."value"',
 			'label' => 'Property value',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.property.languageid' => array(
 			'code' => 'customer.property.languageid',
-			'internalcode' => 'fospr."langid"',
+			'internalcode' => 'mcuspr."langid"',
 			'label' => 'Property language ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.property.ctime' => array(
 			'code' => 'customer.property.ctime',
-			'internalcode' => 'fospr."ctime"',
+			'internalcode' => 'mcuspr."ctime"',
 			'label' => 'Property create date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -77,7 +77,7 @@ class FosUser
 		),
 		'customer.property.mtime' => array(
 			'code' => 'customer.property.mtime',
-			'internalcode' => 'fospr."mtime"',
+			'internalcode' => 'mcuspr."mtime"',
 			'label' => 'Property modify date',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -85,7 +85,7 @@ class FosUser
 		),
 		'customer.property.editor' => array(
 			'code' => 'customer.property.editor',
-			'internalcode' => 'fospr."editor"',
+			'internalcode' => 'mcuspr."editor"',
 			'label' => 'Property editor',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,

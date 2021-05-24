@@ -45,21 +45,21 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT :columns
-							fosad."id" AS "customer.address.id", fosad."parentid" AS "customer.address.parentid",
-							fosad."company" AS "customer.address.company", fosad."vatid" AS "customer.address.vatid",
-							fosad."salutation" AS "customer.address.salutation", fosad."title" AS "customer.address.title",
-							fosad."firstname" AS "customer.address.firstname", fosad."lastname" AS "customer.address.lastname",
-							fosad."address1" AS "customer.address.address1", fosad."address2" AS "customer.address.address2",
-							fosad."address3" AS "customer.address.address3", fosad."postal" AS "customer.address.postal",
-							fosad."city" AS "customer.address.city", fosad."state" AS "customer.address.state",
-							fosad."countryid" AS "customer.address.countryid", fosad."langid" AS "customer.address.languageid",
-							fosad."telephone" AS "customer.address.telephone", fosad."email" AS "customer.address.email",
-							fosad."telefax" AS "customer.address.telefax", fosad."website" AS "customer.address.website",
-							fosad."longitude" AS "customer.address.longitude", fosad."latitude" AS "customer.address.latitude",
-							fosad."pos" AS "customer.address.position", fosad."mtime" AS "customer.address.mtime",
-							fosad."editor" AS "customer.address.editor", fosad."ctime" AS "customer.address.ctime",
-							fosad."siteid" AS "customer.address.siteid", fosad."birthday" AS "customer.address.birthday"
-						FROM "fos_user_address" AS fosad
+							mcusad."id" AS "customer.address.id", mcusad."parentid" AS "customer.address.parentid",
+							mcusad."company" AS "customer.address.company", mcusad."vatid" AS "customer.address.vatid",
+							mcusad."salutation" AS "customer.address.salutation", mcusad."title" AS "customer.address.title",
+							mcusad."firstname" AS "customer.address.firstname", mcusad."lastname" AS "customer.address.lastname",
+							mcusad."address1" AS "customer.address.address1", mcusad."address2" AS "customer.address.address2",
+							mcusad."address3" AS "customer.address.address3", mcusad."postal" AS "customer.address.postal",
+							mcusad."city" AS "customer.address.city", mcusad."state" AS "customer.address.state",
+							mcusad."countryid" AS "customer.address.countryid", mcusad."langid" AS "customer.address.languageid",
+							mcusad."telephone" AS "customer.address.telephone", mcusad."email" AS "customer.address.email",
+							mcusad."telefax" AS "customer.address.telefax", mcusad."website" AS "customer.address.website",
+							mcusad."longitude" AS "customer.address.longitude", mcusad."latitude" AS "customer.address.latitude",
+							mcusad."pos" AS "customer.address.position", mcusad."mtime" AS "customer.address.mtime",
+							mcusad."editor" AS "customer.address.editor", mcusad."ctime" AS "customer.address.ctime",
+							mcusad."siteid" AS "customer.address.siteid", mcusad."birthday" AS "customer.address.birthday"
+						FROM "fos_user_address" AS mcusad
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -67,21 +67,21 @@ return array(
 						',
 					'mysql' => '
 						SELECT :columns
-							fosad."id" AS "customer.address.id", fosad."parentid" AS "customer.address.parentid",
-							fosad."company" AS "customer.address.company", fosad."vatid" AS "customer.address.vatid",
-							fosad."salutation" AS "customer.address.salutation", fosad."title" AS "customer.address.title",
-							fosad."firstname" AS "customer.address.firstname", fosad."lastname" AS "customer.address.lastname",
-							fosad."address1" AS "customer.address.address1", fosad."address2" AS "customer.address.address2",
-							fosad."address3" AS "customer.address.address3", fosad."postal" AS "customer.address.postal",
-							fosad."city" AS "customer.address.city", fosad."state" AS "customer.address.state",
-							fosad."countryid" AS "customer.address.countryid", fosad."langid" AS "customer.address.languageid",
-							fosad."telephone" AS "customer.address.telephone", fosad."email" AS "customer.address.email",
-							fosad."telefax" AS "customer.address.telefax", fosad."website" AS "customer.address.website",
-							fosad."longitude" AS "customer.address.longitude", fosad."latitude" AS "customer.address.latitude",
-							fosad."pos" AS "customer.address.position", fosad."mtime" AS "customer.address.mtime",
-							fosad."editor" AS "customer.address.editor", fosad."ctime" AS "customer.address.ctime",
-							fosad."siteid" AS "customer.address.siteid", fosad."birthday" AS "customer.address.birthday"
-						FROM "fos_user_address" AS fosad
+							mcusad."id" AS "customer.address.id", mcusad."parentid" AS "customer.address.parentid",
+							mcusad."company" AS "customer.address.company", mcusad."vatid" AS "customer.address.vatid",
+							mcusad."salutation" AS "customer.address.salutation", mcusad."title" AS "customer.address.title",
+							mcusad."firstname" AS "customer.address.firstname", mcusad."lastname" AS "customer.address.lastname",
+							mcusad."address1" AS "customer.address.address1", mcusad."address2" AS "customer.address.address2",
+							mcusad."address3" AS "customer.address.address3", mcusad."postal" AS "customer.address.postal",
+							mcusad."city" AS "customer.address.city", mcusad."state" AS "customer.address.state",
+							mcusad."countryid" AS "customer.address.countryid", mcusad."langid" AS "customer.address.languageid",
+							mcusad."telephone" AS "customer.address.telephone", mcusad."email" AS "customer.address.email",
+							mcusad."telefax" AS "customer.address.telefax", mcusad."website" AS "customer.address.website",
+							mcusad."longitude" AS "customer.address.longitude", mcusad."latitude" AS "customer.address.latitude",
+							mcusad."pos" AS "customer.address.position", mcusad."mtime" AS "customer.address.mtime",
+							mcusad."editor" AS "customer.address.editor", mcusad."ctime" AS "customer.address.ctime",
+							mcusad."siteid" AS "customer.address.siteid", mcusad."birthday" AS "customer.address.birthday"
+						FROM "fos_user_address" AS mcusad
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -92,8 +92,8 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT fosad."id"
-							FROM "fos_user_address" AS fosad
+							SELECT mcusad."id"
+							FROM "fos_user_address" AS mcusad
 							:joins
 							WHERE :cond
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -102,8 +102,8 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT fosad."id"
-							FROM "fos_user_address" AS fosad
+							SELECT mcusad."id"
+							FROM "fos_user_address" AS mcusad
 							:joins
 							WHERE :cond
 							LIMIT 10000 OFFSET 0
@@ -152,12 +152,12 @@ return array(
 					'search' => array(
 						'ansi' => '
 							SELECT :columns
-								foslity."id" AS "customer.lists.type.id", foslity."siteid" AS "customer.lists.type.siteid",
-								foslity."code" AS "customer.lists.type.code", foslity."domain" AS "customer.lists.type.domain",
-								foslity."label" AS "customer.lists.type.label", foslity."status" AS "customer.lists.type.status",
-								foslity."mtime" AS "customer.lists.type.mtime", foslity."editor" AS "customer.lists.type.editor",
-								foslity."ctime" AS "customer.lists.type.ctime", foslity."pos" AS "customer.lists.type.position"
-							FROM "fos_user_list_type" AS foslity
+								mcuslity."id" AS "customer.lists.type.id", mcuslity."siteid" AS "customer.lists.type.siteid",
+								mcuslity."code" AS "customer.lists.type.code", mcuslity."domain" AS "customer.lists.type.domain",
+								mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
+								mcuslity."mtime" AS "customer.lists.type.mtime", mcuslity."editor" AS "customer.lists.type.editor",
+								mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position"
+							FROM "fos_user_list_type" AS mcuslity
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -165,12 +165,12 @@ return array(
 						',
 						'mysql' => '
 							SELECT :columns
-								foslity."id" AS "customer.lists.type.id", foslity."siteid" AS "customer.lists.type.siteid",
-								foslity."code" AS "customer.lists.type.code", foslity."domain" AS "customer.lists.type.domain",
-								foslity."label" AS "customer.lists.type.label", foslity."status" AS "customer.lists.type.status",
-								foslity."mtime" AS "customer.lists.type.mtime", foslity."editor" AS "customer.lists.type.editor",
-								foslity."ctime" AS "customer.lists.type.ctime", foslity."pos" AS "customer.lists.type.position"
-							FROM "fos_user_list_type" AS foslity
+								mcuslity."id" AS "customer.lists.type.id", mcuslity."siteid" AS "customer.lists.type.siteid",
+								mcuslity."code" AS "customer.lists.type.code", mcuslity."domain" AS "customer.lists.type.domain",
+								mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
+								mcuslity."mtime" AS "customer.lists.type.mtime", mcuslity."editor" AS "customer.lists.type.editor",
+								mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position"
+							FROM "fos_user_list_type" AS mcuslity
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -181,8 +181,8 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT foslity."id"
-								FROM "fos_user_list_type" AS foslity
+								SELECT mcuslity."id"
+								FROM "fos_user_list_type" AS mcuslity
 								:joins
 								WHERE :cond
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -191,8 +191,8 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT foslity."id"
-								FROM "fos_user_list_type" AS foslity
+								SELECT mcuslity."id"
+								FROM "fos_user_list_type" AS mcuslity
 								:joins
 								WHERE :cond
 								LIMIT 10000 OFFSET 0
@@ -215,8 +215,8 @@ return array(
 					'ansi' => '
 						SELECT :keys, COUNT("id") AS "count"
 						FROM (
-							SELECT :acols, fosli."id" AS "id"
-							FROM "fos_user_list" AS fosli
+							SELECT :acols, mcusli."id" AS "id"
+							FROM "fos_user_list" AS mcusli
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -227,8 +227,8 @@ return array(
 					'mysql' => '
 						SELECT :keys, COUNT("id") AS "count"
 						FROM (
-							SELECT :acols, fosli."id" AS "id"
-							FROM "fos_user_list" AS fosli
+							SELECT :acols, mcusli."id" AS "id"
+							FROM "fos_user_list" AS mcusli
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -265,14 +265,14 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT :columns
-							fosli."id" AS "customer.lists.id", fosli."siteid" AS "customer.lists.siteid",
-							fosli."parentid" AS "customer.lists.parentid", fosli."type" AS "customer.lists.type",
-							fosli."domain" AS "customer.lists.domain", fosli."refid" AS "customer.lists.refid",
-							fosli."start" AS "customer.lists.datestart", fosli."end" AS "customer.lists.dateend",
-							fosli."config" AS "customer.lists.config", fosli."pos" AS "customer.lists.position",
-							fosli."status" AS "customer.lists.status", fosli."mtime" AS "customer.lists.mtime",
-							fosli."editor" AS "customer.lists.editor", fosli."ctime" AS "customer.lists.ctime"
-						FROM "fos_user_list" AS fosli
+							mcusli."id" AS "customer.lists.id", mcusli."siteid" AS "customer.lists.siteid",
+							mcusli."parentid" AS "customer.lists.parentid", mcusli."type" AS "customer.lists.type",
+							mcusli."domain" AS "customer.lists.domain", mcusli."refid" AS "customer.lists.refid",
+							mcusli."start" AS "customer.lists.datestart", mcusli."end" AS "customer.lists.dateend",
+							mcusli."config" AS "customer.lists.config", mcusli."pos" AS "customer.lists.position",
+							mcusli."status" AS "customer.lists.status", mcusli."mtime" AS "customer.lists.mtime",
+							mcusli."editor" AS "customer.lists.editor", mcusli."ctime" AS "customer.lists.ctime"
+						FROM "fos_user_list" AS mcusli
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -280,14 +280,14 @@ return array(
 						',
 					'mysql' => '
 						SELECT :columns
-							fosli."id" AS "customer.lists.id", fosli."siteid" AS "customer.lists.siteid",
-							fosli."parentid" AS "customer.lists.parentid", fosli."type" AS "customer.lists.type",
-							fosli."domain" AS "customer.lists.domain", fosli."refid" AS "customer.lists.refid",
-							fosli."start" AS "customer.lists.datestart", fosli."end" AS "customer.lists.dateend",
-							fosli."config" AS "customer.lists.config", fosli."pos" AS "customer.lists.position",
-							fosli."status" AS "customer.lists.status", fosli."mtime" AS "customer.lists.mtime",
-							fosli."editor" AS "customer.lists.editor", fosli."ctime" AS "customer.lists.ctime"
-						FROM "fos_user_list" AS fosli
+							mcusli."id" AS "customer.lists.id", mcusli."siteid" AS "customer.lists.siteid",
+							mcusli."parentid" AS "customer.lists.parentid", mcusli."type" AS "customer.lists.type",
+							mcusli."domain" AS "customer.lists.domain", mcusli."refid" AS "customer.lists.refid",
+							mcusli."start" AS "customer.lists.datestart", mcusli."end" AS "customer.lists.dateend",
+							mcusli."config" AS "customer.lists.config", mcusli."pos" AS "customer.lists.position",
+							mcusli."status" AS "customer.lists.status", mcusli."mtime" AS "customer.lists.mtime",
+							mcusli."editor" AS "customer.lists.editor", mcusli."ctime" AS "customer.lists.ctime"
+						FROM "fos_user_list" AS mcusli
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -298,8 +298,8 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT fosli."id"
-							FROM "fos_user_list" AS fosli
+							SELECT mcusli."id"
+							FROM "fos_user_list" AS mcusli
 							:joins
 							WHERE :cond
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -308,8 +308,8 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT fosli."id"
-							FROM "fos_user_list" AS fosli
+							SELECT mcusli."id"
+							FROM "fos_user_list" AS mcusli
 							:joins
 							WHERE :cond
 							LIMIT 10000 OFFSET 0
@@ -358,12 +358,12 @@ return array(
 					'search' => array(
 						'ansi' => '
 							SELECT :columns
-								fosprty."id" AS "customer.property.type.id", fosprty."siteid" AS "customer.property.type.siteid",
-								fosprty."code" AS "customer.property.type.code", fosprty."domain" AS "customer.property.type.domain",
-								fosprty."label" AS "customer.property.type.label", fosprty."status" AS "customer.property.type.status",
-								fosprty."mtime" AS "customer.property.type.mtime", fosprty."editor" AS "customer.property.type.editor",
-								fosprty."ctime" AS "customer.property.type.ctime", fosprty."pos" AS "customer.property.type.position"
-							FROM "fos_user_property_type" fosprty
+								mcusprty."id" AS "customer.property.type.id", mcusprty."siteid" AS "customer.property.type.siteid",
+								mcusprty."code" AS "customer.property.type.code", mcusprty."domain" AS "customer.property.type.domain",
+								mcusprty."label" AS "customer.property.type.label", mcusprty."status" AS "customer.property.type.status",
+								mcusprty."mtime" AS "customer.property.type.mtime", mcusprty."editor" AS "customer.property.type.editor",
+								mcusprty."ctime" AS "customer.property.type.ctime", mcusprty."pos" AS "customer.property.type.position"
+							FROM "fos_user_property_type" mcusprty
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -371,12 +371,12 @@ return array(
 						',
 						'mysql' => '
 							SELECT :columns
-								fosprty."id" AS "customer.property.type.id", fosprty."siteid" AS "customer.property.type.siteid",
-								fosprty."code" AS "customer.property.type.code", fosprty."domain" AS "customer.property.type.domain",
-								fosprty."label" AS "customer.property.type.label", fosprty."status" AS "customer.property.type.status",
-								fosprty."mtime" AS "customer.property.type.mtime", fosprty."editor" AS "customer.property.type.editor",
-								fosprty."ctime" AS "customer.property.type.ctime", fosprty."pos" AS "customer.property.type.position"
-							FROM "fos_user_property_type" fosprty
+								mcusprty."id" AS "customer.property.type.id", mcusprty."siteid" AS "customer.property.type.siteid",
+								mcusprty."code" AS "customer.property.type.code", mcusprty."domain" AS "customer.property.type.domain",
+								mcusprty."label" AS "customer.property.type.label", mcusprty."status" AS "customer.property.type.status",
+								mcusprty."mtime" AS "customer.property.type.mtime", mcusprty."editor" AS "customer.property.type.editor",
+								mcusprty."ctime" AS "customer.property.type.ctime", mcusprty."pos" AS "customer.property.type.position"
+							FROM "fos_user_property_type" mcusprty
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -387,8 +387,8 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT fosprty."id"
-								FROM "fos_user_property_type" fosprty
+								SELECT mcusprty."id"
+								FROM "fos_user_property_type" mcusprty
 								:joins
 								WHERE :cond
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -397,8 +397,8 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT fosprty."id"
-								FROM "fos_user_property_type" fosprty
+								SELECT mcusprty."id"
+								FROM "fos_user_property_type" mcusprty
 								:joins
 								WHERE :cond
 								LIMIT 10000 OFFSET 0
@@ -445,12 +445,12 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT :columns
-							fospr."id" AS "customer.property.id", fospr."parentid" AS "customer.property.parentid",
-							fospr."siteid" AS "customer.property.siteid", fospr."type" AS "customer.property.type",
-							fospr."langid" AS "customer.property.languageid", fospr."value" AS "customer.property.value",
-							fospr."mtime" AS "customer.property.mtime", fospr."editor" AS "customer.property.editor",
-							fospr."ctime" AS "customer.property.ctime"
-						FROM "fos_user_property" AS fospr
+							mcuspr."id" AS "customer.property.id", mcuspr."parentid" AS "customer.property.parentid",
+							mcuspr."siteid" AS "customer.property.siteid", mcuspr."type" AS "customer.property.type",
+							mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
+							mcuspr."mtime" AS "customer.property.mtime", mcuspr."editor" AS "customer.property.editor",
+							mcuspr."ctime" AS "customer.property.ctime"
+						FROM "fos_user_property" AS mcuspr
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -458,12 +458,12 @@ return array(
 					',
 					'mysql' => '
 						SELECT :columns
-							fospr."id" AS "customer.property.id", fospr."parentid" AS "customer.property.parentid",
-							fospr."siteid" AS "customer.property.siteid", fospr."type" AS "customer.property.type",
-							fospr."langid" AS "customer.property.languageid", fospr."value" AS "customer.property.value",
-							fospr."mtime" AS "customer.property.mtime", fospr."editor" AS "customer.property.editor",
-							fospr."ctime" AS "customer.property.ctime"
-						FROM "fos_user_property" AS fospr
+							mcuspr."id" AS "customer.property.id", mcuspr."parentid" AS "customer.property.parentid",
+							mcuspr."siteid" AS "customer.property.siteid", mcuspr."type" AS "customer.property.type",
+							mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
+							mcuspr."mtime" AS "customer.property.mtime", mcuspr."editor" AS "customer.property.editor",
+							mcuspr."ctime" AS "customer.property.ctime"
+						FROM "fos_user_property" AS mcuspr
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -474,8 +474,8 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT fospr."id"
-							FROM "fos_user_property" AS fospr
+							SELECT mcuspr."id"
+							FROM "fos_user_property" AS mcuspr
 							:joins
 							WHERE :cond
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -484,8 +484,8 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT fospr."id"
-							FROM "fos_user_property" AS fospr
+							SELECT mcuspr."id"
+							FROM "fos_user_property" AS mcuspr
 							:joins
 							WHERE :cond
 							LIMIT 10000 OFFSET 0
@@ -541,57 +541,57 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						fos."id" AS "customer.id", fos."siteid" AS "customer.siteid",
-						fos."username_canonical" as "customer.code", fos."username" as "customer.label",
-						fos."company" AS "customer.company", fos."vatid" AS "customer.vatid",
-						fos."salutation" AS "customer.salutation", fos."title" AS "customer.title",
-						fos."firstname" AS "customer.firstname", fos."lastname" AS "customer.lastname",
-						fos."address1" AS "customer.address1", fos."address2" AS "customer.address2",
-						fos."address3" AS "customer.address3", fos."postal" AS "customer.postal",
-						fos."city" AS "customer.city", fos."state" AS "customer.state",
-						fos."countryid" AS "customer.countryid", fos."langid" AS "customer.languageid",
-						fos."telephone" AS "customer.telephone", fos."email_canonical" AS "customer.email",
-						fos."telefax" AS "customer.telefax", fos."website" AS "customer.website",
-						fos."longitude" AS "customer.longitude", fos."latitude" AS "customer.latitude",
-						fos."birthday" AS "customer.birthday", fos."enabled" AS "customer.status",
-						fos."vdate" AS "customer.vdate", fos."password" AS "customer.password",
-						fos."ctime" AS "customer.ctime", fos."mtime" AS "customer.mtime",
-						fos."editor" AS "customer.editor", fos."roles", fos."salt"
-					FROM "fos_user" AS fos
+						mcus."id" AS "customer.id", mcus."siteid" AS "customer.siteid",
+						mcus."username_canonical" as "customer.code", mcus."username" as "customer.label",
+						mcus."company" AS "customer.company", mcus."vatid" AS "customer.vatid",
+						mcus."salutation" AS "customer.salutation", mcus."title" AS "customer.title",
+						mcus."firstname" AS "customer.firstname", mcus."lastname" AS "customer.lastname",
+						mcus."address1" AS "customer.address1", mcus."address2" AS "customer.address2",
+						mcus."address3" AS "customer.address3", mcus."postal" AS "customer.postal",
+						mcus."city" AS "customer.city", mcus."state" AS "customer.state",
+						mcus."countryid" AS "customer.countryid", mcus."langid" AS "customer.languageid",
+						mcus."telephone" AS "customer.telephone", mcus."email_canonical" AS "customer.email",
+						mcus."telefax" AS "customer.telefax", mcus."website" AS "customer.website",
+						mcus."longitude" AS "customer.longitude", mcus."latitude" AS "customer.latitude",
+						mcus."birthday" AS "customer.birthday", mcus."enabled" AS "customer.status",
+						mcus."vdate" AS "customer.vdate", mcus."password" AS "customer.password",
+						mcus."ctime" AS "customer.ctime", mcus."mtime" AS "customer.mtime",
+						mcus."editor" AS "customer.editor", mcus."roles", mcus."salt"
+					FROM "fos_user" AS mcus
 					:joins
 					WHERE :cond
 					GROUP BY :columns :group
-						fos."id", fos."siteid", fos."username_canonical", fos."username", fos."company", fos."vatid",
-						fos."salutation", fos."title", fos."firstname", fos."lastname", fos."address1", fos."address2",
-						fos."address3", fos."postal", fos."city", fos."state", fos."countryid", fos."langid",
-						fos."telephone", fos."email_canonical", fos."telefax", fos."website", fos."longitude", fos."latitude",
-						fos."birthday", fos."enabled", fos."vdate", fos."password", fos."ctime", fos."mtime",
-						fos."editor", fos."roles", fos."salt"
+						mcus."id", mcus."siteid", mcus."username_canonical", mcus."username", mcus."company", mcus."vatid",
+						mcus."salutation", mcus."title", mcus."firstname", mcus."lastname", mcus."address1", mcus."address2",
+						mcus."address3", mcus."postal", mcus."city", mcus."state", mcus."countryid", mcus."langid",
+						mcus."telephone", mcus."email_canonical", mcus."telefax", mcus."website", mcus."longitude", mcus."latitude",
+						mcus."birthday", mcus."enabled", mcus."vdate", mcus."password", mcus."ctime", mcus."mtime",
+						mcus."editor", mcus."roles", mcus."salt"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
 					SELECT :columns
-						fos."id" AS "customer.id", fos."siteid" AS "customer.siteid",
-						fos."username_canonical" as "customer.code", fos."username" as "customer.label",
-						fos."company" AS "customer.company", fos."vatid" AS "customer.vatid",
-						fos."salutation" AS "customer.salutation", fos."title" AS "customer.title",
-						fos."firstname" AS "customer.firstname", fos."lastname" AS "customer.lastname",
-						fos."address1" AS "customer.address1", fos."address2" AS "customer.address2",
-						fos."address3" AS "customer.address3", fos."postal" AS "customer.postal",
-						fos."city" AS "customer.city", fos."state" AS "customer.state",
-						fos."countryid" AS "customer.countryid", fos."langid" AS "customer.languageid",
-						fos."telephone" AS "customer.telephone", fos."email_canonical" AS "customer.email",
-						fos."telefax" AS "customer.telefax", fos."website" AS "customer.website",
-						fos."longitude" AS "customer.longitude", fos."latitude" AS "customer.latitude",
-						fos."birthday" AS "customer.birthday", fos."enabled" AS "customer.status",
-						fos."vdate" AS "customer.vdate", fos."password" AS "customer.password",
-						fos."ctime" AS "customer.ctime", fos."mtime" AS "customer.mtime",
-						fos."editor" AS "customer.editor", fos."roles", fos."salt"
-					FROM "fos_user" AS fos
+						mcus."id" AS "customer.id", mcus."siteid" AS "customer.siteid",
+						mcus."username_canonical" as "customer.code", mcus."username" as "customer.label",
+						mcus."company" AS "customer.company", mcus."vatid" AS "customer.vatid",
+						mcus."salutation" AS "customer.salutation", mcus."title" AS "customer.title",
+						mcus."firstname" AS "customer.firstname", mcus."lastname" AS "customer.lastname",
+						mcus."address1" AS "customer.address1", mcus."address2" AS "customer.address2",
+						mcus."address3" AS "customer.address3", mcus."postal" AS "customer.postal",
+						mcus."city" AS "customer.city", mcus."state" AS "customer.state",
+						mcus."countryid" AS "customer.countryid", mcus."langid" AS "customer.languageid",
+						mcus."telephone" AS "customer.telephone", mcus."email_canonical" AS "customer.email",
+						mcus."telefax" AS "customer.telefax", mcus."website" AS "customer.website",
+						mcus."longitude" AS "customer.longitude", mcus."latitude" AS "customer.latitude",
+						mcus."birthday" AS "customer.birthday", mcus."enabled" AS "customer.status",
+						mcus."vdate" AS "customer.vdate", mcus."password" AS "customer.password",
+						mcus."ctime" AS "customer.ctime", mcus."mtime" AS "customer.mtime",
+						mcus."editor" AS "customer.editor", mcus."roles", mcus."salt"
+					FROM "fos_user" AS mcus
 					:joins
 					WHERE :cond
-					GROUP BY :group fos."id"
+					GROUP BY :group mcus."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				',
@@ -600,22 +600,22 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT fos."id"
-						FROM "fos_user" AS fos
+						SELECT mcus."id"
+						FROM "fos_user" AS mcus
 						:joins
 						WHERE :cond
-						GROUP BY fos."id"
+						GROUP BY mcus."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT fos."id"
-						FROM "fos_user" AS fos
+						SELECT mcus."id"
+						FROM "fos_user" AS mcus
 						:joins
 						WHERE :cond
-						GROUP BY fos."id"
+						GROUP BY mcus."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				',

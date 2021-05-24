@@ -19,7 +19,7 @@ class TypesMigrateColumnsFosuser extends \Aimeos\MW\Setup\Task\TypesMigrateColum
 	];
 
 	private $constraints = [
-		'db-customer' => ['fos_user_list' => 'unq_fosli_sid_dm_rid_tid_pid', 'fos_user_property' => 'unq_fospr_sid_tid_lid_value'],
+		'db-customer' => ['fos_user_list' => 'unq_mcusli_sid_dm_rid_tid_pid', 'fos_user_property' => 'unq_mcuspr_sid_tid_lid_value'],
 	];
 
 	private $migrations = [

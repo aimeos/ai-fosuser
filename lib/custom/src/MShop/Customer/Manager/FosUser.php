@@ -24,14 +24,14 @@ class FosUser
 		'customer.id' => array(
 			'label' => 'Customer ID',
 			'code' => 'customer.id',
-			'internalcode' => 'fos."id"',
+			'internalcode' => 'mcus."id"',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'customer.siteid' => array(
 			'code' => 'customer.siteid',
-			'internalcode' => 'fos."siteid"',
+			'internalcode' => 'mcus."siteid"',
 			'label' => 'Customer site ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -40,210 +40,210 @@ class FosUser
 		'customer.code' => array(
 			'label' => 'Customer username',
 			'code' => 'customer.code',
-			'internalcode' => 'fos."username"',
+			'internalcode' => 'mcus."username"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 		'customer.label' => array(
 			'label' => 'Customer label',
 			'code' => 'customer.label',
-			'internalcode' => 'fos."username_canonical"',
+			'internalcode' => 'mcus."username_canonical"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 		'customer.salutation' => array(
 			'label' => 'Customer salutation',
 			'code' => 'customer.salutation',
-			'internalcode' => 'fos."salutation"',
+			'internalcode' => 'mcus."salutation"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.company'=> array(
 			'label' => 'Customer company',
 			'code' => 'customer.company',
-			'internalcode' => 'fos."company"',
+			'internalcode' => 'mcus."company"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.vatid'=> array(
 			'label' => 'Customer VAT ID',
 			'code' => 'customer.vatid',
-			'internalcode' => 'fos."vatid"',
+			'internalcode' => 'mcus."vatid"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.title' => array(
 			'label' => 'Customer title',
 			'code' => 'customer.title',
-			'internalcode' => 'fos."title"',
+			'internalcode' => 'mcus."title"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.firstname' => array(
 			'label' => 'Customer firstname',
 			'code' => 'customer.firstname',
-			'internalcode' => 'fos."firstname"',
+			'internalcode' => 'mcus."firstname"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lastname' => array(
 			'label' => 'Customer lastname',
 			'code' => 'customer.lastname',
-			'internalcode' => 'fos."lastname"',
+			'internalcode' => 'mcus."lastname"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.address1' => array(
 			'label' => 'Customer address part one',
 			'code' => 'customer.address1',
-			'internalcode' => 'fos."address1"',
+			'internalcode' => 'mcus."address1"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.address2' => array(
 			'label' => 'Customer address part two',
 			'code' => 'customer.address2',
-			'internalcode' => 'fos."address2"',
+			'internalcode' => 'mcus."address2"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.address3' => array(
 			'label' => 'Customer address part three',
 			'code' => 'customer.address3',
-			'internalcode' => 'fos."address3"',
+			'internalcode' => 'mcus."address3"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.postal' => array(
 			'label' => 'Customer postal',
 			'code' => 'customer.postal',
-			'internalcode' => 'fos."postal"',
+			'internalcode' => 'mcus."postal"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.city' => array(
 			'label' => 'Customer city',
 			'code' => 'customer.city',
-			'internalcode' => 'fos."city"',
+			'internalcode' => 'mcus."city"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.state' => array(
 			'label' => 'Customer state',
 			'code' => 'customer.state',
-			'internalcode' => 'fos."state"',
+			'internalcode' => 'mcus."state"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.languageid' => array(
 			'label' => 'Customer language',
 			'code' => 'customer.languageid',
-			'internalcode' => 'fos."langid"',
+			'internalcode' => 'mcus."langid"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.countryid' => array(
 			'label' => 'Customer country',
 			'code' => 'customer.countryid',
-			'internalcode' => 'fos."countryid"',
+			'internalcode' => 'mcus."countryid"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.telephone' => array(
 			'label' => 'Customer telephone',
 			'code' => 'customer.telephone',
-			'internalcode' => 'fos."telephone"',
+			'internalcode' => 'mcus."telephone"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.email' => array(
 			'label' => 'Customer email',
 			'code' => 'customer.email',
-			'internalcode' => 'fos."email"',
+			'internalcode' => 'mcus."email"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.telefax' => array(
 			'label' => 'Customer telefax',
 			'code' => 'customer.telefax',
-			'internalcode' => 'fos."telefax"',
+			'internalcode' => 'mcus."telefax"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.website' => array(
 			'label' => 'Customer website',
 			'code' => 'customer.website',
-			'internalcode' => 'fos."website"',
+			'internalcode' => 'mcus."website"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.longitude' => array(
 			'label' => 'Customer longitude',
 			'code' => 'customer.longitude',
-			'internalcode' => 'fos."longitude"',
+			'internalcode' => 'mcus."longitude"',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'customer.latitude' => array(
 			'label' => 'Customer latitude',
 			'code' => 'customer.latitude',
-			'internalcode' => 'fos."latitude"',
+			'internalcode' => 'mcus."latitude"',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'customer.birthday' => array(
 			'label' => 'Customer birthday',
 			'code' => 'customer.birthday',
-			'internalcode' => 'fos."birthday"',
+			'internalcode' => 'mcus."birthday"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.password'=> array(
 			'label' => 'Customer password',
 			'code' => 'customer.password',
-			'internalcode' => 'fos."password"',
+			'internalcode' => 'mcus."password"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.status'=> array(
 			'label' => 'Customer status',
 			'code' => 'customer.status',
-			'internalcode' => 'fos."enabled"',
+			'internalcode' => 'mcus."enabled"',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL,
 		),
 		'customer.dateverified'=> array(
 			'label' => 'Customer verification date',
 			'code' => 'customer.dateverified',
-			'internalcode' => 'fos."vdate"',
+			'internalcode' => 'mcus."vdate"',
 			'type' => 'date',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.ctime'=> array(
 			'label' => 'Customer creation time',
 			'code' => 'customer.ctime',
-			'internalcode' => 'fos."ctime"',
+			'internalcode' => 'mcus."ctime"',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.mtime'=> array(
 			'label' => 'Customer modification time',
 			'code' => 'customer.mtime',
-			'internalcode' => 'fos."mtime"',
+			'internalcode' => 'mcus."mtime"',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.editor'=> array(
 			'label' => 'Customer editor',
 			'code' => 'customer.editor',
-			'internalcode' => 'fos."editor"',
+			'internalcode' => 'mcus."editor"',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer:has' => array(
 			'code' => 'customer:has()',
-			'internalcode' => ':site AND :key AND fosli."id"',
-			'internaldeps' => ['LEFT JOIN "fos_user_list" AS fosli ON ( fosli."parentid" = fos."id" )'],
+			'internalcode' => ':site AND :key AND mcusli."id"',
+			'internaldeps' => ['LEFT JOIN "fos_user_list" AS mcusli ON ( mcusli."parentid" = mcus."id" )'],
 			'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
@@ -251,8 +251,8 @@ class FosUser
 		),
 		'customer:prop' => array(
 			'code' => 'customer:prop()',
-			'internalcode' => ':site AND :key AND fospr."id"',
-			'internaldeps' => ['LEFT JOIN "fos_user_property" AS fospr ON ( fospr."parentid" = fos."id" )'],
+			'internalcode' => ':site AND :key AND mcuspr."id"',
+			'internaldeps' => ['LEFT JOIN "fos_user_property" AS mcuspr ON ( mcuspr."parentid" = mcus."id" )'],
 			'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
 			'internaltype' => 'null',
@@ -284,8 +284,8 @@ class FosUser
 				}
 			}
 
-			$sitestr = $this->getSiteString( 'fosli."siteid"', $level );
-			$keystr = $this->toExpression( 'fosli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 'mcusli."siteid"', $level );
+			$keystr = $this->toExpression( 'mcusli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
@@ -303,8 +303,8 @@ class FosUser
 				}
 			}
 
-			$sitestr = $this->getSiteString( 'fospr."siteid"', $level );
-			$keystr = $this->toExpression( 'fospr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 'mcuspr."siteid"', $level );
+			$keystr = $this->toExpression( 'mcuspr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
