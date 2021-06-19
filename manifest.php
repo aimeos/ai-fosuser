@@ -1,17 +1,17 @@
 <?php
 
-return array(
+return [
 	'name' => 'ai-fosuser',
-	'depends' => array(
+	'depends' => [
 		'aimeos-core',
-	),
-	'include' => array(
+	],
+	'include' => [
 		'lib/custom/src',
-	),
-	'config' => array(
+	],
+	'config' => [
 		'lib/custom/config',
-	),
-	'setup' => array(
+	],
+	'setup' => [
 		'lib/custom/setup',
-	),
-);
+	],
+];
