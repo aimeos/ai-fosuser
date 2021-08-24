@@ -237,7 +237,7 @@ class FosUser
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->clearBase( $siteids, 'mshop/customer/manager/lists/fosuser/delete' );
+		return $this->clearBase( $siteids, 'mshop/customer/manager/address/fosuser/clear' );
 	}
 
 
