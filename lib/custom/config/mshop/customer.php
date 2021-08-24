@@ -10,6 +10,12 @@ return array(
 	'manager' => array(
 		'address' => array(
 			'fosuser' => array(
+				'clear' => array(
+					'ansi' => '
+						DELETE FROM "fos_user_address"
+						WHERE :cond AND "siteid" = ?
+					',
+				),
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "fos_user_address"
@@ -504,6 +510,12 @@ return array(
 			),
 		),
 		'fosuser' => array(
+			'clear' => array(
+				'ansi' => '
+					DELETE FROM "fos_user"
+					WHERE :cond AND "siteid" = ?
+				',
+			),
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "fos_user"
