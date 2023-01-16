@@ -41,11 +41,11 @@ class CustomerAddFosUserTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 	 */
 	public function migrate()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\ContextIface::class, $this->additional );
 
 		$this->msg( 'Adding FosUser customer test data', 0 );
 
-		$dbm = $this->additional->getDatabaseManager();
+		$dbm = $this->additional->db();
 		$conn = $dbm->acquire( 'db-customer' );
 		$conn->create( 'DELETE FROM "fos_user" WHERE "email" LIKE \'test%@example.com\'' )->execute()->finish();
 		$dbm->release( $conn, 'db-customer' );

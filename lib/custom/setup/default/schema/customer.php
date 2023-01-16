@@ -57,7 +57,7 @@ return array(
 			$table->addUniqueIndex( array( 'confirmation_token' ), 'unq_fosus_confirmtoken' );
 			$table->addUniqueIndex( array( 'username_canonical' ), 'unq_fosus_username' );
 			$table->addUniqueIndex( array( 'email_canonical' ), 'unq_fosus_email' );
-			$table->addIndex( array( 'langid' ), 'idx_fosus_langid' );
+			$table->addIndex( array( 'langid', 'siteid' ), 'idx_fosus_langid_sid' );
 			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_fosus_last_first' );
 			$table->addIndex( array( 'postal', 'address1' ), 'idx_fosus_post_addr1' );
 			$table->addIndex( array( 'postal', 'city' ), 'idx_fosus_post_city' );
@@ -103,7 +103,7 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_fosusad_id' );
-			$table->addIndex( array( 'parentid' ), 'idx_fosusad_pid' );
+			$table->addIndex( array( 'langid', 'siteid' ), 'idx_fosusad_langid_sid' );
 			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_fosusad_last_first' );
 			$table->addIndex( array( 'postal', 'address1' ), 'idx_fosusad_post_addr1' );
 			$table->addIndex( array( 'postal', 'city' ), 'idx_fosusad_post_city' );
@@ -134,10 +134,10 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_fosuslity_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_fosuslity_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_fosuslity_sid_status_pos' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_fosuslity_sid_label' );
-			$table->addIndex( array( 'siteid', 'code' ), 'idx_fosuslity_sid_code' );
+			$table->addUniqueIndex( array( 'domain', 'code', 'siteid' ), 'unq_fosuslity_dom_code_sid' );
+			$table->addIndex( array( 'status', 'siteid', 'pos' ), 'idx_fosuslity_status_sid_pos' );
+			$table->addIndex( array( 'label', 'siteid' ), 'idx_fosuslity_label_sid' );
+			$table->addIndex( array( 'code', 'siteid' ), 'idx_fosuslity_code_sid' );
 
 			return $schema;
 		},
@@ -164,9 +164,8 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_fosusli_id' );
-			$table->addUniqueIndex( array( 'parentid', 'domain', 'siteid', 'type', 'refid' ), 'unq_fosusli_pid_dm_sid_ty_rid' );
+			$table->addUniqueIndex( array( 'parentid', 'domain', 'type', 'refid', 'siteid' ), 'unq_fosusli_pid_dm_ty_rid_sid' );
 			$table->addIndex( array( 'key', 'siteid' ), 'idx_fosusli_key_sid' );
-			$table->addIndex( array( 'parentid' ), 'fk_fosusli_pid' );
 
 			$table->addForeignKeyConstraint( 'fos_user', array( 'parentid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_fosusli_pid' );
@@ -191,10 +190,10 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_fosusprty_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_fosusprty_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_fosusprty_sid_status_pos' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_fosusprty_sid_label' );
-			$table->addIndex( array( 'siteid', 'code' ), 'idx_fosusprty_sid_code' );
+			$table->addUniqueIndex( array( 'domain', 'code', 'siteid' ), 'unq_fosusprty_dom_code_sid' );
+			$table->addIndex( array( 'status', 'siteid', 'pos' ), 'idx_fosusprty_status_sid_pos' );
+			$table->addIndex( array( 'label', 'siteid' ), 'idx_fosusprty_label_sid' );
+			$table->addIndex( array( 'code', 'siteid' ), 'idx_fosusprty_code_sid' );
 
 			return $schema;
 		},
@@ -216,9 +215,8 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_fosuspr_id' );
-			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_fosuspr_sid_ty_lid_value' );
-			$table->addIndex( array( 'key', 'siteid' ), 'fk_fosuspr_key_sid' );
-			$table->addIndex( array( 'parentid' ), 'fk_fosuspr_pid' );
+			$table->addUniqueIndex( array( 'parentid', 'type', 'langid', 'value', 'siteid' ), 'unq_fosuspr_pid_ty_lid_val_sid' );
+			$table->addIndex( array( 'key', 'siteid' ), 'idx_fosuspr_key_sid' );
 
 			$table->addForeignKeyConstraint( 'fos_user', array( 'parentid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_fosuspr_pid' );
