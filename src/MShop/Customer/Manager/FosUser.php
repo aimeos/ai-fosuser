@@ -323,7 +323,7 @@ class FosUser
 		$path = 'mshop/customer/manager/submanagers';
 		$default = ['address', 'group', 'lists', 'property'];
 
-		foreach( $this->getContext()->config()->get( $path, $default ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, $default ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -372,7 +372,7 @@ class FosUser
 			return $item;
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
@@ -560,7 +560,7 @@ class FosUser
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		$dbm = $this->getContext()->db();
+		$dbm = $this->context()->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 		$map = [];

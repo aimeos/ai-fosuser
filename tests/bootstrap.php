@@ -6,8 +6,6 @@
 error_reporting( -1 );
 ini_set( 'display_errors', true );
 
-date_default_timezone_set( 'UTC' );
-
 /*
  * Set locale settings to reasonable defaults
  */

@@ -103,7 +103,7 @@ class FosUser
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/property/submanagers';
-		foreach( $this->getContext()->config()->get( $path, ['type'] ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, ['type'] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
