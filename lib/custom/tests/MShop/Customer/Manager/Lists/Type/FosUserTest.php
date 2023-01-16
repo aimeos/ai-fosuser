@@ -40,7 +40,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\Base\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 

@@ -52,7 +52,7 @@ class TestHelper
 	 */
 	private static function createContext( $site )
 	{
-		$ctx = new \Aimeos\MShop\Context\Item\Standard();
+		$ctx = new \Aimeos\MShop\Context();
 		$aimeos = self::getAimeos();
 
 
@@ -60,29 +60,29 @@ class TestHelper
 		$paths[] = __DIR__ . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
 
-		$conf = new \Aimeos\MW\Config\PHPArray( [], $paths );
-		$conf = new \Aimeos\MW\Config\Decorator\Memory( $conf );
-		$conf = new \Aimeos\MW\Config\Decorator\Documentor( $conf, $file );
+		$conf = new \Aimeos\Base\Config\PHPArray( [], $paths );
+		$conf = new \Aimeos\Base\Config\Decorator\Memory( $conf );
+		$conf = new \Aimeos\Base\Config\Decorator\Documentor( $conf, $file );
 		$ctx->setConfig( $conf );
 
 
-		$dbm = new \Aimeos\MW\DB\Manager\PDO( $conf );
+		$dbm = new \Aimeos\Base\DB\Manager\PDO( $conf );
 		$ctx->setDatabaseManager( $dbm );
 
 
-		$logger = new \Aimeos\MW\Logger\File( $site . '.log', \Aimeos\MW\Logger\Base::DEBUG );
+		$logger = new \Aimeos\Base\Logger\File( $site . '.log', \Aimeos\Base\Logger\Base::DEBUG );
 		$ctx->setLogger( $logger );
 
 
-		$cache = new \Aimeos\MW\Cache\None();
+		$cache = new \Aimeos\Base\Cache\None();
 		$ctx->setCache( $cache );
 
 
-		$i18n = new \Aimeos\MW\Translation\None( 'de' );
+		$i18n = new \Aimeos\Base\Translation\None( 'de' );
 		$ctx->setI18n( array( 'de' => $i18n ) );
 
 
-		$session = new \Aimeos\MW\Session\None();
+		$session = new \Aimeos\Base\Session\None();
 		$ctx->setSession( $session );
 
 

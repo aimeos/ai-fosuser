@@ -26,7 +26,7 @@ class FosUser
 			'internalcode' => 'mcuslity."id"',
 			'label' => 'Customer list type ID',
 			'type'=> 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'customer.lists.type.siteid' => array(
@@ -34,7 +34,7 @@ class FosUser
 			'internalcode' => 'mcuslity."siteid"',
 			'label' => 'Customer list type site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.lists.type.code' => array(
@@ -42,56 +42,56 @@ class FosUser
 			'internalcode' => 'mcuslity."code"',
 			'label' => 'Customer list type code',
 			'type'=> 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lists.type.domain' => array(
 			'code' => 'customer.lists.type.domain',
 			'internalcode' => 'mcuslity."domain"',
 			'label' => 'Customer list type domain',
 			'type'=> 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lists.type.label' => array(
 			'code' => 'customer.lists.type.label',
 			'internalcode' => 'mcuslity."label"',
 			'label' => 'Customer list type label',
 			'type'=> 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lists.type.status' => array(
 			'code' => 'customer.lists.type.status',
 			'internalcode' => 'mcuslity."status"',
 			'label' => 'Customer list type status',
 			'type'=> 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'customer.lists.type.position' => array(
 			'code' => 'customer.lists.type.position',
 			'internalcode' => 'mcuslity."pos"',
 			'label' => 'Customer list type position',
 			'type'=> 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'customer.lists.type.ctime'=> array(
 			'code' => 'customer.lists.type.ctime',
 			'internalcode' => 'mcuslity."ctime"',
 			'label' => 'Customer list type create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype'=> \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lists.type.mtime'=> array(
 			'code' => 'customer.lists.type.mtime',
 			'internalcode' => 'mcuslity."mtime"',
 			'label' => 'Customer list type modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype'=> \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lists.type.editor'=> array(
 			'code' => 'customer.lists.type.editor',
 			'internalcode' => 'mcuslity."editor"',
 			'label' => 'Customer list type editor',
 			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype'=> \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -105,7 +105,7 @@ class FosUser
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/lists/type/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
+		foreach( $this->getContext()->config()->get( $path, [] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -117,7 +117,7 @@ class FosUser
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return array List of attribute items implementing \Aimeos\Base\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{

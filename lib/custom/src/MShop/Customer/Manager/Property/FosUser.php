@@ -27,7 +27,7 @@ class FosUser
 			'internaldeps'=> ['LEFT JOIN "fos_user_property" AS mcuspr ON ( mcuspr."parentid" = mcus."id" )'],
 			'label' => 'Property ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'customer.property.parentid' => array(
@@ -35,7 +35,7 @@ class FosUser
 			'internalcode' => 'mcuspr."parentid"',
 			'label' => 'Property parent ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'customer.property.siteid' => array(
@@ -43,7 +43,7 @@ class FosUser
 			'internalcode' => 'mcuspr."siteid"',
 			'label' => 'Property site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.property.type' => array(
@@ -51,28 +51,28 @@ class FosUser
 			'internalcode' => 'mcuspr."type"',
 			'label' => 'Property type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.property.value' => array(
 			'code' => 'customer.property.value',
 			'internalcode' => 'mcuspr."value"',
 			'label' => 'Property value',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.property.languageid' => array(
 			'code' => 'customer.property.languageid',
 			'internalcode' => 'mcuspr."langid"',
 			'label' => 'Property language ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.property.ctime' => array(
 			'code' => 'customer.property.ctime',
 			'internalcode' => 'mcuspr."ctime"',
 			'label' => 'Property create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.property.mtime' => array(
@@ -80,7 +80,7 @@ class FosUser
 			'internalcode' => 'mcuspr."mtime"',
 			'label' => 'Property modify date',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.property.editor' => array(
@@ -88,7 +88,7 @@ class FosUser
 			'internalcode' => 'mcuspr."editor"',
 			'label' => 'Property editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -103,7 +103,7 @@ class FosUser
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/property/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
+		foreach( $this->getContext()->config()->get( $path, ['type'] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -115,7 +115,7 @@ class FosUser
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return array Returns a list of attribtes implementing \Aimeos\Base\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{

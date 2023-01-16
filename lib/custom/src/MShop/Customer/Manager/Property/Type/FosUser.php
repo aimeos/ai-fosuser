@@ -26,7 +26,7 @@ class FosUser
 			'internalcode' => 'mcusprty."id"',
 			'label' => 'Property type ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'customer.property.type.siteid' => array(
@@ -34,7 +34,7 @@ class FosUser
 			'internalcode' => 'mcusprty."siteid"',
 			'label' => 'Property type site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.property.type.label' => array(
@@ -42,42 +42,42 @@ class FosUser
 			'internalcode' => 'mcusprty."label"',
 			'label' => 'Property type label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.property.type.code' => array(
 			'code' => 'customer.property.type.code',
 			'internalcode' => 'mcusprty."code"',
 			'label' => 'Property type code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.property.type.domain' => array(
 			'code' => 'customer.property.type.domain',
 			'internalcode' => 'mcusprty."domain"',
 			'label' => 'Property type domain',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.property.type.position' => array(
 			'code' => 'customer.property.type.position',
 			'internalcode' => 'mcusprty."pos"',
 			'label' => 'Property type position',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'customer.property.type.status' => array(
 			'code' => 'customer.property.type.status',
 			'internalcode' => 'mcusprty."status"',
 			'label' => 'Property type status',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'customer.property.type.ctime' => array(
 			'code' => 'customer.property.type.ctime',
 			'internalcode' => 'mcusprty."ctime"',
 			'label' => 'Property type create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.property.type.mtime' => array(
@@ -85,7 +85,7 @@ class FosUser
 			'internalcode' => 'mcusprty."mtime"',
 			'label' => 'Property type modify date',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.property.type.editor' => array(
@@ -93,7 +93,7 @@ class FosUser
 			'internalcode' => 'mcusprty."editor"',
 			'label' => 'Property type editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -108,7 +108,7 @@ class FosUser
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/property/type/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
+		foreach( $this->getContext()->config()->get( $path, [] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -120,7 +120,7 @@ class FosUser
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return array Returns a list of attribtes implementing \Aimeos\Base\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
