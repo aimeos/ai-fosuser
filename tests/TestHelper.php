@@ -1,11 +1,11 @@
 <?php
 
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2023
  */
+
+
 class TestHelper
 {
 	private static $aimeos;
@@ -22,7 +22,7 @@ class TestHelper
 	}
 
 
-	public static function getContext( $site = 'unittest' )
+	public static function context( $site = 'unittest' )
 	{
 		if( !isset( self::$context[$site] ) ) {
 			self::$context[$site] = self::createContext( $site );
@@ -32,31 +32,27 @@ class TestHelper
 	}
 
 
-	private static function getAimeos()
+	public static function getAimeos()
 	{
 		if( !isset( self::$aimeos ) )
 		{
 			require_once 'Bootstrap.php';
 			spl_autoload_register( 'Aimeos\\Bootstrap::autoload' );
 
-			$extdir = dirname( dirname( dirname( __DIR__ ) ) );
-			self::$aimeos = new \Aimeos\Bootstrap( array( $extdir ), true );
+			self::$aimeos = new \Aimeos\Bootstrap();
 		}
 
 		return self::$aimeos;
 	}
 
 
-	/**
-	 * @param string $site
-	 */
 	private static function createContext( $site )
 	{
 		$ctx = new \Aimeos\MShop\Context();
 		$aimeos = self::getAimeos();
 
 
-		$paths = $aimeos->getConfigPaths( 'mysql' );
+		$paths = $aimeos->getConfigPaths();
 		$paths[] = __DIR__ . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
 
@@ -66,11 +62,11 @@ class TestHelper
 		$ctx->setConfig( $conf );
 
 
-		$dbm = new \Aimeos\Base\DB\Manager\PDO( $conf );
+		$dbm = new \Aimeos\Base\DB\Manager\Standard( $conf->get( 'resource', [] ), 'PDO' );
 		$ctx->setDatabaseManager( $dbm );
 
 
-		$logger = new \Aimeos\Base\Logger\File( $site . '.log', \Aimeos\Base\Logger\Base::DEBUG );
+		$logger = new \Aimeos\Base\Logger\File( $site . '.log', \Aimeos\Base\Logger\Iface::DEBUG );
 		$ctx->setLogger( $logger );
 
 
@@ -86,13 +82,11 @@ class TestHelper
 		$ctx->setSession( $session );
 
 
-		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $ctx );
+		$localeManager = \Aimeos\MShop::create( $ctx, 'locale' );
 		$localeItem = $localeManager->bootstrap( $site, '', '', false );
-
 		$ctx->setLocale( $localeItem );
 
-		$ctx->setEditor( 'ai-fosuser:lib/custom' );
 
-		return $ctx;
+		return $ctx->setEditor( 'ai-fosuser' );
 	}
 }
