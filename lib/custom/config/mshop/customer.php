@@ -13,13 +13,13 @@ return array(
 				'clear' => array(
 					'ansi' => '
 						DELETE FROM "fos_user_address"
-						WHERE :cond AND "siteid" = ?
+						WHERE :cond AND "siteid" LIKE ?
 					',
 				),
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "fos_user_address"
-						WHERE :cond AND ( "siteid" = ? OR "siteid" = \'\' )
+						WHERE :cond AND ( "siteid" LIKE ? OR "siteid" = \'\' )
 					',
 				),
 				'insert' => array(
@@ -45,7 +45,7 @@ return array(
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
 							"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?
-						WHERE ( "siteid" = ? OR "siteid" = \'\' ) AND "id" = ?
+						WHERE ( "siteid" LIKE ? OR "siteid" = \'\' ) AND "id" = ?
 					',
 				),
 				'search' => array(
@@ -146,13 +146,13 @@ return array(
 							SET :names
 								"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
-							WHERE "siteid" = ? AND "id" = ?
+							WHERE "siteid" LIKE ? AND "id" = ?
 						',
 					),
 					'delete' => array(
 						'ansi' => '
 							DELETE FROM "fos_user_list_type"
-							WHERE :cond AND siteid = ?
+							WHERE :cond AND "siteid" LIKE ?
 						',
 					),
 					'search' => array(
@@ -246,7 +246,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "fos_user_list"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND "siteid" LIKE ?
 					',
 				),
 				'insert' => array(
@@ -265,7 +265,7 @@ return array(
 						SET :names
 							"parentid"=?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?,
 							"end" = ?, "config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "id" = ?
+						WHERE "siteid" LIKE ? AND "id" = ?
 					',
 				),
 				'search' => array(
@@ -339,7 +339,7 @@ return array(
 					'delete' => array(
 						'ansi' => '
 							DELETE FROM "fos_user_property_type"
-							WHERE :cond AND siteid = ?
+							WHERE :cond AND "siteid" LIKE ?
 						'
 					),
 					'insert' => array(
@@ -358,7 +358,7 @@ return array(
 							SET :names
 								"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
-							WHERE "siteid" = ? AND "id" = ?
+							WHERE "siteid" LIKE ? AND "id" = ?
 						'
 					),
 					'search' => array(
@@ -426,7 +426,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "fos_user_property"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND "siteid" LIKE ?
 					'
 				),
 				'insert' => array(
@@ -445,7 +445,7 @@ return array(
 						SET :names
 							"parentid" = ?, "key" = ?, "type" = ?, "langid" = ?,
 							"value" = ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "id" = ?
+						WHERE "siteid" LIKE ? AND "id" = ?
 					'
 				),
 				'search' => array(
@@ -513,13 +513,13 @@ return array(
 			'clear' => array(
 				'ansi' => '
 					DELETE FROM "fos_user"
-					WHERE :cond AND "siteid" = ?
+					WHERE :cond AND "siteid" LIKE ?
 				',
 			),
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "fos_user"
-					WHERE :cond AND ( "siteid" = ? OR "siteid" = \'\' )
+					WHERE :cond AND ( "siteid" LIKE ? OR "siteid" = \'\' )
 				',
 			),
 			'insert' => array(
@@ -547,7 +547,7 @@ return array(
 						"telephone" = ?, "email_canonical" = ?, "email" = ?, "telefax" = ?,
 						"website" = ?, "longitude" = ?, "latitude" = ?, "birthday" = ?, "enabled" = ?,
 						"vdate" = ?, "password" = ?, "mtime" = ?, "editor" = ?, "roles" = ?, "salt" = ?
-					WHERE ( "siteid" = ? OR "siteid" = \'\' ) AND "id" = ?
+					WHERE ( "siteid" LIKE ? OR "siteid" = \'\' ) AND "id" = ?
 				',
 			),
 			'search' => array(
