@@ -6,23 +6,23 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+ namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Removes address and list records without user entry
  */
-class CustomerRemoveLostUserDataFosuser extends \Aimeos\MW\Setup\Task\Base
+class CustomerRemoveLostUserDataFosuser extends Base
 {
 	private $sql = [
 		'fos_user_address' => [
-			'fk_mcusad_pid' => 'DELETE FROM "fos_user_address" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )'
+			'fk_fosusad_pid' => 'DELETE FROM "fos_user_address" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )'
 		],
 		'fos_user_list' => [
-			'fk_mcusli_pid' => 'DELETE FROM "fos_user_list" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )'
+			'fk_fosusli_pid' => 'DELETE FROM "fos_user_list" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )'
 		],
 		'fos_user_property' => [
-			'fk_mcuspr_pid' => 'DELETE FROM "fos_user_property" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )'
+			'fk_fosuspr_pid' => 'DELETE FROM "fos_user_property" WHERE NOT EXISTS ( SELECT "id" FROM "fos_user" AS u WHERE "parentid"=u."id" )'
 		],
 	];
 
@@ -32,36 +32,33 @@ class CustomerRemoveLostUserDataFosuser extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Customer'];
 	}
 
 
 	/**
 	 * Migrate database schema
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Remove left over FOS user references', 0, '' );
+		$db = $this->db( 'db-customer' );
 
-		$schema = $this->getSchema( 'db-customer' );
+		if( !$db->hasTable( 'fos_user' ) ) {
+			return;
+		}
+
+		$this->info( 'Remove left over FosUser references', 'vv' );
 
 		foreach( $this->sql as $table => $map )
 		{
 			foreach( $map as $constraint => $sql )
 			{
-				$this->msg( sprintf( 'Remove records from %1$s', $table ), 1 );
-
-				if( $schema->tableExists( 'fe_users' ) && $schema->tableExists( $table )
-					&& $schema->constraintExists( $table, $constraint ) === false
-				) {
-					$this->execute( $sql, 'db-customer' );
-					$this->status( 'done' );
-				}
-				else
+				if( $db->hasTable( $table ) && !$db->hasForeign( $table, $constraint ) )
 				{
-					$this->status( 'OK' );
+					$this->info( sprintf( 'Remove records from %1$s', $table ), 'vv', 1 );
+					$db->exec( $sql );
 				}
 			}
 		}

@@ -6,54 +6,36 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+ namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds FOS user customer test data.
  */
-class CustomerAddFosUserTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
+class CustomerAddFosUserTestData extends CustomerAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['ProductAddTestData'];
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies() : array
-	{
-		return ['CustomerAddTestData'];
+		return ['Customer', 'Text', 'ProductAddTestData'];
 	}
 
 
 	/**
 	 * Adds customer test data
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\ContextIface::class, $this->additional );
+		$this->info( 'Adding FosUser customer test data', 'vv' );
 
-		$this->msg( 'Adding FosUser customer test data', 0 );
+		$this->db( 'db-customer' )->exec( "DELETE FROM fos_user WHERE email LIKE 'test%@example.com'" );
 
-		$dbm = $this->additional->db();
-		$conn = $dbm->acquire( 'db-customer' );
-		$conn->create( 'DELETE FROM "fos_user" WHERE "email" LIKE \'test%@example.com\'' )->execute()->finish();
-		$dbm->release( $conn, 'db-customer' );
-
-		$this->additional->setEditor( 'ai-fosuser:lib/custom' );
-		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'customer.php' );
-
-		$this->status( 'done' );
+		$this->context()->setEditor( 'ai-fosuser' );
+		$this->process();
 	}
 
 
@@ -61,12 +43,13 @@ class CustomerAddFosUserTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 	 * Returns the manager for the current setup task
 	 *
 	 * @param string $domain Domain name of the manager
+	 * @param string $name Specific manager implemenation
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function getManager( $domain )
+	protected function getManager( string $domain, string $name = 'Standard' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( $domain === 'customer' ) {
-			return \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'FosUser' );
+			return parent::getManager( $domain, 'FosUser' );
 		}
 
 		return parent::getManager( $domain );

@@ -6,13 +6,13 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+ namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds the new type columns
  */
-class TypesMigrateColumnsFosuser extends \Aimeos\MW\Setup\Task\TypesMigrateColumns
+class TypesMigrateColumnsFosuser extends TypesMigrateColumns
 {
 	private $tables = [
 		'db-customer' => ['fos_user_list', 'fos_user_property'],
@@ -29,42 +29,46 @@ class TypesMigrateColumnsFosuser extends \Aimeos\MW\Setup\Task\TypesMigrateColum
 		],
 	];
 
-
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return array List of task names
-	 */
-	public function getPostDependencies() : array
-	{
-		return ['TablesCreateMShop'];
-	}
+	private $drops = [
+		'db-customer' => ['fos_user_list' => 'fk_fosusli_typeid', 'fos_user_property' => 'fk_fosuspr_typeid'],
+	];
 
 
 	/**
 	 * Executes the task
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( sprintf( 'Add new type columns for FosUser' ), 0 );
-		$this->status( '' );
+		$db = $this->db( 'db-customer' );
+
+		if( !$db->hasTable( 'fos_user' ) ) {
+			return;
+		}
+
+		$this->info( 'Migrate typeid to type for FosUser', 'vv' );
+
+		$this->info( 'Add new type columns for FosUser', 'vv', 1 );
 
 		foreach( $this->tables as $rname => $list ) {
 			$this->addColumn( $rname, $list );
 		}
 
-		$this->msg( sprintf( 'Drop old unique indexes for FosUser' ), 0 );
-		$this->status( '' );
+		$this->info( 'Drop old unique indexes for FosUser', 'vv', 1 );
 
 		foreach( $this->constraints as $rname => $list ) {
 			$this->dropIndex( $rname, $list );
 		}
 
-		$this->msg( sprintf( 'Migrate typeid to type for FosUser' ), 0 );
-		$this->status( '' );
+		$this->info( 'Migrate typeid to type for FosUser', 'vv', 1 );
 
 		foreach( $this->migrations as $rname => $list ) {
 			$this->migrateData( $rname, $list );
+		}
+
+		$this->info( 'Drop typeid columns for FosUser', 'vv', 1 );
+
+		foreach( $this->drops as $rname => $list ) {
+			$this->dropColumn( $rname, $list );
 		}
 	}
 }

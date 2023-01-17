@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+ namespace Aimeos\Upscheme\Task;
 
 
 /**
@@ -27,34 +27,31 @@ class TablesMigrateSiteidFosuser extends TablesMigrateSiteid
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function before() : array
 	{
-		return ['TablesMigrateSiteid'];
-	}
-
-
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies() : array
-	{
-		return ['TablesCreateMShop'];
+		return ['Customer', 'TablesMigrateSiteid'];
 	}
 
 
 	/**
 	 * Executes the task
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Update FOS user "siteid" columns', 0, '' );
+		$db = $this->db( 'db-locale' );
+
+		if( !$db->hasTable( 'mshop_locale_site' ) || $db->hasColumn( 'mshop_locale_site', 'siteid' ) ) {
+			return;
+		}
+
+		$this->info( 'Update FosUser "siteid" columns', 'vv' );
 
 		$this->process( $this->resources );
 
-		if( $this->getSchema( 'db-customer' )->columnExists( 'fosuser', 'siteid' ) !== false ) {
-			$this->execute( 'UPDATE fosuser SET siteid=\'\' WHERE siteid IS NULL', 'db-customer' );
+		$db = $this->db( 'db-customer' );
+
+		if( $db->hasColumn( 'users', 'siteid' ) ) {
+			$db->exec( 'UPDATE users SET siteid=\'\' WHERE siteid IS NULL' );
 		}
 	}
 }

@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+ namespace Aimeos\Upscheme\Task;
 
 
 /**
@@ -19,7 +19,7 @@ class CustomerMigrateListsKeyFosuser extends TablesMigrateListsKey
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['TablesMigrateListsKey'];
 	}
@@ -28,9 +28,9 @@ class CustomerMigrateListsKeyFosuser extends TablesMigrateListsKey
 	/**
 	 * Executes the task
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Update FOS user lists "key" columns', 0 ); $this->status( '' );
+		$this->info( 'Update FosUser lists "key" columns', 'vv' );
 
 		$this->process( ['db-customer' => 'fos_user_list'] );
 	}

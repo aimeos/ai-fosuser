@@ -7,221 +7,179 @@
 
 
 return array(
-	'exclude' => ['fos_user'],
-
 	'table' => array(
-		'fos_user' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fos_user' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'fos_user' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
-			$table->addColumn( 'username', 'string', array( 'length' => 180 ) );
-			$table->addColumn( 'username_canonical', 'string', array( 'length' => 180 ) );
-			$table->addColumn( 'email', 'string', array( 'length' => 180 ) );
-			$table->addColumn( 'email_canonical', 'string', array( 'length' => 180 ) );
-			$table->addColumn( 'enabled', 'boolean', [] );
-			$table->addColumn( 'salt', 'string', array( 'length' => 255, 'notnull' => false ) );
-			$table->addColumn( 'password', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'last_login', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'confirmation_token', 'string', array( 'length' => 180, 'notnull' => false ) );
-			$table->addColumn( 'password_requested_at', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'roles', 'text', array( 'length' => 0x7fffffff, 'comment' => '(DC2Type:array)' ) );
-			$table->addColumn( 'salutation', 'string', array( 'length' => 8 ) );
-			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
-			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'title', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'firstname', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'lastname', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'address1', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'address2', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'address3', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'postal', 'string', array( 'length' => 16 ) );
-			$table->addColumn( 'city', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'state', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
-			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false ) );
-			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'telefax', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'longitude', 'float', array( 'notnull' => false ) );
-			$table->addColumn( 'latitude', 'float', array( 'notnull' => false ) );
-			$table->addColumn( 'birthday', 'date', array( 'notnull' => false ) );
-			$table->addColumn( 'vdate', 'date', array( 'notnull' => false ) );
-			$table->addColumn( 'mtime', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'ctime', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_fosus_id' );
+			$table->string( 'siteid' )->default( '' );
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_fosus_id' );
-			$table->addUniqueIndex( array( 'confirmation_token' ), 'unq_fosus_confirmtoken' );
-			$table->addUniqueIndex( array( 'username_canonical' ), 'unq_fosus_username' );
-			$table->addUniqueIndex( array( 'email_canonical' ), 'unq_fosus_email' );
-			$table->addIndex( array( 'langid', 'siteid' ), 'idx_fosus_langid_sid' );
-			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_fosus_last_first' );
-			$table->addIndex( array( 'postal', 'address1' ), 'idx_fosus_post_addr1' );
-			$table->addIndex( array( 'postal', 'city' ), 'idx_fosus_post_city' );
-			$table->addIndex( array( 'lastname' ), 'idx_fosus_lastname' );
-			$table->addIndex( array( 'address1' ), 'idx_fosus_address1' );
-			$table->addIndex( array( 'city' ), 'idx_fosus_city' );
+			$table->string( 'email', 180 );
+			$table->string( 'email_canonical', 180 );
+			$table->string( 'username', 180 );
+			$table->string( 'username_canonical', 180 );
+			$table->string( 'password' );
+			$table->string( 'salt' )->null( true );
+			$table->string( 'confirmation_token', 180 )->null( true );
+			$table->datetime( 'password_requested_at' )->null( true );
+			$table->datetime( 'last_login' )->null( true );
+			$table->text( 'roles' )->comment( '(DC2Type:array)' );
+			$table->bool( 'enabled' )->default( 1 );
+			$table->string( 'company', 100 )->default( '' );
+			$table->string( 'vatid', 32 )->default( '' );
+			$table->string( 'salutation', 8 )->default( '' );
+			$table->string( 'title', 64 )->default( '' );
+			$table->string( 'firstname', 64 )->default( '' );
+			$table->string( 'lastname', 64 )->default( '' );
+			$table->string( 'address1', 200 )->default( '' );
+			$table->string( 'address2', 200 )->default( '' );
+			$table->string( 'address3', 200 )->default( '' );
+			$table->string( 'postal', 16 )->default( '' );
+			$table->string( 'city', 200 )->default( '' );
+			$table->string( 'state', 200 )->default( '' );
+			$table->string( 'langid', 5 )->null( true );
+			$table->string( 'countryid', 2 )->null( true );
+			$table->string( 'telephone', 32 )->default( '' );
+			$table->string( 'telefax', 32 )->default( '' );
+			$table->string( 'website' )->default( '' );
+			$table->float( 'longitude' )->null( true );
+			$table->float( 'latitude' )->null( true );
+			$table->date( 'birthday' )->null( true );
+			$table->date( 'vdate' )->null( true );
+			$table->datetime( 'mtime' );
+			$table->datetime( 'ctime' );
+			$table->string( 'editor' )->default( '' );
 
-			return $schema;
+			$table->unique( ['confirmation_token'], 'unq_fosus_confirmtoken' );
+			$table->unique( ['username_canonical'], 'unq_fosus_username' );
+			$table->unique( ['email_canonical'], 'unq_fosus_email' );
+			$table->index( ['langid', 'siteid'], 'idx_fosus_langid_sid' );
+			$table->index( ['lastname', 'firstname'], 'idx_fosus_last_first' );
+			$table->index( ['postal', 'address1'], 'idx_fosus_post_addr1' );
+			$table->index( ['postal', 'city'], 'idx_fosus_post_city' );
+			$table->index( ['city'], 'idx_fosus_city' );
 		},
 
-		'fos_user_address' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fos_user_address' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'fos_user_address' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', [] );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
-			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'salutation', 'string', array( 'length' => 8 ) );
-			$table->addColumn( 'title', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'firstname', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'lastname', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'address1', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'address2', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'address3', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'postal', 'string', array( 'length' => 16 ) );
-			$table->addColumn( 'city', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'state', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
-			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false ) );
-			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'telefax', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'longitude', 'float', array( 'notnull' => false ) );
-			$table->addColumn( 'latitude', 'float', array( 'notnull' => false ) );
-			$table->addColumn( 'birthday', 'date', array( 'notnull' => false ) );
-			$table->addColumn( 'pos', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_fosusad_id' );
+			$table->string( 'siteid' );
+			$table->bigint( 'parentid' )->unsigned( true );
+			$table->string( 'company', 100 );
+			$table->string( 'vatid', 32 );
+			$table->string( 'salutation', 8 );
+			$table->string( 'title', 64 );
+			$table->string( 'firstname', 64 );
+			$table->string( 'lastname', 64 );
+			$table->string( 'address1', 200 );
+			$table->string( 'address2', 200 );
+			$table->string( 'address3', 200 );
+			$table->string( 'postal', 16 );
+			$table->string( 'city', 200 );
+			$table->string( 'state', 200 );
+			$table->string( 'langid', 5 )->null( true );
+			$table->string( 'countryid', 2 )->null( true );
+			$table->string( 'telephone', 32 );
+			$table->string( 'telefax', 32 );
+			$table->string( 'email' );
+			$table->string( 'website' );
+			$table->float( 'longitude' )->null( true );
+			$table->float( 'latitude' )->null( true );
+			$table->date( 'birthday' )->null( true );
+			$table->smallint( 'pos' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_fosusad_id' );
-			$table->addIndex( array( 'langid', 'siteid' ), 'idx_fosusad_langid_sid' );
-			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_fosusad_last_first' );
-			$table->addIndex( array( 'postal', 'address1' ), 'idx_fosusad_post_addr1' );
-			$table->addIndex( array( 'postal', 'city' ), 'idx_fosusad_post_city' );
-			$table->addIndex( array( 'address1' ), 'idx_fosusad_address1' );
-			$table->addIndex( array( 'city' ), 'idx_fosusad_city' );
-			$table->addIndex( array( 'email' ), 'idx_fosusad_email' );
+			$table->index( ['langid', 'siteid'], 'idx_fosusad_langid_sid' );
+			$table->index( ['lastname', 'firstname'], 'idx_fosusad_last_first' );
+			$table->index( ['postal', 'address1'], 'idx_fosusad_post_addr1' );
+			$table->index( ['postal', 'city'], 'idx_fosusad_post_ci' );
+			$table->index( ['city'], 'idx_fosusad_city' );
+			$table->index( ['email'], 'idx_fosusad_email' );
 
-			$table->addForeignKeyConstraint( 'fos_user', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_fosusad_pid' );
-
-			return $schema;
+			$table->foreign( 'parentid', 'fos_user', 'id', 'fk_fosusad_pid' );
 		},
 
-		'fos_user_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fos_user_list_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'fos_user_list_type' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'pos', 'integer', ['default' => 0] );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_fosuslity_id' );
+			$table->string( 'siteid' );
+			$table->string( 'domain', 32 );
+			$table->code();
+			$table->string( 'label' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_fosuslity_id' );
-			$table->addUniqueIndex( array( 'domain', 'code', 'siteid' ), 'unq_fosuslity_dom_code_sid' );
-			$table->addIndex( array( 'status', 'siteid', 'pos' ), 'idx_fosuslity_status_sid_pos' );
-			$table->addIndex( array( 'label', 'siteid' ), 'idx_fosuslity_label_sid' );
-			$table->addIndex( array( 'code', 'siteid' ), 'idx_fosuslity_code_sid' );
-
-			return $schema;
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_fosuslity_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_fosuslity_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_fosuslity_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_fosuslity_code_sid' );
 		},
 
-		'fos_user_list' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fos_user_list' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'fos_user_list' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', [] );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'key', 'string', array( 'length' => 134, 'default' => '', 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'refid', 'string', array( 'length' => 36, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
-			$table->addColumn( 'pos', 'integer', [] );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_fosusli_id' );
+			$table->string( 'siteid' );
+			$table->bigint( 'parentid' )->unsigned( true );
+			$table->string( 'key', 134 )->default( '' );
+			$table->type( 'type' );
+			$table->string( 'domain', 32 );
+			$table->refid();
+			$table->startend();
+			$table->config();
+			$table->int( 'pos' );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_fosusli_id' );
-			$table->addUniqueIndex( array( 'parentid', 'domain', 'type', 'refid', 'siteid' ), 'unq_fosusli_pid_dm_ty_rid_sid' );
-			$table->addIndex( array( 'key', 'siteid' ), 'idx_fosusli_key_sid' );
+			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_fosusli_pid_dm_ty_rid_sid' );
+			$table->index( ['key', 'siteid'], 'idx_fosusli_key_sid' );
 
-			$table->addForeignKeyConstraint( 'fos_user', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_fosusli_pid' );
-
-			return $schema;
+			$table->foreign( 'parentid', 'fos_user', 'id', 'fk_fosusli_pid' );
 		},
 
-		'fos_user_property_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fos_user_property_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'fos_user_property_type' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'pos', 'integer', ['default' => 0] );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_fosusprty_id' );
+			$table->string( 'siteid' );
+			$table->string( 'domain', 32 );
+			$table->code();
+			$table->string( 'label' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_fosusprty_id' );
-			$table->addUniqueIndex( array( 'domain', 'code', 'siteid' ), 'unq_fosusprty_dom_code_sid' );
-			$table->addIndex( array( 'status', 'siteid', 'pos' ), 'idx_fosusprty_status_sid_pos' );
-			$table->addIndex( array( 'label', 'siteid' ), 'idx_fosusprty_label_sid' );
-			$table->addIndex( array( 'code', 'siteid' ), 'idx_fosusprty_code_sid' );
-
-			return $schema;
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_fosusprty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_fosusprty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_fosusprty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_fosusprty_code_sid' );
 		},
 
-		'fos_user_property' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fos_user_property' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'fos_user_property' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', [] );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'key', 'string', array( 'length' => 103, 'default' => '', 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
-			$table->addColumn( 'value', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->bigid()->primary( 'pk_fosuspr_id' );
+			$table->string( 'siteid' );
+			$table->bigint( 'parentid' )->unsigned( true );
+			$table->string( 'key', 255 )->default( '' );
+			$table->type();
+			$table->string( 'langid', 5 )->null( true );
+			$table->string( 'value' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_fosuspr_id' );
-			$table->addUniqueIndex( array( 'parentid', 'type', 'langid', 'value', 'siteid' ), 'unq_fosuspr_pid_ty_lid_val_sid' );
-			$table->addIndex( array( 'key', 'siteid' ), 'idx_fosuspr_key_sid' );
+			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_fosuspr_pid_ty_lid_val_sid' );
+			$table->index( ['key', 'siteid'], 'idx_fosuspr_key_sid' );
 
-			$table->addForeignKeyConstraint( 'fos_user', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_fosuspr_pid' );
-
-			return $schema;
+			$table->foreign( 'parentid', 'fos_user', 'id', 'fk_fosuspr_pid' );
 		},
 	),
 );
