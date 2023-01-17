@@ -12,14 +12,15 @@
 class FosUserTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	private $editor = '';
+	private $editor;
 
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->getEditor();
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( \TestHelper::context(), 'FosUser' );
+		$context = \TestHelper::context();
+		$this->editor = $context->editor();
 
+		$manager = new \Aimeos\MShop\Customer\Manager\FosUser( $context );
 		$listManager = $manager->getSubManager( 'lists', 'FosUser' );
 		$this->object = $listManager->getSubManager( 'type', 'FosUser' );
 	}
@@ -100,7 +101,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
-		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -111,7 +112,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
-		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
+		$this->assertEquals( $this->editor, $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 

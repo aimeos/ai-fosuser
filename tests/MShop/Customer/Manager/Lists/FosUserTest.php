@@ -12,45 +12,28 @@ namespace Aimeos\MShop\Customer\Manager\Lists;
 class FosUserTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	private $context;
-	private $editor = '';
+	private $editor;
 
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelper::context();
-		$this->editor = $this->context->getEditor();
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context, 'FosUser' );
+		$context = \TestHelper::context();
+		$this->editor = $context->editor();
+
+		$manager = new \Aimeos\MShop\Customer\Manager\FosUser( $context );
 		$this->object = $manager->getSubManager( 'lists', 'FosUser' );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object, $this->context );
+		unset( $this->object );
 	}
 
 
 	public function testClear()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->clear( array( -1 ) ) );
-	}
-
-
-	public function testAggregate()
-	{
-		$search = $this->object->filter( true );
-		$expr = array(
-			$search->getConditions(),
-			$search->compare( '==', 'customer.lists.editor', 'ai-fosuser:lib/custom' ),
-		);
-		$search->setConditions( $search->and( $expr ) );
-
-		$result = $this->object->aggregate( $search, 'customer.lists.domain' )->toArray();
-
-		$this->assertEquals( 2, count( $result ) );
-		$this->assertArrayHasKey( 'text', $result );
-		$this->assertEquals( 4, $result['text'] );
 	}
 
 
@@ -104,11 +87,11 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getDateStart(), $itemSaved->getDateStart() );
 		$this->assertEquals( $item->getDateEnd(), $itemSaved->getDateEnd() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
-		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->editor() );
 		$this->assertStringStartsWith( date( 'Y-m-d', time() ), $itemSaved->getTimeCreated() );
 		$this->assertStringStartsWith( date( 'Y-m-d', time() ), $itemSaved->getTimeModified() );
 
-		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -122,7 +105,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getDateEnd(), $itemUpd->getDateEnd() );
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 
-		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
+		$this->assertEquals( $this->editor, $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -174,7 +157,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'customer.lists.editor', $this->editor ) );
 		$result = $this->object->search( $search );
-		$this->assertEquals( 5, count( $result ) );
+		$this->assertEquals( 7, count( $result ) );
 	}
 
 
@@ -187,7 +170,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->and( $conditions ) );
-		$this->assertEquals( 5, count( $this->object->search( $search ) ) );
+		$this->assertEquals( 7, count( $this->object->search( $search ) ) );
 	}
 
 

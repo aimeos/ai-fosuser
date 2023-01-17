@@ -19,19 +19,19 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$context = \TestHelper::context();
-		$this->editor = $context->getEditor();
-		$customer = new \Aimeos\MShop\Customer\Manager\FosUser( $context );
+		$this->editor = $context->editor();
 
-		$search = $customer->filter();
+		$manager = new \Aimeos\MShop\Customer\Manager\FosUser( $context );
+
+		$search = $manager->filter();
 		$conditions = array(
 			$search->compare( '==', 'customer.code', 'test@example.com' ),
 			$search->compare( '==', 'customer.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );
 
-		if( ( $customerItem = $customer->search( $search )->first() ) === null ) {
-			throw new \RuntimeException( sprintf( 'No customer item found for code "%1$s"', 'test@example.com' ) );
-		}
+		$customerItem = $manager->search( $search )
+			->first( new \RuntimeException( sprintf( 'No customer item found for code "%1$s"', 'test@example.com' ) ) );
 
 		$this->fixture = array(
 			'customer.address.parentid' => $customerItem->getId(),
@@ -57,10 +57,10 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 			'customer.address.latitude' => '50.0',
 			'customer.address.position' => 1,
 			'customer.address.birthday' => '2000-01-01',
-			'customer.address.siteid' => $context->getLocale()->getSiteId(),
+			'customer.address.siteid' => $context->locale()->getSiteId(),
 		);
 
-		$this->object = $customer->getSubManager( 'address', 'FosUser' );
+		$this->object = $manager->getSubManager( 'address', 'FosUser' );
 	}
 
 
@@ -151,7 +151,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getLatitude(), $itemSaved->getLatitude() );
 		$this->assertEquals( $item->getBirthday(), $itemSaved->getBirthday() );
 
-		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -180,7 +180,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getLatitude(), $itemUpd->getLatitude() );
 		$this->assertEquals( $itemExp->getBirthday(), $itemUpd->getBirthday() );
 
-		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
+		$this->assertEquals( $this->editor, $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 

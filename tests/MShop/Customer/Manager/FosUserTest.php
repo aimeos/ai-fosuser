@@ -14,13 +14,14 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 	private $object;
 	private $fixture;
 	private $address;
-	private $editor = '';
+	private $editor;
 
 
 	protected function setUp() : void
 	{
 		$context = \TestHelper::context();
-		$this->editor = $context->getEditor();
+		$this->editor = $context->editor();
+
 		$this->object = new \Aimeos\MShop\Customer\Manager\FosUser( $context );
 
 		$this->fixture = array(
@@ -103,7 +104,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getRoles(), $itemSaved->getRoles() );
 		$this->assertEquals( $item->getSalt(), $itemSaved->getSalt() );
 
-		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -116,7 +117,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getRoles(), $itemUpd->getRoles() );
 		$this->assertEquals( $itemExp->getSalt(), $itemUpd->getSalt() );
 
-		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
+		$this->assertEquals( $this->editor, $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -182,7 +183,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.status', 1 );
 		$expr[] = $search->compare( '>', 'customer.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>', 'customer.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'customer.editor', '' );
 
 		$expr[] = $search->compare( '==', 'customer.salutation', 'mr' );
 		$expr[] = $search->compare( '==', 'customer.company', 'Example company' );

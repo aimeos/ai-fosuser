@@ -144,7 +144,7 @@ class FosUser
 	{
 		$path = 'mshop/customer/manager/lists/submanagers';
 		foreach( $this->context()->config()->get( $path, ['type'] ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, 'mshop/customer/manager/lists/fosuser/delete' );
