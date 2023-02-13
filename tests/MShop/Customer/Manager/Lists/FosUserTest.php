@@ -179,7 +179,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type' ) );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type', 'Standard' ) );
 
-		$this->expectException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( \LogicException::class );
 		$this->object->getSubManager( 'unknown' );
 	}
 }
