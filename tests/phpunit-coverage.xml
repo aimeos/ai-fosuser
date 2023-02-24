@@ -8,5 +8,9 @@
       <clover outputFile="coverage.xml"/>
     </report>
   </coverage>
-  <logging/>
+  <testsuites>
+    <testsuite name="Tests">
+      <directory>./</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>
