@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Customer\Item;
  */
 class FosUser extends Standard implements Iface
 {
-	private $helper;
+	private ?\Aimeos\MShop\Common\Helper\Password\Iface $helper;
 
 
 	/**
