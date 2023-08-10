@@ -65,7 +65,7 @@ return array(
 
 			$table->engine = 'InnoDB';
 
-			$table->id()->primary( 'pk_fosusad_id' );
+			$table->id()->primary( 'pk_fosad_id' );
 			$table->string( 'siteid' );
 			$table->bigint( 'parentid' )->unsigned( true );
 			$table->string( 'company', 100 );
@@ -92,21 +92,21 @@ return array(
 			$table->smallint( 'pos' );
 			$table->meta();
 
-			$table->index( ['langid', 'siteid'], 'idx_fosusad_langid_sid' );
-			$table->index( ['lastname', 'firstname'], 'idx_fosusad_last_first' );
-			$table->index( ['postal', 'address1'], 'idx_fosusad_post_addr1' );
-			$table->index( ['postal', 'city'], 'idx_fosusad_post_ci' );
-			$table->index( ['city'], 'idx_fosusad_city' );
-			$table->index( ['email'], 'idx_fosusad_email' );
+			$table->index( ['langid', 'siteid'], 'idx_fosad_langid_sid' );
+			$table->index( ['lastname', 'firstname'], 'idx_fosad_last_first' );
+			$table->index( ['postal', 'address1'], 'idx_fosad_post_addr1' );
+			$table->index( ['postal', 'city'], 'idx_fosad_post_ci' );
+			$table->index( ['city'], 'idx_fosad_city' );
+			$table->index( ['email'], 'idx_fosad_email' );
 
-			$table->foreign( 'parentid', 'fos_user', 'id', 'fk_fosusad_pid' );
+			$table->foreign( 'parentid', 'fos_user', 'id', 'fk_fosad_pid' );
 		},
 
 		'fos_user_list_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';
 
-			$table->id()->primary( 'pk_fosuslity_id' );
+			$table->id()->primary( 'pk_foslity_id' );
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code();
@@ -115,17 +115,17 @@ return array(
 			$table->smallint( 'status' );
 			$table->meta();
 
-			$table->unique( ['domain', 'code', 'siteid'], 'unq_fosuslity_dom_code_sid' );
-			$table->index( ['status', 'siteid', 'pos'], 'idx_fosuslity_status_sid_pos' );
-			$table->index( ['label', 'siteid'], 'idx_fosuslity_label_sid' );
-			$table->index( ['code', 'siteid'], 'idx_fosuslity_code_sid' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_foslity_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_foslity_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_foslity_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_foslity_code_sid' );
 		},
 
 		'fos_user_list' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';
 
-			$table->id()->primary( 'pk_fosusli_id' );
+			$table->id()->primary( 'pk_fosli_id' );
 			$table->string( 'siteid' );
 			$table->bigint( 'parentid' )->unsigned( true );
 			$table->string( 'key', 134 )->default( '' );
@@ -138,17 +138,17 @@ return array(
 			$table->smallint( 'status' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_fosusli_pid_dm_ty_rid_sid' );
-			$table->index( ['key', 'siteid'], 'idx_fosusli_key_sid' );
+			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_fosli_pid_dm_ty_rid_sid' );
+			$table->index( ['key', 'siteid'], 'idx_fosli_key_sid' );
 
-			$table->foreign( 'parentid', 'fos_user', 'id', 'fk_fosusli_pid' );
+			$table->foreign( 'parentid', 'fos_user', 'id', 'fk_fosli_pid' );
 		},
 
 		'fos_user_property_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
 			$table->engine = 'InnoDB';
 
-			$table->id()->primary( 'pk_fosusprty_id' );
+			$table->id()->primary( 'pk_fosprty_id' );
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code();
@@ -157,10 +157,10 @@ return array(
 			$table->smallint( 'status' );
 			$table->meta();
 
-			$table->unique( ['domain', 'code', 'siteid'], 'unq_fosusprty_dom_code_sid' );
-			$table->index( ['status', 'siteid', 'pos'], 'idx_fosusprty_status_sid_pos' );
-			$table->index( ['label', 'siteid'], 'idx_fosusprty_label_sid' );
-			$table->index( ['code', 'siteid'], 'idx_fosusprty_code_sid' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_fosprty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_fosprty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_fosprty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_fosprty_code_sid' );
 		},
 
 		'fos_user_property' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -176,10 +176,10 @@ return array(
 			$table->string( 'value' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_fosuspr_pid_ty_lid_val_sid' );
+			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_fospr_pid_ty_lid_val_sid' );
 			$table->index( ['key', 'siteid'], 'idx_fosuspr_key_sid' );
 
-			$table->foreign( 'parentid', 'fos_user', 'id', 'fk_fosuspr_pid' );
+			$table->foreign( 'parentid', 'fos_user', 'id', 'fk_fospr_pid' );
 		},
 	),
 );
