@@ -16,8 +16,8 @@ class TablesMigrateSiteidFosuser extends TablesMigrateSiteid
 {
 	private $resources = [
 		'db-customer' => [
-			'fosuser_list_type', 'fosuser_property_type',
-			'fosuser_property', 'fosuser_list', 'fosuser_address', 'fosuser',
+			'fos_user_list_type', 'fos_user_property_type',
+			'fos_user_property', 'fos_user_list', 'fos_user_address', 'fos_user',
 		],
 	];
 
