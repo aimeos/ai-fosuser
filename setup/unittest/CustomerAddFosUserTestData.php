@@ -21,7 +21,7 @@ class CustomerAddFosUserTestData extends CustomerAddTestData
 	 */
 	public function after() : array
 	{
-		return ['Customer', 'Text', 'ProductAddTestData'];
+		return ['Customer', 'Text', 'GroupAddTestData', 'ProductAddTestData'];
 	}
 
 
