@@ -83,6 +83,11 @@ class FosUser
 			'label' => 'Customer list type editor',
 			'type'=> 'string',
 		),
+		'customer.lists.type.i18n' => array(
+			'internalcode' => 'mcuslity."i18n"',
+			'label' => 'Type translation',
+			'public' => false,
+		),
 	);
 
 

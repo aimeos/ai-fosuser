@@ -86,6 +86,11 @@ class FosUser
 			'type' => 'string',
 			'public' => false,
 		),
+		'customer.property.type.i18n' => array(
+			'internalcode' => 'mcusprty."i18n"',
+			'label' => 'Type translation',
+			'public' => false,
+		),
 	);
 
 
