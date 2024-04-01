@@ -28,7 +28,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 			'customer.vdate' => null,
 			'customer.company' => 'unitCompany',
 			'customer.vatid' => 'DE999999999',
-			'customer.salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
+			'customer.salutation' => 'mr',
 			'customer.title' => 'Dr.',
 			'customer.firstname' => 'firstunit',
 			'customer.lastname' => 'lastunit',

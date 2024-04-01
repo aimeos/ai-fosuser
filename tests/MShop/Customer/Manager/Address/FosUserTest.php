@@ -37,7 +37,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 			'customer.address.parentid' => $customerItem->getId(),
 			'customer.address.company' => 'ABC GmbH',
 			'customer.address.vatid' => 'DE999999999',
-			'customer.address.salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
+			'customer.address.salutation' => 'mr',
 			'customer.address.title' => 'Herr',
 			'customer.address.firstname' => 'firstunit',
 			'customer.address.lastname' => 'lastunit',
