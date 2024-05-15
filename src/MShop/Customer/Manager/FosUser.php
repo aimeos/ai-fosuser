@@ -352,7 +352,6 @@ class FosUser
 		$conn = $context->db( $this->getResourceName() );
 
 		$id = $item->getId();
-		$date = date( 'Y-m-d H:i:s' );
 		$billingAddress = $item->getPaymentAddress();
 		$columns = $this->object()->getSaveAttributes();
 
@@ -457,7 +456,7 @@ class FosUser
 		$stmt->bind( $idx++, ( $item->getStatus() > 0 ? true : false ), \Aimeos\Base\DB\Statement\Base::PARAM_BOOL );
 		$stmt->bind( $idx++, $item->getDateVerified() );
 		$stmt->bind( $idx++, $item->getPassword() );
-		$stmt->bind( $idx++, $date ); // Modification time
+		$stmt->bind( $idx++, $context->datetime() ); // Modification time
 		$stmt->bind( $idx++, $context->editor() );
 		$stmt->bind( $idx++, serialize( $item->getRoles() ) );
 		$stmt->bind( $idx++, $item->getSalt() );
@@ -469,7 +468,7 @@ class FosUser
 			$billingAddress->setId( $id ); // enforce ID to be present
 		} else {
 			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
-			$stmt->bind( $idx, $date ); // Creation time
+			$stmt->bind( $idx, $context->datetime() ); // Creation time
 		}
 
 		$stmt->execute()->finish();
