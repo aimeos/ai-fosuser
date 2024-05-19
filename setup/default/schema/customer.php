@@ -69,6 +69,7 @@ return array(
 			$table->id()->primary( 'pk_fosad_id' );
 			$table->string( 'siteid' );
 			$table->bigint( 'parentid' )->unsigned( true );
+			$table->type()->default( 'delivery' );
 			$table->string( 'company', 100 );
 			$table->string( 'vatid', 32 );
 			$table->string( 'salutation', 8 );

@@ -29,7 +29,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 			'status' => 2,
 		);
 
-		$this->address = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.' );
+		$this->address = new \Aimeos\MShop\Customer\Item\Address\Standard( 'customer.address.' );
 	}
 
 
@@ -133,7 +133,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 		$item->setId( null )->setCode( 'xyz' );
 		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
-		$item->addAddressItem( new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.address.' ) );
+		$item->addAddressItem( new \Aimeos\MShop\Customer\Item\Address\Standard( 'customer.address.' ) );
 		$this->object->save( $item );
 
 		$item2 = $this->object->find( 'xyz', ['customer/address'] );
@@ -228,6 +228,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 		$expr[] = $search->compare( '!=', 'customer.address.id', null );
 		$expr[] = $search->compare( '!=', 'customer.address.parentid', null );
+		$expr[] = $search->compare( '==', 'customer.address.type', 'delivery' );
 		$expr[] = $search->compare( '==', 'customer.address.salutation', 'mr' );
 		$expr[] = $search->compare( '==', 'customer.address.company', 'Example company' );
 		$expr[] = $search->compare( '==', 'customer.address.vatid', 'DE999999999' );
