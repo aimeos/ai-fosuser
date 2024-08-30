@@ -29,7 +29,7 @@ class FosUser
 	 */
 	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		return $this->getSubManagerBase( 'customer', 'lists/' . $manager, ( $name === null ? 'FosUser' : $name ) );
+		return parent::getSubManager( $manager, $name ?: 'FosUser' );
 	}
 
 
