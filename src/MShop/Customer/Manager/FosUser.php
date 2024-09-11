@@ -588,11 +588,11 @@ class FosUser
 			$values['roles'] = unserialize( $values['roles'] );
 		}
 
-		$helper = $this->getPasswordHelper();
-		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.', $values );
+		$values['.listitems'] = $listItems;
+		$values['.propitems'] = $propItems;
+		$values['.addritems'] = $addrItems;
 
-		return new \Aimeos\MShop\Customer\Item\FosUser(
-			$address, $values, $listItems, $refItems, $addrItems, $propItems, $helper
-		);
+		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.', $values );
+		return new \Aimeos\MShop\Customer\Item\FosUser( $address, 'customer.', $values, $this->context()->password() );
 	}
 }

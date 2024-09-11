@@ -52,7 +52,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$this->address = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.', $values );
-		$this->object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, $values );
+		$this->object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, 'customer.', $values );
 	}
 
 	protected function tearDown() : void
@@ -74,8 +74,8 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetPasswordGenerated()
 	{
-		$helper = new \Aimeos\MShop\Common\Helper\Password\Standard( [] );
-		$object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, [], [], [], [], [], $helper );
+		$helper = new \Aimeos\Base\Password\Standard();
+		$object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, 'customer.', [], $helper );
 
 		$object->setPassword( 'newpwd' );
 		$this->assertStringStartsWith( '$2y$10$', $object->getPassword() );
@@ -100,7 +100,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSaltGenerated()
 	{
-		$object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, [] );
+		$object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, 'customer.' );
 		$this->assertEquals( '', $object->getSalt() );
 	}
 
