@@ -38,7 +38,7 @@ class FosUser
 	 *
 	 * @return string Table name e.g. "mshop_product_list_type"
 	 */
-	protected function getTable() : string
+	protected function table() : string
 	{
 		return 'fos_user_list_type';
 	}

@@ -356,7 +356,7 @@ class FosUser
 	 *
 	 * @return string Table name
 	 */
-	protected function getTable() : string
+	protected function table() : string
 	{
 		return 'fos_user';
 	}
