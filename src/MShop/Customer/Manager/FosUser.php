@@ -62,7 +62,7 @@ class FosUser
 	 */
 	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		return $this->deleteItemsBase( $items, 'mshop/customer/manager/fosuser/delete' )->deleteRefItems( $items );
+		return $this->deleteItemsBase( $items, 'mshop/customer/manager/fosuser/delete' );
 	}
 
 

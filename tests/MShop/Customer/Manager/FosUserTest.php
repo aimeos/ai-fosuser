@@ -14,15 +14,18 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 	private $object;
 	private $fixture;
 	private $address;
-	private $editor;
+	private $context;
 
 
 	protected function setUp() : void
 	{
-		$context = \TestHelper::context();
-		$this->editor = $context->editor();
+		$this->context = \TestHelper::context();
 
-		$this->object = new \Aimeos\MShop\Customer\Manager\FosUser( $context );
+		$this->object = new \Aimeos\MShop\Customer\Manager\FosUser( $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Property( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Address( $this->object, $this->context );
+		$this->object->setObject( $this->object );
 
 		$this->fixture = array(
 			'label' => 'unitTest',
@@ -35,7 +38,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		unset( $this->object, $this->fixture, $this->address );
+		unset( $this->object, $this->fixture, $this->address, $this->context );
 	}
 
 
@@ -104,7 +107,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getRoles(), $itemSaved->getRoles() );
 		$this->assertEquals( $item->getSalt(), $itemSaved->getSalt() );
 
-		$this->assertEquals( $this->editor, $itemSaved->editor() );
+		$this->assertEquals( $this->context->editor(), $itemSaved->editor() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -117,7 +120,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getRoles(), $itemUpd->getRoles() );
 		$this->assertEquals( $itemExp->getSalt(), $itemUpd->getSalt() );
 
-		$this->assertEquals( $this->editor, $itemUpd->editor() );
+		$this->assertEquals( $this->context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -254,7 +257,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.address.birthday', '2000-01-01' );
 		$expr[] = $search->compare( '>=', 'customer.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.address.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'customer.address.editor', $this->context->editor() );
 
 		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search );
@@ -267,7 +270,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'customer.address.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'customer.address.editor', $this->context->editor() ) );
 		$search->slice( 0, 2 );
 
 		$results = $this->object->search( $search, [], $total );
@@ -284,7 +287,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter( true );
 		$conditions = array(
-			$search->compare( '==', 'customer.address.editor', $this->editor ),
+			$search->compare( '==', 'customer.address.editor', $this->context->editor() ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->and( $conditions ) );
