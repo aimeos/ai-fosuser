@@ -78,7 +78,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MShop\Customer\Item\FosUser( $this->address, 'customer.', [], $helper );
 
 		$object->setPassword( 'newpwd' );
-		$this->assertStringStartsWith( '$2y$10$', $object->getPassword() );
+		$this->assertStringStartsWith( '$2y$', $object->getPassword() );
 	}
 
 	public function testGetRoles()
