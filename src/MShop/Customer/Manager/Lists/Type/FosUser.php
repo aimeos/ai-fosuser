@@ -31,15 +31,4 @@ class FosUser
 	{
 		return parent::getSubManager( $manager, $name ?: 'FosUser' );
 	}
-
-
-	/**
-	 * Returns the name of the used table
-	 *
-	 * @return string Table name e.g. "mshop_product_list_type"
-	 */
-	protected function table() : string
-	{
-		return 'fos_user_list_type';
-	}
 }
