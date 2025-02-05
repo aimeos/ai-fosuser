@@ -127,7 +127,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'customer.lists.type.id', 0 );
 		$expr[] = $search->compare( '!=', 'customer.lists.type.siteid', null );
 		$expr[] = $search->compare( '==', 'customer.lists.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'customer.lists.type.domain', 'text' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.domain', 'customer/lists' );
 		$expr[] = $search->compare( '==', 'customer.lists.type.label', 'Standard' );
 		$expr[] = $search->compare( '==', 'customer.lists.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'customer.lists.type.mtime', '1970-01-01 00:00:00' );
