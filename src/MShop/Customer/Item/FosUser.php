@@ -26,7 +26,7 @@ class FosUser extends Standard implements Iface
 	 */
 	public function getRoles() : array
 	{
-		return $this->get( 'roles', [] );
+		return (array) $this->get( 'roles', [] );
 	}
 
 
@@ -50,7 +50,7 @@ class FosUser extends Standard implements Iface
 	 */
 	public function getSalt() : string
 	{
-		return $this->get( 'salt', '' );
+		return (string) $this->get( 'salt', '' );
 	}
 
 
