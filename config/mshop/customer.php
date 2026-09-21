@@ -45,7 +45,7 @@ return array(
 						"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
 						"telephone" = ?, "mobile" = ?, "email_canonical" = ?, "email" = ?, "telefax" = ?,
 						"website" = ?, "longitude" = ?, "latitude" = ?, "birthday" = ?, "enabled" = ?,
-						"vdate" = ?, "password" = ?, "mtime" = ?, "editor" = ?, "roles" = ?, "salt" = ?
+						"vdate" = ?, "password" = COALESCE( ?, "password" ), "mtime" = ?, "editor" = ?, "roles" = ?, "salt" = ?
 					WHERE ( "siteid" LIKE ? OR "siteid" = ? ) AND "id" = ?
 				',
 			),
