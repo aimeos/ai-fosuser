@@ -179,12 +179,6 @@ class FosUser
 			'internalcode' => 'mcus."birthday"',
 			'type' => 'string',
 		),
-		'customer.password'=> array(
-			'label' => 'Customer password',
-			'code' => 'customer.password',
-			'internalcode' => 'mcus."password"',
-			'type' => 'string',
-		),
 		'customer.status'=> array(
 			'label' => 'Customer status',
 			'code' => 'customer.status',
@@ -456,7 +450,8 @@ class FosUser
 		$stmt->bind( $idx++, $billingAddress->getBirthday() );
 		$stmt->bind( $idx++, ( $item->getStatus() > 0 ? true : false ), \Aimeos\Base\DB\Statement\Base::PARAM_BOOL );
 		$stmt->bind( $idx++, $item->getDateVerified() );
-		$stmt->bind( $idx++, $item->getPassword() );
+		// Password hash is write-only, NULL keeps the stored one when updating
+		$stmt->bind( $idx++, $id === null ? $item->getPassword() : ( $item->getPassword() ?: null ) );
 		$stmt->bind( $idx++, $date ); // Modification time
 		$stmt->bind( $idx++, $context->editor() );
 		$stmt->bind( $idx++, serialize( $item->getRoles() ) );
