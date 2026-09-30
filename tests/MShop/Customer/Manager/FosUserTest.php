@@ -11,6 +11,7 @@ namespace Aimeos\MShop\Customer\Manager;
 
 class FosUserTest extends \PHPUnit\Framework\TestCase
 {
+	private $context;
 	private $object;
 	private $fixture;
 	private $address;
@@ -19,10 +20,10 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = \TestHelper::context();
-		$this->editor = $context->editor();
+		$this->context = \TestHelper::context();
+		$this->editor = $this->context->editor();
 
-		$this->object = new \Aimeos\MShop\Customer\Manager\FosUser( $context );
+		$this->object = new \Aimeos\MShop\Customer\Manager\FosUser( $this->context );
 
 		$this->fixture = array(
 			'label' => 'unitTest',
@@ -35,7 +36,7 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		unset( $this->object, $this->fixture, $this->address );
+		unset( $this->object, $this->fixture, $this->address, $this->context );
 	}
 
 
@@ -87,8 +88,8 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$this->object->delete( $item->getId() );
 
 		$this->assertEquals( '', $loaded->getPassword() );
-		$this->assertTrue( $this->context->password()->verify( 'secret', $kept ) );
-		$this->assertTrue( $this->context->password()->verify( 'changed', $changed ) );
+		$this->assertTrue( password_verify( 'secret', $kept ) );
+		$this->assertTrue( password_verify( 'changed', $changed ) );
 	}
 
 
