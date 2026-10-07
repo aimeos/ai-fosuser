@@ -49,6 +49,11 @@ return array(
 					WHERE ( "siteid" LIKE ? OR "siteid" = ? ) AND "id" = ?
 				',
 			),
+			'password' => array(
+				'ansi' => '
+					SELECT "password" FROM "fos_user" WHERE "id" = ?
+				',
+			),
 			'newid' => array(
 				'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 				'mysql' => 'SELECT LAST_INSERT_ID()',
