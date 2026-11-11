@@ -50,6 +50,20 @@ class FosUser
 	{
 		$values['customer.siteid'] = $values['customer.siteid'] ?? $this->context()->locale()->getSiteId();
 
+		// serialized roles and salt fetched by the search SQL
+		if( array_key_exists( '.roles', $values ) )
+		{
+			$roles = is_string( $values['.roles'] ) ? unserialize( $values['.roles'], ['allowed_classes' => false] ) : [];
+			$values['roles'] = is_array( $roles ) ? array_values( array_filter( $roles, 'is_string' ) ) : [];
+			unset( $values['.roles'] );
+		}
+
+		if( array_key_exists( '.salt', $values ) )
+		{
+			$values['salt'] = (string) $values['.salt'];
+			unset( $values['.salt'] );
+		}
+
 		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.', $values );
 		return new \Aimeos\MShop\Customer\Item\FosUser( $address, 'customer.', $values, $this->context()->password() );
 	}
