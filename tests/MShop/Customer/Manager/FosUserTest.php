@@ -95,6 +95,35 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSaveRolesKept()
+	{
+		$item = $this->object->create()->setCode( 'unitTest@example.com' )->setRoles( ['ROLE_SUPER_ADMIN'] );
+		$id = $this->object->save( $item )->getId();
+
+		try
+		{
+			$this->object->save( $this->object->get( $id )->setLabel( 'unitTest2' ) );
+			$loaded = $this->object->get( $id );
+		}
+		finally
+		{
+			$this->object->delete( $id );
+		}
+
+		$this->assertEquals( ['ROLE_SUPER_ADMIN'], $loaded->getRoles() );
+		$this->assertTrue( $loaded->isSuper() );
+	}
+
+
+	public function testCreateRolesNoObjects()
+	{
+		$item = $this->object->create( ['.roles' => serialize( ['ROLE_USER', new \stdClass()] ), '.salt' => 'abc'] );
+
+		$this->assertEquals( ['ROLE_USER'], $item->getRoles() );
+		$this->assertEquals( 'abc', $item->getSalt() );
+	}
+
+
 	public function testSaveUpdateDeleteItem()
 	{
 		$item = $this->object->create();
