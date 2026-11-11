@@ -49,6 +49,26 @@ return array(
 					WHERE ( "siteid" LIKE ? OR "siteid" = ? ) AND "id" = ?
 				',
 			),
+			'search' => array(
+				'ansi' => '
+					SELECT :columns, mcus."roles" AS ".roles", mcus."salt" AS ".salt"
+					FROM "fos_user" mcus
+					:joins
+					WHERE :cond
+					GROUP BY :group, mcus."roles", mcus."salt"
+					ORDER BY :order
+					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+				',
+				'mysql' => '
+					SELECT :columns, mcus."roles" AS ".roles", mcus."salt" AS ".salt"
+					FROM "fos_user" mcus
+					:joins
+					WHERE :cond
+					GROUP BY :group
+					ORDER BY :order
+					LIMIT :size OFFSET :start
+				',
+			),
 			'password' => array(
 				'ansi' => '
 					SELECT "password" FROM "fos_user" WHERE "id" = ?
