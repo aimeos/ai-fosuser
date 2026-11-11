@@ -93,6 +93,36 @@ class FosUserTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( array( 'ROLE_USER' ), $this->object->getRoles() );
 	}
 
+	public function testIsSuper()
+	{
+		$this->assertFalse( $this->object->isSuper() );
+		$this->assertTrue( $this->object->setRoles( ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] )->isSuper() );
+	}
+
+
+	public function testFromArrayRoles()
+	{
+		$list = ['roles' => ['ROLE_SUPER_ADMIN'], 'salt' => 'abc'];
+		$this->object->fromArray( $list, true );
+
+		$this->assertEquals( ['ROLE_ADMIN'], $this->object->getRoles() );
+		$this->assertEquals( 'test', $this->object->getSalt() );
+		$this->assertFalse( $this->object->isSuper() );
+	}
+
+
+	public function testToArrayRolesSalt()
+	{
+		$public = $this->object->toArray();
+		$private = $this->object->toArray( true );
+
+		$this->assertArrayNotHasKey( 'roles', $public );
+		$this->assertArrayNotHasKey( 'salt', $public );
+		$this->assertEquals( ['ROLE_ADMIN'], $private['roles'] );
+		$this->assertArrayNotHasKey( 'salt', $private );
+	}
+
+
 	public function testGetSalt()
 	{
 		$this->assertEquals( 'test', $this->object->getSalt() );
